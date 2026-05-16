@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>山本 郁也 ポートフォリオ</title>
+  <meta name="description" content="山本郁也のゲーム開発ポートフォリオ。制作作品と担当内容のまとめ。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">Portfolio</p>
+      <h1>山本 郁也</h1>
+      <p class="lead">ゲーム開発を中心に、C++/Unity/UE を使った実装と、制作を支えるツール開発に取り組んでいます。</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>スキル</h2>
+      <ul class="chips">
+        <li>C</li><li>C++</li><li>C#</li><li>Markdown</li><li>Python</li><li>JavaScript</li><li>HTML</li>
+        <li>Unity</li><li>Unreal Engine</li><li>Visual Studio</li><li>Visual Studio Code</li><li>GitHub</li><li>Maya</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>制作作品一覧</h2>
+      <ul>
+        <li>Buns&amp;Party</li>
+        <li>ネームバトラー</li>
+        <li>仕事猫：無限残業編</li>
+        <li>チンチロローグライク</li>
+        <li>タワーディフェンス</li>
+        <li>探索型サバイバルローグライト（誠意制作中）</li>
+        <li>FileZipper</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Buns&amp;Party</h2>
+      <h3>担当内容</h3>
+      <ul>
+        <li>プロトタイプ作成（プレイヤー移動、食材キャッチ、納品）</li>
+        <li>内部システム実装（音出力用関数、受け渡し用変数）</li>
+        <li>パラメーター調整用 GUI（ImGui）実装、Docking でデバッグ性を改善</li>
+        <li>パラメーター調整データの読み書き機能（JSON 管理）</li>
+        <li>プランナー向け GUI 調整、仕様書作成</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>ネームバトラー</h2>
+      <h3>概要</h3>
+      <p>HEW 直前課題として、完全ターン制バトルゲームを制作。</p>
+      <h3>担当内容</h3>
+      <ul>
+        <li>名前入力システム（十字キー/WASD、上下で文字変更、左右で文字移動）</li>
+        <li>構造体による各パラメーター管理</li>
+        <li>数値変動処理、戦闘処理の簡略化</li>
+        <li>行動値（スピード）の管理</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>仕事猫：無限残業編</h2>
+      <h3>目的</h3>
+      <p>2.5D・アクション・ローグライク要素を組み合わせたゲーム制作。</p>
+      <h3>担当内容</h3>
+      <ul>
+        <li>音量調整、キーコンフィグ、FullScreen / Window 切り替え</li>
+        <li>段階ごとの強化率を表で可視化</li>
+        <li>DrawList による簡易 UI 作成</li>
+        <li>エフェクト作成ツール実装とゲーム内反映（Unity ParticleSystem を参考）</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>チンチロローグライク</h2>
+      <h3>目的</h3>
+      <p>ボードゲームで体験した面白さを、物理挙動として再現すること。</p>
+      <h3>担当内容</h3>
+      <ul>
+        <li>物理演算・挙動の強化（Unity 並み、またはそれ以上を目標）</li>
+        <li>要件に合わせて RigidBody を作成</li>
+        <li>質量を考慮した挙動を実装</li>
+        <li>関数の汎用化・コンポーネント化で再利用性を向上</li>
+      </ul>
+      <h3>課題</h3>
+      <ul>
+        <li>メッシュコライダー利用のため処理負荷が高い</li>
+        <li>最適化の継続が必要</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>タワーディフェンス</h2>
+      <h3>目的</h3>
+      <p>エディタ画面を作ることを主目的に制作。</p>
+      <h3>担当内容</h3>
+      <ul>
+        <li>3D グリッド上で Box を設置</li>
+        <li>保存/読み込み機能</li>
+        <li>モデル変更・読み込み・削除（エディタ内）</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>探索型サバイバルローグライト（誠意制作中）</h2>
+      <h3>目的</h3>
+      <p>これまでより大規模なゲーム制作に挑戦し、開発中に必要となるツールを実装。実制作を通じて、現場で求められるツール要件を再確認する。</p>
+      <h3>実装済み</h3>
+      <ul>
+        <li>プレイヤー操作（移動、ダッシュ、回避、採掘、ロープ昇降、所持品確認、全体マップ確認、攻撃、体力/スタミナ/精神力の増減）</li>
+        <li>敵挙動（接近、攻撃）</li>
+        <li>UI（ピン設置、マップ表示）</li>
+        <li>アイテム（採掘取得、討伐報酬）</li>
+        <li>地形生成エディタ</li>
+      </ul>
+      <h3>今後の実装予定（プロトタイプ）</h3>
+      <ul>
+        <li>プレイヤー: 回避距離調整、スタミナ消費見直し</li>
+        <li>敵: 巡回 AI、縄張り侵入への反応、報酬アイテム追加</li>
+        <li>UI: ピン種類追加、リセット挙動の設定化</li>
+        <li>アイテム: 売却専用以外のインゲーム利用拡張</li>
+      </ul>
+      <h3>開発中に制作した/する予定のツール</h3>
+      <ul>
+        <li>地形生成エディタ</li>
+        <li>UI アニメーションエディター</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>FileZipper</h2>
+      <h3>概要</h3>
+      <p>WPF/.NET を使用した簡易 Zip 化ツール。</p>
+      <h3>制作経緯</h3>
+      <p>課題提出時に必要ファイルを毎回手動で集める手間を削減するため。</p>
+      <h3>挙動</h3>
+      <ul>
+        <li>指定フォルダから必要なファイルのみをピックアップ</li>
+        <li>選択したファイルを Zip 化</li>
+        <li>Zip 化前にファイル名を変更可能</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
