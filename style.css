@@ -87,6 +87,63 @@ section[id] {
   scroll-margin-top: 20px;
 }
 
+.toc {
+  background:
+    linear-gradient(135deg, #f8fcfa 0%, #edf7f2 60%, #e7f3ef 100%);
+  border: 1px solid #c6ddd3;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #0f3f5b;
+  background: #ffffff;
+  border: 1px solid #c7d9e4;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 0 #d5e3ea;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.toc a::after {
+  content: "↘";
+  font-size: 0.95rem;
+  opacity: .7;
+}
+
+.toc a:hover {
+  transform: translateY(-1px);
+  border-color: #8fb5cc;
+  box-shadow: 0 6px 16px rgba(17, 70, 100, 0.14);
+  color: #0a3248;
+}
+
+.toc a:active {
+  transform: translateY(0);
+}
+
+.toc a:focus-visible {
+  outline: 3px solid #8fd1ff;
+  outline-offset: 2px;
+}
+
 .work-media {
   margin: 0 0 14px;
 }
