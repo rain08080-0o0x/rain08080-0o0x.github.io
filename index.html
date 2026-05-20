@@ -91,7 +91,17 @@
 
     <section id="works">
       <h2>制作作品群</h2>
-      <p>以下に、制作作品ごとの概要と担当内容をまとめています。</p>
+      <p>以下に、制作作品ごとの基本情報と担当内容をまとめています。</p>
+      <ul class="work-links">
+        <li><a href="#buns-and-party">Buns&amp;Party</a></li>
+        <li><a href="#name-battler">ネームバトラー</a></li>
+        <li><a href="#shigoto-neko">仕事猫：無限残業編</a></li>
+        <li><a href="#chinchiro-roguelike">チンチロローグライク</a></li>
+        <li><a href="#tower-defense">タワーディフェンス</a></li>
+        <li><a href="#survival-roguelite">探索型サバイバルローグライト</a></li>
+        <li><a href="#file-zipper">FileZipper</a></li>
+        <li><a href="#creator-kousien">CreatorKousien</a></li>
+      </ul>
     </section>
 
     <section id="buns-and-party">
@@ -99,7 +109,18 @@
       <figure class="work-media">
         <img src="image/buns-and-party-allView.png" alt="Buns&Party のスクリーンショット">
       </figure>
-      <h3>担当内容</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>チーム制作（プランナー2名 / プログラマー5名 / デザイナー2名）</td></tr>
+          <tr><th>ジャンル</th><td>料理・納品アクション</td></tr>
+          <tr><th>作成期間</th><td>2025/10 〜 2026/01</td></tr>
+          <tr><th>担当箇所</th><td>プロトタイプ作成、プレイヤー操作、納品処理、調整用GUI、内部システム</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>DirectX11</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>プロトタイプ作成（プレイヤー移動、食材キャッチ、納品）</li>
         <li>内部システム実装（音出力用関数、受け渡し用変数）</li>
@@ -114,9 +135,18 @@
       <figure class="work-media">
         <div class="no-image" aria-label="画像なし">No Image</div>
       </figure>
-      <h3>概要</h3>
-      <p>HEW 直前課題として、完全ターン制バトルゲームを制作。</p>
-      <h3>担当内容</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>ターン制バトル</td></tr>
+          <tr><th>作成期間</th><td>2023/11 〜 2023/12</td></tr>
+          <tr><th>担当箇所</th><td>名前入力、戦闘システム、パラメーター管理</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>コンソール</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>名前入力システム（十字キー/WASD、上下で文字変更、左右で文字移動）</li>
         <li>構造体による各パラメーター管理</li>
@@ -130,9 +160,18 @@
       <figure class="work-media">
         <img src="image/genba-keyconfig.png" alt="仕事猫：無限残業編 のスクリーンショット">
       </figure>
-      <h3>目的</h3>
-      <p>2.5D・アクション・ローグライク要素を組み合わせたゲーム制作。</p>
-      <h3>担当内容</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>2.5Dアクション / ローグライク</td></tr>
+          <tr><th>作成期間</th><td>2025/12 〜 2026/05</td></tr>
+          <tr><th>担当箇所</th><td>キーコンフィグ、表示切替、強化表現、UI、エフェクト作成ツール</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022 / GitHub / ImGui</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>DirectX11</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>音量調整、キーコンフィグ、FullScreen / Window 切り替え</li>
         <li>段階ごとの強化率を表で可視化</li>
@@ -146,9 +185,18 @@
       <figure class="work-media">
         <img src="image/dice.png" alt="チンチロローグライク のスクリーンショット">
       </figure>
-      <h3>目的</h3>
-      <p>ボードゲームで体験した面白さを、物理挙動として再現すること。</p>
-      <h3>担当内容</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>物理挙動 / ローグライク</td></tr>
+          <tr><th>作成期間</th><td>2025/10 〜 2025/12</td></tr>
+          <tr><th>担当箇所</th><td>ダイス物理挙動、当たり判定、RigidBody、汎用化</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022 / GitHub / ImGui</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>DirectX11</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>物理演算・挙動の強化（Unity 並み、またはそれ以上を目標）</li>
         <li>要件に合わせて RigidBody を作成</li>
@@ -167,9 +215,18 @@
       <figure class="work-media">
         <img src="image/castleEditor.png" alt="タワーディフェンス のスクリーンショット">
       </figure>
-      <h3>目的</h3>
-      <p>エディタ画面を作ることを主目的に制作。</p>
-      <h3>担当内容</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>タワーディフェンス / エディタ制作</td></tr>
+          <tr><th>作成期間</th><td>2026/03 〜 2026/06</td></tr>
+          <tr><th>担当箇所</th><td>3Dグリッド配置、保存/読み込み、モデル管理、エディタ操作</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022 / Visual Studio Code / GitHub / ImGui</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>DirectX11</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>3D グリッド上で Box を設置</li>
         <li>保存/読み込み機能</li>
@@ -182,9 +239,18 @@
       <figure class="work-media">
         <img src="image/survival-Editor.png" alt="探索型サバイバルローグライト のスクリーンショット">
       </figure>
-      <h3>目的</h3>
-      <p>これまでより大規模なゲーム制作に挑戦し、開発中に必要となるツールを実装。実制作を通じて、現場で求められるツール要件を再確認する。</p>
-      <h3>実装済み</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>探索型サバイバル / ローグライト</td></tr>
+          <tr><th>作成期間</th><td>2026/05 〜 制作中</td></tr>
+          <tr><th>担当箇所</th><td>プレイヤー操作、敵挙動、UI、アイテム、地形生成エディタ</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022 / Visual Studio Code / Fork / GitHub / ImGui</td></tr>
+          <tr><th>言語</th><td>C++</td></tr>
+          <tr><th>API</th><td>DirectX11</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>プレイヤー操作（移動、ダッシュ、回避、採掘、ロープ昇降、所持品確認、全体マップ確認、攻撃、体力/スタミナ/精神力の増減）</li>
         <li>敵挙動（接近、攻撃）</li>
@@ -211,15 +277,49 @@
       <figure class="work-media">
         <div class="no-image" aria-label="画像なし">No Image</div>
       </figure>
-      <h3>概要</h3>
-      <p>WPF/.NET を使用した簡易 Zip 化ツール。</p>
-      <h3>制作経緯</h3>
-      <p>課題提出時に必要ファイルを毎回手動で集める手間を削減するため。</p>
-      <h3>挙動</h3>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>個人制作</td></tr>
+          <tr><th>ジャンル</th><td>ファイル圧縮支援ツール</td></tr>
+          <tr><th>作成期間</th><td>2025/05 〜 2025/05</td></tr>
+          <tr><th>担当箇所</th><td>ファイル選択、必要ファイル抽出、Zip化、出力名変更</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022</td></tr>
+          <tr><th>言語</th><td>C#</td></tr>
+          <tr><th>フレームワーク</th><td>WPF</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
       <ul>
         <li>指定フォルダから必要なファイルのみをピックアップ</li>
         <li>選択したファイルを Zip 化</li>
         <li>Zip 化前にファイル名を変更可能</li>
+      </ul>
+    </section>
+
+    <section id="creator-kousien">
+      <h2>CreatorKousien</h2>
+      <figure class="work-media">
+        <div class="no-image" aria-label="画像なし">No Image</div>
+      </figure>
+      <table class="work-table">
+        <tbody>
+          <tr><th>制作形態</th><td>チーム制作（プランナー2名 / プログラマー7名 / デザイナー3名）</td></tr>
+          <tr><th>ジャンル</th><td>フィールド移動 / カードベースバトル</td></tr>
+          <tr><th>作成期間</th><td>2026/02 〜 2026/06</td></tr>
+          <tr><th>担当箇所</th><td>プレイヤー、収集物、敵、UI表示、システム間の責務分離</td></tr>
+          <tr><th>使用ツール</th><td>Visual Studio 2022 / Visual Studio Code / GitHub / Fork / Unity</td></tr>
+          <tr><th>言語</th><td>C#</td></tr>
+          <tr><th>API</th><td>Unity</td></tr>
+          <tr><th>フレームワーク</th><td>Universal Render Pipeline（URP）</td></tr>
+        </tbody>
+      </table>
+      <h3>担当箇所で行った内容</h3>
+      <ul>
+        <li>プレイヤー移動、入力、所持状態、収集処理を役割ごとに分けて実装</li>
+        <li>収集物の生成、管理、保持、形状変化、合成処理を整理</li>
+        <li>敵の体力、攻撃ゲージ、状態管理、スポーン処理を構成</li>
+        <li>HUD、敵ゲージ、ヒット表示などのUI表示処理を実装</li>
+        <li>Core / Gameplay / Presentation などの領域ごとに処理を分け、保守しやすい構成を意識</li>
       </ul>
     </section>
   </main>
