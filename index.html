@@ -18,7 +18,59 @@
   </header>
 
   <main class="container">
-    <section>
+    <section class="toc">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#about-me">自己紹介</a></li>
+        <li><a href="#specialty">得意な技術領域</a></li>
+        <li><a href="#skills">スキル</a></li>
+        <li><a href="#works">制作作品群</a></li>
+      </ul>
+    </section>
+
+    <section id="about-me">
+      <h2>自己紹介</h2>
+      <p>
+        仕様通りに実装するだけでなく、処理の責務やデータの流れを整理しながら、
+        あとから手を入れやすい構成にまとめることを大切にしています。
+      </p>
+      <p>
+        これまで C++ / DirectX11 でのゲーム制作では、ダイスの物理挙動、OBB 判定、摩擦、重力、回転、停止判定などを扱ってきました。
+        実装時に問題が起きた場合は、現象だけを追うのではなく、原因を一つずつ切り分けながら確認しています。
+        例えば「なぜ跳ね続けるのか」「どこで状態が上書きされているのか」「どの処理を分離すべきか」を整理し、
+        挙動と設計の両方を見直す形で改善してきました。
+      </p>
+      <p>
+        Unity では UI 設計や Editor 拡張にも取り組み、CardView、UIManager、InputProvider、LayerManager のように
+        役割ごとに処理を分けながら、入力、表示、選択状態、データ管理を整理する実装を進めています。
+        ScriptableObject を一覧表示・編集できるツールや、Canvas 上に UI 部品を生成する EditorWindow など、
+        制作効率を上げる仕組み作りにも関心があります。
+      </p>
+      <p>
+        実装中の問題を感覚で直すのではなく、構造から原因を確認し、再利用しやすい形へ整えていく姿勢をこれからも磨きながら、
+        ゲームの面白さを支えるシステムやツールを設計・実装の両面から改善できるプログラマーを目指しています。
+      </p>
+    </section>
+
+    <section id="specialty">
+      <h2>得意な技術領域</h2>
+      <p>
+        私の得意な技術領域は、ゲームシステムの実装と、開発効率を高めるツール制作です。
+      </p>
+      <p>
+        C++／DirectX11では、ダイスの物理挙動、OBBによる当たり判定、摩擦、重力、回転、停止判定など、ゲーム内の挙動を制御する処理を実装してきました。
+        特に、想定通りに動かない挙動に対して、変数の更新タイミングや状態遷移を確認しながら原因を切り分け、改善することを意識しています。
+      </p>
+      <p>
+        またUnityでは、UI設計やEditor拡張に取り組んでいます。UIManager、CardView、InputProviderのように、入力、表示、選択状態、データ管理の責務を分ける設計を行いました。
+        加えて、ScriptableObjectの一覧表示・編集ツールや、Canvas上にUI部品を生成するEditorWindowなど、制作作業を効率化するための仕組み作りにも関心があります。
+      </p>
+      <p>
+        これらの経験から、私はゲームの動きを支える低レイヤー寄りの実装と、制作現場を支えるツール開発の両方に強みがあります。
+      </p>
+    </section>
+
+    <section id="skills">
       <h2>スキル</h2>
       <ul class="chips">
         <li><i class="devicon-c-plain colored" aria-hidden="true"></i><span>C</span></li>
@@ -37,17 +89,9 @@
       </ul>
     </section>
 
-    <section>
-      <h2>目次（制作作品一覧）</h2>
-      <ul>
-        <li><a href="#buns-and-party">Buns&amp;Party</a></li>
-        <li><a href="#name-battler">ネームバトラー</a></li>
-        <li><a href="#shigoto-neko">仕事猫：無限残業編</a></li>
-        <li><a href="#chinchiro-roguelike">チンチロローグライク</a></li>
-        <li><a href="#tower-defense">タワーディフェンス</a></li>
-        <li><a href="#survival-roguelite">探索型サバイバルローグライト（誠意制作中）</a></li>
-        <li><a href="#file-zipper">FileZipper</a></li>
-      </ul>
+    <section id="works">
+      <h2>制作作品群</h2>
+      <p>以下に、制作作品ごとの概要と担当内容をまとめています。</p>
     </section>
 
     <section id="buns-and-party">
