@@ -92,9 +92,13 @@ section[id] {
 }
 
 .toc {
+  position: sticky;
+  top: 10px;
+  z-index: 30;
   background:
     linear-gradient(135deg, #f8fcfa 0%, #edf7f2 60%, #e7f3ef 100%);
   border: 1px solid #c6ddd3;
+  backdrop-filter: blur(2px);
 }
 
 .toc ul {
