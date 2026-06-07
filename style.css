@@ -404,6 +404,15 @@ section[id] {
   background: #e7f0ed;
 }
 
+.media-fit-contain img {
+  object-fit: contain;
+  padding: 10px;
+}
+
+.media-compact img {
+  aspect-ratio: 16 / 9;
+}
+
 .media-card figcaption {
   padding: 12px 14px;
   font-size: 0.9rem;
