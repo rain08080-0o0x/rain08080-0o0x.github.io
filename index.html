@@ -1,982 +1,157 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>山本 郁也 ポートフォリオ</title>
-  <meta name="description" content="山本郁也のゲーム開発ポートフォリオ。ゲーム実装、ツール開発、チーム制作での担当内容をまとめています。">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <meta name="description" content="山本郁也のゲームプログラマー・ツール開発ポートフォリオ。C++ / DirectX11、Unity / C#による個人制作とチーム制作を紹介します。">
+  <meta name="theme-color" content="#111a22">
+  <title>山本 郁也 | Game Programmer</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header class="hero">
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">Portfolio / Game Programmer</p>
-        <h1>山本 郁也</h1>
-        <p class="lead">
-          ゲームシステムの実装と、制作効率を上げるツール開発の両方に取り組んでいます。
-          仕様に合わせて作るだけでなく、調整しやすさ、責務分離、運用しやすさまで含めて設計することを重視しています。
-        </p>
-        <div class="hero-points">
-          <span>C++ / DirectX11 によるゲーム実装</span>
-          <span>Unity / C# によるツールと UI 開発</span>
-          <span>調整環境・保存フロー・運用改善の設計</span>
-        </div>
-      </div>
-      <div class="hero-panel">
-        <p class="panel-title">強み</p>
-        <ul class="panel-list">
-          <li>課題を整理してから実装する</li>
-          <li>ゲーム本体と制作環境を両方改善する</li>
-          <li>複雑な処理を再利用しやすい単位へ分解する</li>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="site-name" href="#top" aria-label="ページ先頭へ"><span class="site-mark" aria-hidden="true">IY</span><span>山本 郁也</span></a>
+      <nav aria-label="メインナビゲーション">
+        <ul class="nav-list">
+          <li><a href="#works">作品</a></li><li><a href="#profile">強み</a></li><li><a href="#skills">技術</a></li>
+          <li><a class="nav-github" href="https://github.com/rain08080-0o0x" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
         </ul>
-      </div>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section class="toc" aria-label="目次">
-      <h2>目次</h2>
-      <ul>
-        <li><a href="#about-me">自己紹介</a></li>
-        <li><a href="#specialty">得意な技術領域</a></li>
-        <li><a href="#skills">スキル</a></li>
-        <li><a href="#works">制作作品群</a></li>
-      </ul>
-    </section>
-
-    <section id="about-me" class="intro-section">
-      <div class="section-heading">
-        <p class="section-label">Profile</p>
-        <h2>自己紹介</h2>
-      </div>
-      <div class="intro-grid">
-        <div class="copy-card">
-          <p>
-            実装中に問題が起きたときは、感覚で直すのではなく、責務の切り分けとデータの流れを整理しながら原因を追うことを大切にしています。
-            どの処理が状態を持ち、どのタイミングで更新され、どこが他のシステムと結びついているかを明確にすることで、修正時の影響範囲を抑えられる構成を目指しています。
-          </p>
-          <p>
-            C++ / DirectX11 では、ダイスの物理挙動、当たり判定、シーン間のデータ受け渡し、調整用 GUI、保存 / 読み込みなど、ゲームの土台になる部分を重点的に担当してきました。
-            Unity / C# では、UI や ScriptableObject を扱うツール、Editor 拡張、プレイヤーや収集物のシステム実装など、ゲーム制作を前に進めるための仕組み作りにも取り組んでいます。
-          </p>
-          <p>
-            ゲームが遊べるだけで終わらせず、プランナーや他の開発者が扱いやすい状態まで整えることが、自分の価値の出し方だと考えています。
-            今後も、挙動の説得力と制作現場の運用しやすさを両立できるプログラマーとして成長していきます。
-          </p>
-        </div>
-        <div class="info-stack">
-          <article class="info-card emphasis-card">
-            <h3>実装姿勢</h3>
-            <p>現象だけを見るのではなく、設計上の責務と更新順まで確認して直す。</p>
-          </article>
-          <article class="info-card">
-            <h3>得意分野</h3>
-            <p>ゲームシステム実装、ツール開発、調整基盤の整備、運用改善。</p>
-          </article>
-          <article class="info-card">
-            <h3>意識していること</h3>
-            <p>あとから触る人が迷わない構造にすること、再利用できる単位で分けること。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="specialty">
-      <div class="section-heading">
-        <p class="section-label">Specialty</p>
-        <h2>得意な技術領域</h2>
-      </div>
-      <div class="specialty-grid">
-        <article class="feature-card">
-          <h3>ゲームの挙動を支える実装</h3>
-          <p>
-            C++ / DirectX11 を用いたゲーム制作では、当たり判定、物理挙動、プレイヤー制御、シーン間データの受け渡しなど、ゲーム体験の根幹を支える実装を多く担当してきました。
-            特に、見た目と判定がずれないこと、パラメーター調整の影響範囲が追えること、状態の保存と復元が破綻しないことを意識しています。
-          </p>
-        </article>
-        <article class="feature-card">
-          <h3>制作を前に進めるツール開発</h3>
-          <p>
-            Unity の Editor 拡張や ImGui ベースの調整画面、提出作業を短縮する WPF ツールなど、開発の手数を減らす仕組み作りにも強みがあります。
-            実装者しか触れないツールではなく、他メンバーが運用できる状態に整え、説明や配布まで含めて使われる形にすることを重視しています。
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="section-heading">
-        <p class="section-label">Skills</p>
-        <h2>スキル</h2>
-      </div>
-      <div class="skill-groups">
-        <article class="skill-group">
-          <h3>言語</h3>
-          <ul class="chips">
-            <li><i class="devicon-c-plain colored" aria-hidden="true"></i><span>C</span></li>
-            <li><i class="devicon-cplusplus-plain colored" aria-hidden="true"></i><span>C++</span></li>
-            <li><i class="devicon-csharp-plain colored" aria-hidden="true"></i><span>C#</span></li>
-            <li><i class="devicon-python-plain colored" aria-hidden="true"></i><span>Python</span></li>
-            <li><i class="devicon-javascript-plain colored" aria-hidden="true"></i><span>JavaScript</span></li>
-            <li><i class="devicon-html5-plain colored" aria-hidden="true"></i><span>HTML</span></li>
-            <li><i class="devicon-markdown-original" aria-hidden="true"></i><span>Markdown</span></li>
-          </ul>
-        </article>
-        <article class="skill-group">
-          <h3>エンジン / API / フレームワーク</h3>
-          <ul class="chips">
-            <li><i class="devicon-unity-original colored" aria-hidden="true"></i><span>Unity</span></li>
-            <li><i class="devicon-unrealengine-original colored" aria-hidden="true"></i><span>Unreal Engine</span></li>
-            <li><i class="devicon-dotnetcore-plain colored" aria-hidden="true"></i><span>.NET / WPF</span></li>
-            <li><span class="badge-icon" aria-hidden="true">DX</span><span>DirectX11</span></li>
-            <li><span class="badge-icon" aria-hidden="true">IM</span><span>ImGui</span></li>
-            <li><span class="badge-icon" aria-hidden="true">JP</span><span>JSON</span></li>
-            <li><span class="badge-icon" aria-hidden="true">DM</span><span>DirectXMath</span></li>
-          </ul>
-        </article>
-        <article class="skill-group">
-          <h3>ツール / ワークフロー</h3>
-          <ul class="chips">
-            <li><i class="devicon-visualstudio-plain colored" aria-hidden="true"></i><span>Visual Studio 2022</span>
-            </li>
-            <li><i class="devicon-vscode-plain colored" aria-hidden="true"></i><span>Visual Studio Code</span></li>
-            <li><i class="devicon-github-original" aria-hidden="true"></i><span>GitHub</span></li>
-            <li><span class="badge-icon" aria-hidden="true">PF</span><span>Perforce</span></li>
-            <li><span class="badge-icon" aria-hidden="true">FK</span><span>Fork</span></li>
-            <li><span class="badge-icon" aria-hidden="true">MY</span><span>Maya</span></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="works">
-      <div class="section-heading">
-        <p class="section-label">Works</p>
-        <h2>制作作品群</h2>
-      </div>
-      <p class="section-intro">
-        作品ごとに、何を作ったかだけでなく、どの課題に対して何を判断し、どう実装して、どのような効果があったかを整理しています。
-      </p>
-      <div class="work-index-grid">
-        <a class="jump-card" href="#buns-and-party">
-          <strong>Buns&amp;Party</strong>
-          <span>調整基盤、Transfer、保存 / 読み込み、UI 改善</span>
-        </a>
-        <a class="jump-card" href="#shigoto-neko">
-          <strong>仕事猫：無限残業編</strong>
-          <span>設定 UI、キーコンフィグ、エフェクト調整環境</span>
-        </a>
-        <a class="jump-card" href="#chinchiro-roguelike">
-          <strong>チンチロローグライク</strong>
-          <span>OBB、RigidBody、物理挙動の調整</span>
-        </a>
-        <a class="jump-card" href="#tower-defense">
-          <strong>タワーディフェンス</strong>
-          <span>3D グリッド配置エディタ、保存 / 読み込み</span>
-        </a>
-        <a class="jump-card" href="#survival-roguelite">
-          <strong>探索型サバイバルローグライト</strong>
-          <span>大規模化を見据えたゲーム本体とツールの並行開発</span>
-        </a>
-        <a class="jump-card" href="#file-zipper">
-          <strong>FileZipper</strong>
-          <span>提出ファイル抽出、Zip 化、配布導線の整備</span>
-        </a>
-        <a class="jump-card" href="#creator-kousien">
-          <strong>CreatorKousien</strong>
-          <span>Unity チーム制作と周辺ツール群</span>
-        </a>
-        <a class="jump-card" href="#name-battler">
-          <strong>ネームバトラー</strong>
-          <span>コンソールでの戦闘処理と入力設計</span>
-        </a>
-      </div>
-    </section>
-
-    <section id="buns-and-party" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Team Project</p>
-        <h2>Buns&amp;Party</h2>
-      </div>
-      <div class="work-body">
-        <div class="meta-card">
-          <h3>基本情報</h3>
-          <table class="meta-table">
-            <tbody>
-              <tr>
-                <th>制作形態</th>
-                <td>チーム制作（プランナー 2 名 / プログラマー 5 名 / デザイナー 2 名）</td>
-              </tr>
-              <tr>
-                <th>ジャンル</th>
-                <td>料理・納品アクション</td>
-              </tr>
-              <tr>
-                <th>作成期間</th>
-                <td>2025/10 〜 2026/01</td>
-              </tr>
-              <tr>
-                <th>担当箇所</th>
-                <td>プロトタイプ、プレイヤー操作、納品処理、Transfer、調整 GUI、保存 / 読み込み、音連携</td>
-              </tr>
-              <tr>
-                <th>使用技術</th>
-                <td>C++ / DirectX11 / ImGui / JSON</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <article class="detail-card">
-          <h3>作品概要</h3>
-          <p>
-            料理を作って納品する流れをテンポよく遊ばせるチーム制作作品です。
-            自分はプロトタイプ段階のゲームループ実装に加えて、後半では調整基盤と内部システムの整備を中心に担当しました。
-            単に動くゲームにするだけでなく、プランナーが仕様変更を試しやすい開発環境へ持っていくことを主な役割として取り組みました。
-          </p>
-          <figure class="media-card">
-            <img src="image/powerpoint/buns&amp;party.png" alt="Buns&amp;Party のプレイ画面全体">
-            <figcaption>作品全体のゲーム画面。料理作成から納品までのループが分かるメインビジュアルです。</figcaption>
-          </figure>
-        </article>
-
-        <article class="detail-card">
-          <h3>担当箇所で行った内容</h3>
-          <p>
-            初期段階では、プレイヤー移動、食材のキャッチ、納品までの基本ループを先に成立させ、チーム内で触って議論できる状態を作りました。
-            その後は、ゲーム中の状態をシーンやシステムをまたいで扱うための Transfer を整備し、プレイヤー、カメラ、日付進行、UI、音などの情報をまとめて扱えるようにしました。
-          </p>
-          <p>
-            加えて、ImGui を使った調整画面を作成し、値の変更、確認、保存、再読み込みを実行中に完結できるようにしました。
-            プログラマー以外でも扱いやすいことを重視し、ウィンドウ構成、表示順、一覧性を調整しながら、仕様書も含めて運用しやすい形へ整えました。
-          </p>
-          <div class="work-media-grid">
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/画像33.png" alt="Buns&amp;Party の Transfer で管理するデータ範囲を整理した資料">
-              <figcaption>Transfer で管理するデータ範囲を一覧化し、シーン間受け渡しの責務を明確にした全体説明画像です。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_imgui_tab.png" alt="Buns&amp;Party の ImGui 調整タブ画面">
-              <figcaption>実行中に値確認、保存、再読込まで完結できる ImGui 調整 UI です。</figcaption>
-            </figure>
+  <main id="main">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="overline">Game programmer / Tool developer</p>
+          <h1 id="hero-title">遊びの核と、<br><span>作りやすい仕組み</span>を実装する。</h1>
+          <p class="hero-lead">C++ / DirectX11 によるゲームシステムと、Unity / C# による制作ツールを開発しています。挙動を作るだけでなく、データの流れや調整方法まで整理し、チームが扱いやすい形にすることを大切にしています。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#works">作品を見る</a>
+            <a class="button button-secondary" href="https://github.com/rain08080-0o0x" target="_blank" rel="noreferrer">GitHub を開く <span aria-hidden="true">↗</span></a>
           </div>
-        </article>
+        </div>
+        <aside class="hero-summary" aria-label="ポートフォリオ概要">
+          <p class="summary-label">Focus</p>
+          <dl class="summary-list">
+            <div><dt>01</dt><dd><strong>Game systems</strong><span>物理・戦闘・探索・保存</span></dd></div>
+            <div><dt>02</dt><dd><strong>Development tools</strong><span>Editor・ImGui・WPF</span></dd></div>
+            <div><dt>03</dt><dd><strong>Maintainable design</strong><span>責務分離・データ駆動</span></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
 
-        <div class="detail-grid two-column-details">
-          <article class="detail-card">
-            <h3>課題</h3>
-            <p>
-              仕様変更のたびにプログラマーがコードや CSV を直接触る運用では、確認と修正の往復が重く、誰がどこを直せばよいかも分かりにくい状態でした。
-              また、シーンごとに必要な情報が分散していたため、保存 / 読み込みや次のシーンへの引き継ぎで不整合が起きやすい構造でした。
-            </p>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_csv.png" alt="Buns&amp;Party の CSV から JSON への移行内容を示した画面">
-              <figcaption>CSV 管理から JSON 管理へ移行し、項目追加や差分追跡をしやすくした整理資料です。</figcaption>
-            </figure>
-          </article>
-          <article class="detail-card">
-            <h3>判断・実装</h3>
-            <p>
-              調整対象の情報を Transfer に集約し、日付進行や各種 UI 情報をひとまとまりのデータとして扱えるようにしました。
-              さらに JSON 化によって、構造のまとまり、項目の意味、差分の確認しやすさを改善し、保存 / 読み込みフローも同じデータ基盤の上で扱えるように整理しました。
-            </p>
-            <div class="work-media-grid">
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/buns&amp;party_json.png" alt="Buns&amp;Party の JSON データ構造を示した画面">
-                <figcaption>Transfer と保存データを JSON 化し、項目のまとまりと差分確認をしやすくした構成です。</figcaption>
-              </figure>
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/buns&amp;party_sequence.png" alt="Buns&amp;Party の Transfer と保存読み込みフロー図">
-                <figcaption>シーン間受け渡しと保存 / 読み込みの責務を整理したシーケンス図です。</figcaption>
-              </figure>
+    <section id="works" class="section shell" aria-labelledby="works-title">
+      <div class="section-heading heading-with-copy">
+        <div><p class="overline">Selected works</p><h2 id="works-title">注目作品</h2></div>
+        <p>最近の個人制作を中心に、企画・実装・検証まで取り組んだ作品を掲載しています。</p>
+      </div>
+      <div class="featured-grid">
+        <article class="project-card project-card-wide accent-violet">
+          <div class="project-visual visual-lost-page" role="img" aria-label="Lost Pageを表す4色のエーテルカード">
+            <span class="visual-number">01</span><div class="ether ether-red"></div><div class="ether ether-blue"></div><div class="ether ether-green"></div><div class="ether ether-yellow"></div><p>BUILD THE DECK.<br>SHAPE THE DRAW.</p>
+          </div>
+          <div class="project-content">
+            <div class="project-topline"><p class="project-kind">Personal / Unity</p><span class="status-badge">Windows / Android</span></div>
+            <h3>Lost Page</h3>
+            <p class="project-catch">カードを増やすほど、次に引く資源の確率まで変わるデッキ構築ローグライト。</p>
+            <ul class="project-tags" aria-label="使用技術"><li>Unity 6</li><li>C#</li><li>Game Design</li><li>Mobile</li></ul>
+            <dl class="project-facts">
+              <div><dt>担当</dt><dd>原案・企画・ゲームデザイン・仕様決定</dd></div>
+              <div><dt>特徴</dt><dd>4色のエーテル、分岐マップ、ターン制バトル</dd></div>
+              <div><dt>公開</dt><dd>Windows 64-bit / Android 8.0 以上</dd></div>
+            </dl>
+            <details class="project-details"><summary>設計のポイント</summary><p>カードのコストを戦闘中に引くエーテルのプールへ反映し、デッキ構築とリソース管理を一体化。持ち越し、使用順、分岐ルートの選択が毎ターンの判断につながるよう設計しています。</p></details>
+            <div class="project-links">
+              <a class="text-link" href="https://github.com/rain08080-0o0x/LostPage" target="_blank" rel="noreferrer">コードと詳細 <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="https://github.com/rain08080-0o0x/LostPage/releases" target="_blank" rel="noreferrer">ダウンロード <span aria-hidden="true">↗</span></a>
             </div>
-          </article>
-        </div>
-
-        <article class="detail-card accent-card">
-          <h3>効果</h3>
-          <p>
-            プランナーがコードを触らずに調整を試せるようになり、調整サイクルを短縮できました。
-            保存 / 読み込みや次シーンへの受け渡しでも参照先が明確になり、不具合の切り分けがしやすくなりました。
-            実装面でも、ゲーム状態を一箇所に集めたことで、後から機能追加するときの影響範囲を追いやすくなっています。
-          </p>
+          </div>
         </article>
 
-        <div class="detail-grid">
-          <article class="detail-card">
-            <h3>注文 UI 改善</h3>
-            <p>
-              オーダー作成 UI は、旧構成では入力項目が分散しており、設定順や確認箇所が分かりにくい状態でした。
-              そこで、入力と確認を分けすぎず、一覧で最終状態を見渡せる構成へ整理しました。
-              設定漏れの防止と確認速度の向上を優先し、プランナーが短時間で複数のオーダーを試せるようにしています。
-            </p>
-            <div class="work-media-grid media-compare-grid">
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/buns&amp;party_order_old.png" alt="Buns&amp;Party の旧オーダー作成 UI">
-                <figcaption>旧オーダー UI。入力箇所が分散し、確認導線が分かりにくかった状態です。</figcaption>
-              </figure>
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/buns&amp;party_order_new.png" alt="Buns&amp;Party の改善後オーダー作成 UI">
-                <figcaption>改善後オーダー UI。一覧性を高め、設定漏れと確認往復を減らしました。</figcaption>
-              </figure>
-            </div>
-          </article>
-          <article class="detail-card">
-            <h3>当たり判定設計</h3>
-            <p>
-              食材ごとに複雑な判定形状を持たせると、調整項目と管理コストが増えすぎるため、高さ固定とサイズ管理のバランスを取りながら設計しました。
-              見た目の説得力と運用コストの両方を考え、必要十分な粒度で管理できる形へ寄せたことで、追加対応や修正にも耐えやすくしています。
-            </p>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_cat.png" alt="Buns&amp;Party の食材キャッチ判定イメージ">
-              <figcaption>食材キャッチの見た目と当たり判定のバランスを調整した補足資料です。</figcaption>
-            </figure>
-          </article>
-        </div>
+        <article class="project-card accent-gold">
+          <div class="project-visual visual-bell" role="img" aria-label="JoyaBellBozuの二重振り子と鐘を表す図形">
+            <span class="visual-number">02</span><div class="crane-arm crane-arm-one"></div><div class="crane-arm crane-arm-two"></div><div class="crane-hammer"></div><div class="bell-shape"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-topline"><p class="project-kind">Personal / Physics</p><span class="status-badge">Prototype</span></div>
+            <h3>JoyaBellBozu</h3>
+            <p class="project-catch">初期配置だけで結果が決まる、二重振り子の鐘つきゲーム。</p>
+            <ul class="project-tags" aria-label="使用技術"><li>Unity 6</li><li>C#</li><li>RK4</li><li>Physics</li></ul>
+            <details class="project-details"><summary>実装のポイント</summary><p>Unity の関節ソルバーに頼らず、二重振り子の運動方程式を固定時間刻みの RK4 で計算。接触もヘッド移動の掃引と相対速度から独自に判定しています。</p></details>
+            <a class="text-link" href="https://github.com/rain08080-0o0x/JoyaBellBozu" target="_blank" rel="noreferrer">GitHub で見る <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
 
-        <article class="detail-card">
-          <h3>チュートリアル / 残り物対応</h3>
-          <p>
-            チュートリアル専用の処理と通常フローが混ざると、残留アイテムや表示崩れの原因になりやすいため、状態と描画の責務を分けて整理しました。
-            一時的な分岐でしのぐのではなく、通常ゲームとチュートリアルでどの情報が共通で、どこが専用処理かを切り分けたことで、不具合を抑えながら挙動を調整できるようになりました。
-          </p>
-          <div class="work-media-grid">
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_tutorial_json.png" alt="Buns&amp;Party のチュートリアル用 JSON 設定画面">
-              <figcaption>チュートリアル専用設定を通常フローから切り分けたデータ管理例です。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_tutorial_txt.png" alt="Buns&amp;Party のチュートリアル用テキスト管理画面">
-              <figcaption>チュートリアル文言と進行条件を追いやすくしたテキスト管理資料です。</figcaption>
-            </figure>
+        <article class="project-card accent-green">
+          <div class="project-visual image-visual"><span class="visual-number">03</span><img src="image/survival-Editor.png" alt="奈落塔の地形エディタ画面" loading="lazy" decoding="async"></div>
+          <div class="project-content">
+            <div class="project-topline"><p class="project-kind">Personal / DirectX11</p><span class="status-badge">In development</span></div>
+            <h3>奈落塔</h3>
+            <p class="project-catch">「まだ潜るか、もう帰るか」を中心判断にした2.5D探索サバイバルローグライト。</p>
+            <ul class="project-tags" aria-label="使用技術"><li>C++</li><li>DirectX11</li><li>ImGui</li><li>Editor</li></ul>
+            <details class="project-details"><summary>実装のポイント</summary><p>ゲーム本体と地形エディタを並行開発。重量、スタミナ、上昇負荷、帰還時の損失を組み合わせ、探索の続行と撤退の判断をシステムで支えています。</p></details>
+            <a class="text-link" href="https://github.com/rain08080-0o0x/SurvivalRoguelike" target="_blank" rel="noreferrer">GitHub で見る <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="work-media-grid media-compare-grid">
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_batTexture1.png" alt="Buns&amp;Party の汚れ状態テクスチャ差分 1">
-              <figcaption>汚れ状態の差分案 1。焦げや劣化が伝わるよう、彩度を落として状態変化を強めています。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_batTexture2.png" alt="Buns&amp;Party の汚れ状態テクスチャ差分 2">
-              <figcaption>汚れ状態の差分案 2。残り物表現の強さを比較し、視認性と不快感のバランスを調整した資料です。</figcaption>
-            </figure>
+        </article>
+
+        <article class="project-card project-card-wide project-card-horizontal accent-blue">
+          <div class="project-visual visual-pmx" role="img" aria-label="pmxConverterの3Dボーン編集を表す図形">
+            <span class="visual-number">04</span><div class="axis axis-x"></div><div class="axis axis-y"></div><div class="axis axis-z"></div><div class="bone bone-one"></div><div class="bone bone-two"></div><div class="bone bone-three"></div><span class="pmx-label">PMX → glTF</span>
           </div>
-          <div class="work-media-grid media-compare-grid media-compare-grid-triple">
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_goodTexture1.png" alt="Buns&amp;Party の良い状態と悪い状態のテクスチャ差分一覧">
-              <figcaption>良い状態の基準テクスチャ。食材の新鮮さが一目で伝わる見た目を調整しました。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_goodTexture2.png" alt="Buns&amp;Party の良い状態テクスチャ差分 2">
-              <figcaption>良い状態の差分案 2。食材ごとの質感差が崩れないよう色味と陰影を比較しています。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/buns&amp;party_goodTexture3.png" alt="Buns&amp;Party の良い状態テクスチャ差分 3">
-              <figcaption>良い状態の差分案 3。盛り付け後も判別しやすい輪郭を確認したテクスチャ案です。</figcaption>
-            </figure>
+          <div class="project-content">
+            <div class="project-topline"><p class="project-kind">Personal / Graphics tool</p><span class="status-badge">Desktop</span></div>
+            <h3>pmxConverter</h3>
+            <p class="project-catch">PMXモデルを読み込み、ボーン・モーション・ウェイトを編集してglTFへ出力する制作ツール。</p>
+            <ul class="project-tags" aria-label="使用技術"><li>C++20</li><li>OpenGL 3.3</li><li>Dear ImGui</li><li>CMake</li></ul>
+            <dl class="project-facts"><div><dt>編集</dt><dd>ボーン、キーフレーム、IK、スキンウェイト</dd></div><div><dt>運用</dt><dd>Undo / Redo、作業状態保存、glTF 2.0 出力</dd></div></dl>
+            <details class="project-details"><summary>実装のポイント</summary><p>モデル表示だけでなく、階層選択、ギズモ操作、補間、モーション軌跡、最大4影響のウェイトペイントまで一つの編集フローに統合しています。</p></details>
           </div>
         </article>
       </div>
     </section>
 
-    <section id="shigoto-neko" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Personal Project</p>
-        <h2>仕事猫：無限残業編</h2>
-      </div>
-      <div class="work-layout reverse-on-wide">
-        <div class="work-media-grid">
-          <figure class="media-card">
-            <img src="image/genba-keyconfig.png" alt="仕事猫：無限残業編 のキーコンフィグ画面">
-            <figcaption>キーコンフィグとゲーム設定 UI</figcaption>
-          </figure>
-          <figure class="media-card">
-            <img src="image/genba-mucis.png" alt="仕事猫：無限残業編 の音量設定画面">
-            <figcaption>音量調整や環境設定の画面</figcaption>
-          </figure>
-          <figure class="media-card">
-            <img src="image/effect.png" alt="仕事猫：無限残業編 のエフェクト調整画面">
-            <figcaption>ゲーム内エフェクト調整ツール</figcaption>
-          </figure>
-        </div>
-        <div class="work-body">
-          <div class="meta-card">
-            <h3>基本情報</h3>
-            <table class="meta-table">
-              <tbody>
-                <tr>
-                  <th>制作形態</th>
-                  <td>個人制作</td>
-                </tr>
-                <tr>
-                  <th>ジャンル</th>
-                  <td>2.5D アクション / ローグライク</td>
-                </tr>
-                <tr>
-                  <th>作成期間</th>
-                  <td>2025/12 〜 2026/05</td>
-                </tr>
-                <tr>
-                  <th>担当箇所</th>
-                  <td>キーコンフィグ、音量設定、表示切替、強化 UI、エフェクト作成ツール</td>
-                </tr>
-                <tr>
-                  <th>使用技術</th>
-                  <td>C++ / DirectX11 / ImGui</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <article class="detail-card">
-            <h3>作品概要</h3>
-            <p>
-              2.5D アクションとローグライク要素を組み合わせた個人制作作品です。
-              自分は、遊びやすさに直結する設定まわりと、強化状態を把握するための UI、演出を調整するためのツールを中心に整備しました。
-            </p>
-          </article>
-          <article class="detail-card">
-            <h3>担当箇所で行った内容</h3>
-            <p>
-              キーコンフィグ、音量調整、FullScreen / Window 切り替えを実装し、環境差に左右されにくいプレイ体験を作りました。
-              また、強化要素では段階ごとの成長量を見える化し、現在の状態と次にどれだけ伸びるかを UI 上で把握しやすくしています。
-            </p>
-            <p>
-              エフェクト面では、Unity の ParticleSystem を参考にしつつ、ゲーム内でエフェクトを作成・調整・反映できる仕組みを用意しました。
-              その場で結果を確認しながら調整できるため、演出づくりの試行回数を増やせる点が大きな効果でした。
-            </p>
-          </article>
-        </div>
+    <section id="profile" class="section section-dark" aria-labelledby="profile-title">
+      <div class="shell profile-grid">
+        <div class="profile-heading"><p class="overline">How I work</p><h2 id="profile-title">問題の原因を、<br>構造からほどく。</h2><p>現象だけを局所的に直すのではなく、誰が状態を持ち、いつ更新され、どこへ渡るかを整理します。そのうえで、ゲームの手触りと制作側の扱いやすさを両立させます。</p></div>
+        <ol class="approach-list">
+          <li><span>01</span><div><h3>状態と責務を整理する</h3><p>更新順とデータの所有者を明確にし、修正の影響範囲を追える構造にします。</p></div></li>
+          <li><span>02</span><div><h3>調整できる形で実装する</h3><p>Editor、ImGui、データファイルを使い、試行錯誤をコード変更なしで回せるようにします。</p></div></li>
+          <li><span>03</span><div><h3>使う人まで含めて仕上げる</h3><p>操作導線、保存、配布、説明を整え、実装者以外も運用できる状態を目指します。</p></div></li>
+        </ol>
       </div>
     </section>
 
-    <section id="chinchiro-roguelike" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Personal Project</p>
-        <h2>チンチロローグライク</h2>
-      </div>
-      <div class="work-body">
-        <div class="meta-card">
-          <h3>基本情報</h3>
-          <table class="meta-table">
-            <tbody>
-              <tr>
-                <th>制作形態</th>
-                <td>個人制作</td>
-              </tr>
-              <tr>
-                <th>ジャンル</th>
-                <td>物理挙動 / ローグライク</td>
-              </tr>
-              <tr>
-                <th>作成期間</th>
-                <td>2025/10 〜 2025/12</td>
-              </tr>
-              <tr>
-                <th>担当箇所</th>
-                <td>OBB 判定、RigidBody、重力 / 摩擦 / 回転、補助関数の整備、調整</td>
-              </tr>
-              <tr>
-                <th>使用技術</th>
-                <td>C++ / DirectX11 / DirectXMath / ImGui</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <article class="detail-card">
-          <h3>作品概要</h3>
-          <p>
-            ボードゲームのダイスが転がるときの納得感を、ゲーム上の物理挙動として再現したいと考えて制作した作品です。
-            見た目どおりに当たることと、不自然に跳ね続けないことの両立を目標に、判定と物理の両面から作り込みました。
-          </p>
-        </article>
-
-        <div class="detail-grid two-column-details">
-          <article class="detail-card">
-            <h3>課題</h3>
-            <p>
-              箱型の見た目でも AABB 的な扱いのままだと、回転したダイスの見た目と当たり方がずれてしまいます。
-              ダイスは接触しながら転がるため、この違和感がそのまま操作感や説得力の低下につながることが問題でした。
-            </p>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/tintiro_box.png" alt="チンチロローグライク の OBB 判定確認画面">
-              <figcaption>ダイスの回転に追従する OBB 判定を確認した画面です。</figcaption>
-            </figure>
-          </article>
-          <article class="detail-card">
-            <h3>判断・実装</h3>
-            <p>
-              見た目どおりの接触を優先して OBB を採用しました。
-              その際、DirectXMath の `XMVECTOR` と、自分が普段扱いやすい `XMFLOAT3` の間で行き来する補助関数を先に整備し、判定コードが読みにくくならないようにしながら OBB
-              実装へつなげました。
-            </p>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/tintiro_vec3.png" alt="チンチロローグライク の XMFLOAT3 と XMVECTOR 補助関数資料">
-              <figcaption>`XMFLOAT3` と `XMVECTOR` を往復する補助関数の整理資料です。</figcaption>
-            </figure>
-          </article>
-        </div>
-
-        <article class="detail-card accent-card">
-          <h3>RigidBody と物理挙動</h3>
-          <p>
-            重力、摩擦、回転、停止判定を一つの巨大な処理に詰め込むと、どこを直せば挙動が変わるのか追いにくくなるため、RigidBody として責務を分離しました。
-            パラメーターごとに調整できるようにしたことで、跳ねすぎる、滑りすぎる、止まりにくいといった問題を切り分けながら修正できるようになりました。
-          </p>
-          <div class="work-media-grid media-compare-grid">
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/tintiro_rigidboy1.png" alt="チンチロローグライク の RigidBody 責務分離図 1">
-              <figcaption>重力、摩擦、回転を責務ごとに切り分けた RigidBody 設計です。</figcaption>
-            </figure>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/tintiro_rigidboy2.png" alt="チンチロローグライク の RigidBody 調整資料 2">
-              <figcaption>停止判定やパラメーター調整点を追いやすくした RigidBody 補足資料です。</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <article class="detail-card">
-          <h3>効果</h3>
-          <p>
-            OBB によって見た目と判定のずれを抑えられ、物理挙動の説得力が上がりました。
-            また、補助関数と RigidBody の導入によって、複雑な計算をその場しのぎで増やすのではなく、次に別の物体へ流用できる形に近づけられています。
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>調整で学んだこと</h3>
-          <p>
-            見た目の違和感は、判定、計算、パラメーターのどこに原因があるのかを切り分けないと直しきれません。
-            複雑な物理挙動ほど、責務を分離して観察可能な単位へ分けることが、最終的には調整速度と品質の両方につながると実感しました。
-          </p>
-        </article>
+    <section id="skills" class="section shell" aria-labelledby="skills-title">
+      <div class="section-heading"><p class="overline">Skills</p><h2 id="skills-title">技術スタック</h2></div>
+      <div class="skills-grid">
+        <article><p class="skill-index">01</p><h3>Game programming</h3><p>C++ / DirectX11 を中心に、当たり判定、物理挙動、プレイヤー制御、シーン遷移、保存と復元を実装。</p><ul class="inline-tags"><li>C</li><li>C++</li><li>DirectX11</li><li>DirectXMath</li><li>ImGui</li></ul></article>
+        <article><p class="skill-index">02</p><h3>Unity development</h3><p>ゲームシステム、UI、ScriptableObject、Editor 拡張を開発。Windows と Android 向けのビルドも経験。</p><ul class="inline-tags"><li>C#</li><li>Unity</li><li>Editor</li><li>UI</li><li>Mobile</li></ul></article>
+        <article><p class="skill-index">03</p><h3>Production tools</h3><p>作業の反復を減らすデスクトップツールやデータ編集環境を、実際の制作フローに合わせて設計。</p><ul class="inline-tags"><li>.NET 8</li><li>WPF</li><li>JSON</li><li>CMake</li><li>Git</li></ul></article>
       </div>
     </section>
 
-    <section id="tower-defense" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Personal Project</p>
-        <h2>タワーディフェンス</h2>
-      </div>
-      <div class="work-layout reverse-on-wide">
-        <div class="work-media-grid">
-          <figure class="media-card">
-            <img src="image/castleEditor.png" alt="タワーディフェンス のマップエディタ画面">
-            <figcaption>3D グリッド配置エディタ</figcaption>
-          </figure>
-        </div>
-        <div class="work-body">
-          <div class="meta-card">
-            <h3>基本情報</h3>
-            <table class="meta-table">
-              <tbody>
-                <tr>
-                  <th>制作形態</th>
-                  <td>個人制作</td>
-                </tr>
-                <tr>
-                  <th>ジャンル</th>
-                  <td>タワーディフェンス / エディタ制作</td>
-                </tr>
-                <tr>
-                  <th>作成期間</th>
-                  <td>2026/03 〜 2026/06</td>
-                </tr>
-                <tr>
-                  <th>担当箇所</th>
-                  <td>3D グリッド配置、保存 / 読み込み、モデル管理、エディタ操作</td>
-                </tr>
-                <tr>
-                  <th>使用技術</th>
-                  <td>C++ / DirectX11 / ImGui</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <article class="detail-card">
-            <h3>作品概要</h3>
-            <p>
-              エディタ制作そのものを目的に進めた作品です。
-              3D グリッド上へ Box やモデルを配置し、マップ構成を実行中に確認しながら作れるようにしました。
-            </p>
-          </article>
-          <article class="detail-card">
-            <h3>担当箇所で行った内容</h3>
-            <p>
-              配置、削除、モデル差し替え、保存 / 読み込みをエディタ内で完結できるようにし、ゲーム制作中に発生する反復作業を減らしました。
-              作業中に必要な調整を後回しにせず、その場で触れることを重視して構成しています。
-            </p>
-          </article>
-        </div>
+    <section class="section shell archive-section" aria-labelledby="archive-title">
+      <div class="section-heading heading-with-copy"><div><p class="overline">More projects</p><h2 id="archive-title">これまでの制作</h2></div><p>チーム制作、授業制作、制作補助ツールで担当した内容です。</p></div>
+      <div class="archive-grid">
+        <article class="archive-card archive-featured"><img src="image/powerpoint/buns&amp;party.png" alt="Buns&amp;Partyのプレイ画面" loading="lazy" decoding="async"><div><p class="project-kind">Team / C++ / DirectX11</p><h3>Buns&amp;Party</h3><p>料理・納品アクション。シーン間データ受け渡し、保存・読み込み、調整用 ImGui、注文 UI を担当。</p></div></article>
+        <article class="archive-card"><p class="project-kind">Team / C++</p><h3>仕事猫：無限残業編</h3><p>キーコンフィグ、音量設定、エフェクト調整環境を実装。</p></article>
+        <article class="archive-card"><p class="project-kind">C++ / Physics</p><h3>チンチロローグライク</h3><p>OBB判定、RigidBodyの責務分離、ダイスの物理挙動を調整。</p></article>
+        <article class="archive-card"><p class="project-kind">C++ / Tool</p><h3>タワーディフェンス</h3><p>3Dグリッド配置エディタとマップデータの保存・読み込みを実装。</p></article>
+        <article class="archive-card"><p class="project-kind">WPF / .NET 8</p><h3>FileZipper</h3><p>提出対象ファイルの抽出とZip化を自動化し、配布まで整備。</p></article>
+        <article class="archive-card"><p class="project-kind">Team / Unity</p><h3>CreatorKousien</h3><p>ScriptableObject、UI生成、収集物演出を扱うEditorツール群を開発。</p></article>
+        <article class="archive-card"><p class="project-kind">C / Console</p><h3>ネームバトラー</h3><p>文字列から能力値を生成する戦闘処理と入力フローを実装。</p></article>
       </div>
     </section>
 
-    <section id="survival-roguelite" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Work In Progress</p>
-        <h2>探索型サバイバルローグライト</h2>
-      </div>
-      <div class="work-layout">
-        <div class="work-media-grid">
-          <figure class="media-card">
-            <img src="image/survival-Editor.png" alt="探索型サバイバルローグライト のエディタ画面">
-            <figcaption>地形生成エディタと探索用 UI の試作</figcaption>
-          </figure>
-        </div>
-        <div class="work-body">
-          <div class="meta-card">
-            <h3>基本情報</h3>
-            <table class="meta-table">
-              <tbody>
-                <tr>
-                  <th>制作形態</th>
-                  <td>個人制作</td>
-                </tr>
-                <tr>
-                  <th>ジャンル</th>
-                  <td>探索型サバイバル / ローグライト</td>
-                </tr>
-                <tr>
-                  <th>作成期間</th>
-                  <td>2026/05 〜 制作中</td>
-                </tr>
-                <tr>
-                  <th>担当箇所</th>
-                  <td>プレイヤー、敵挙動、UI、アイテム、地形生成エディタ</td>
-                </tr>
-                <tr>
-                  <th>使用技術</th>
-                  <td>C++ / DirectX11 / ImGui / GitHub / Fork</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <article class="detail-card">
-            <h3>作品概要</h3>
-            <p>
-              探索、採掘、帰還、売却、再探索というループを検証するために制作している作品です。
-              ゲーム本体とツールの両方を並行で整え、大きめの規模でも破綻しない構成を試しています。
-            </p>
-          </article>
-          <article class="detail-card">
-            <h3>担当箇所で行った内容</h3>
-            <p>
-              プレイヤーの移動、ダッシュ、回避、採掘、ロープ昇降、マップ確認、戦闘など、探索に必要な行動を一通り実装しました。
-              さらに、体力、スタミナ、精神力を行動と結びつけ、単なる表示ではなく探索判断に関わる要素として扱えるようにしています。
-            </p>
-            <p>
-              あわせて、敵の接近 / 攻撃挙動、取得アイテム、ピン設置や全体マップなどの UI、地形生成エディタも整備しています。
-              ゲーム本体だけでなく、制作中に必要になるツールをその都度作り足しながら、実際に必要な支援機能を検証しています。
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="file-zipper" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Utility Tool</p>
-        <h2>FileZipper</h2>
-      </div>
-      <div class="work-body">
-        <div class="meta-card">
-          <h3>基本情報</h3>
-          <table class="meta-table">
-            <tbody>
-              <tr>
-                <th>制作形態</th>
-                <td>個人制作</td>
-              </tr>
-              <tr>
-                <th>ジャンル</th>
-                <td>提出ファイル圧縮支援ツール</td>
-              </tr>
-              <tr>
-                <th>作成期間</th>
-                <td>2025/05</td>
-              </tr>
-              <tr>
-                <th>担当箇所</th>
-                <td>必要ファイル抽出、Zip 化、出力名変更、WPF 画面構成、配布 / 運用整備</td>
-              </tr>
-              <tr>
-                <th>使用技術</th>
-                <td>C# / WPF / .NET</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <article class="detail-card">
-          <h3>作品概要</h3>
-          <p>
-            課題提出のたびに必要ファイルを手作業で集めて圧縮する負担を減らすために作成したツールです。
-            便利な機能を作るだけでなく、初学者でも迷わず使える UI や配布導線まで含めて設計しました。
-          </p>
-          <figure class="media-card media-fit-contain">
-            <img src="image/powerpoint/FileZIpper.png" alt="FileZipper のメイン画面">
-            <figcaption>抽出対象の確認から Zip 化までを一画面で進められるメイン UI です。</figcaption>
-          </figure>
-        </article>
-
-        <article class="detail-card">
-          <h3>担当箇所で行った内容</h3>
-          <p>
-            指定フォルダから提出に必要なファイルだけを抽出し、そのまま Zip 化できるようにしました。
-            事前に出力ファイル名を変更できるようにし、提出ルールに合わせたファイル作成まで一連で完了できる構成にしています。
-          </p>
-          <p>
-            画面は WPF で構成し、選択、確認、圧縮という流れが迷わず進むようにレイアウトしました。
-            また、導入方法や使い方を整理した資料やインストーラーも用意し、ツールが使われるところまで考えて整備しました。
-          </p>
-        </article>
-
-        <div class="detail-grid two-column-details">
-          <article class="detail-card">
-            <h3>課題</h3>
-            <p>
-              毎回の提出作業では、必要なファイルを探す、選び漏れがないか確認する、Zip 名を整える、といった細かい作業が積み重なっていました。
-              特に慣れていない人ほど手順を覚えにくく、同じところで時間を使いやすい点が課題でした。
-            </p>
-            <figure class="media-card media-fit-contain">
-              <img src="image/powerpoint/FileZIpper_tutorial.png" alt="FileZipper の使い方説明資料">
-              <figcaption>導入手順と運用フローをまとめたチュートリアル資料です。</figcaption>
-            </figure>
-          </article>
-          <article class="detail-card">
-            <h3>判断・実装</h3>
-            <p>
-              操作の中心を「抽出対象の確認」と「出力結果の明確化」に置き、手順を画面内で完結できるようにしました。
-              単なる圧縮機能ではなく、提出作業の失敗を減らすことを目的に、必要ファイル抽出と Zip 化を一体の流れとして設計しています。
-            </p>
-          </article>
-        </div>
-
-        <article class="detail-card accent-card">
-          <h3>効果</h3>
-          <p>
-            手作業の確認回数を減らし、提出前の負担を軽くできました。
-            さらに、配布資料と導入手順まで整えたことで、作った本人以外でも運用できるツールとしてまとめられた点が大きな成果です。
-          </p>
-          <figure class="media-card media-fit-contain">
-            <img src="image/powerpoint/FileZIpper_Installer.png" alt="FileZipper のインストーラー画面">
-            <figcaption>初学者でも導入しやすいように整えたインストーラー画面です。</figcaption>
-          </figure>
-        </article>
-      </div>
-    </section>
-
-    <section id="creator-kousien" class="work-section">
-      <div class="section-heading">
-        <p class="section-label">Team Project / Tooling</p>
-        <h2>CreatorKousien</h2>
-      </div>
-      <div class="work-body">
-        <div class="meta-card">
-          <h3>基本情報</h3>
-          <table class="meta-table">
-            <tbody>
-              <tr>
-                <th>制作形態</th>
-                <td>チーム制作（プランナー 2 名 / プログラマー 7 名 / デザイナー 3 名）</td>
-              </tr>
-              <tr>
-                <th>ジャンル</th>
-                <td>フィールド移動 / カードベースバトル</td>
-              </tr>
-              <tr>
-                <th>作成期間</th>
-                <td>2026/02 〜 2026/06</td>
-              </tr>
-              <tr>
-                <th>担当箇所</th>
-                <td>プレイヤー、収集物、敵、UI 表示、ツール開発、責務分離</td>
-              </tr>
-              <tr>
-                <th>使用技術</th>
-                <td>C# / Unity / URP / GitHub / Fork</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <article class="detail-card">
-          <h3>作品概要</h3>
-          <p>
-            Unity / URP で制作したチーム作品です。
-            プレイヤーや収集物、敵、UI といったゲーム本体の実装に加え、制作効率を高めるための Editor ツール群も並行して整備しました。
-          </p>
-          <figure class="media-card">
-            <img src="image/powerpoint/CreaterKousien.png" alt="CreatorKousien の作品メイン画面">
-            <figcaption>Unity チーム制作作品のメイン画面。ゲーム本体と周辺ツールの両方を担当した作品です。</figcaption>
-          </figure>
-        </article>
-
-        <article class="detail-card">
-          <h3>担当箇所で行った内容</h3>
-          <p>
-            ゲーム本体では、プレイヤーの入力、移動、所持状態、収集物の生成と保持、敵の体力や攻撃ゲージ、HUD やヒット表示などに関わりました。
-            それぞれの処理を Core / Gameplay / Presentation のように役割で分け、依存関係が大きくなりすぎないよう意識して整理しています。
-          </p>
-          <p>
-            あわせて、制作中に繰り返し発生する作業を減らすために、ScriptableObjectManager、UI Object Creator、CollectibleVectorEmitter などのツールも作成しました。
-            ゲーム実装とツール整備を切り離さず、チーム全体の開発速度を上げるための補助まで担当した点が特徴です。
-          </p>
-        </article>
-
-        <div class="detail-grid three-column-details">
-          <article class="detail-card">
-            <h3>ScriptableObjectManager</h3>
-            <p>
-              ScriptableObject が増えるほど目的のアセットを探す時間が増えていたため、一覧、検索、編集、ソートをまとめた管理ツールを作成しました。
-              アセット探索と編集を一つの導線にまとめることで、データ量が増えても扱いやすい状態にしています。
-            </p>
-            <div class="work-media-grid media-compare-grid">
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_SO_View.png"
-                  alt="CreatorKousien の ScriptableObjectManager 一覧画面">
-                <figcaption>ScriptableObjectManager の一覧ビュー。目的のアセットを探しやすくしています。</figcaption>
-              </figure>
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_SO_Editor.png"
-                  alt="CreatorKousien の ScriptableObjectManager 編集画面">
-                <figcaption>一覧からそのまま編集へつなぐ ScriptableObjectManager の編集画面です。</figcaption>
-              </figure>
-            </div>
-          </article>
-          <article class="detail-card">
-            <h3>UI Object Creator</h3>
-            <p>
-              Image や Text を毎回手作業で探して配置すると、同じ UI を組むたびに時間がかかるため、Canvas 上へ必要な UI オブジェクトをまとめて生成するツールを用意しました。
-              配置作業の反復を減らし、UI 試作の速度を上げています。
-            </p>
-            <div class="work-media-grid media-compare-grid">
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_Canvas.png"
-                  alt="CreatorKousien の UI Object Creator 対象 Canvas 画面">
-                <figcaption>UI Object Creator が配置対象とする Canvas の確認画面です。</figcaption>
-              </figure>
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_UI_Editor.png"
-                  alt="CreatorKousien の UI Object Creator エディター画面">
-                <figcaption>Image や Text をまとめて生成できる UI Object Creator のエディター画面です。</figcaption>
-              </figure>
-            </div>
-          </article>
-          <article class="detail-card">
-            <h3>CollectibleVectorEmitter</h3>
-            <p>
-              収集物の飛散方向や角度がコードの数値だけでは把握しにくかったため、Gizmo を使って方向と広がりを可視化できるようにしました。
-              見て調整できるようにしたことで、演出の調整コストを下げています。
-            </p>
-            <div class="work-media-grid media-compare-grid">
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_Vector.png"
-                  alt="CreatorKousien の CollectibleVectorEmitter 設定画面">
-                <figcaption>収集物の飛散方向を数値で管理する CollectibleVectorEmitter の設定画面です。</figcaption>
-              </figure>
-              <figure class="media-card media-fit-contain">
-                <img src="image/powerpoint/CreaterKousien_Vector_View.png"
-                  alt="CreatorKousien の CollectibleVectorEmitter 可視化画面">
-                <figcaption>Gizmo による方向可視化で調整しやすくした CollectibleVectorEmitter のビューです。</figcaption>
-              </figure>
-            </div>
-          </article>
-        </div>
-
-        <article class="detail-card accent-card">
-          <h3>効果</h3>
-          <p>
-            ゲーム本体の仕様変更に対応しつつ、データ整理や UI 作成のような反復作業も軽くできたことで、チーム全体の作業効率を上げることにつながりました。
-            実装対象が多い中でも、責務分離とツール整備の両面から支えられた点が、この作品での大きな学びです。
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="name-battler" class="work-section compact-work">
-      <div class="section-heading">
-        <p class="section-label">Personal Project</p>
-        <h2>ネームバトラー</h2>
-      </div>
-      <div class="work-layout reverse-on-wide">
-        <div class="work-media-grid">
-          <figure class="media-card">
-            <div class="no-image" aria-label="ネームバトラー の画像なし">No Image</div>
-            <figcaption>画像未掲載</figcaption>
-          </figure>
-        </div>
-        <div class="work-body">
-          <div class="meta-card">
-            <h3>基本情報</h3>
-            <table class="meta-table">
-              <tbody>
-                <tr>
-                  <th>制作形態</th>
-                  <td>個人制作</td>
-                </tr>
-                <tr>
-                  <th>ジャンル</th>
-                  <td>ターン制バトル</td>
-                </tr>
-                <tr>
-                  <th>作成期間</th>
-                  <td>2023/11 〜 2023/12</td>
-                </tr>
-                <tr>
-                  <th>担当箇所</th>
-                  <td>名前入力、戦闘システム、パラメーター管理</td>
-                </tr>
-                <tr>
-                  <th>使用技術</th>
-                  <td>C++ / コンソール</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <article class="detail-card">
-            <h3>担当箇所で行った内容</h3>
-            <p>
-              十字キーや WASD による文字選択と入力位置移動を実装し、コンソール上でも名前入力が成立するようにしました。
-              戦闘部分では、HP や攻撃力などの数値を構造体で管理し、ターン進行や行動順が追いやすい形で整理しています。
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="other-activities">
-      <div class="section-heading">
-        <p class="section-label">Other Activities</p>
-        <h2>その他の取り組み</h2>
-      </div>
-      <div class="activity-grid">
-        <article class="detail-card">
-          <h3>後輩向け講座</h3>
-          <p>
-            ImGui 講座では、即時モード特有の考え方でつまずきやすい点を分解し、表示、入力、値の保持、更新タイミングを順に理解できる構成へ整理して説明しました。
-            実装例だけでなく、なぜその書き方になるのかも含めて伝えることで、表面的な写経ではなく考え方ごと共有することを意識しました。
-          </p>
-          <div class="work-media-grid">
-            <figure class="media-card media-fit-contain media-compact">
-              <img src="image/powerpoint/kouza.png" alt="後輩向け ImGui 講座の資料画面">
-              <figcaption>後輩向け講座で使った ImGui 解説資料です。</figcaption>
-            </figure>
-          </div>
-        </article>
-        <article class="detail-card">
-          <h3>共通する強み</h3>
-          <p>
-            どの作品でも、実装対象が増えたときに破綻しない構造へ整えること、そして他の人が扱いやすい状態まで責任を持つことを一貫して意識しています。
-            ゲーム挙動とツール開発の両方を見ながら、開発全体を前に進める役割を担えることが自分の強みです。
-          </p>
-        </article>
-      </div>
+    <section class="contact-section" aria-labelledby="contact-title">
+      <div class="shell contact-inner"><div><p class="overline">Source &amp; activity</p><h2 id="contact-title">実装の詳細は GitHub へ。</h2><p>公開できる個人制作のコード、README、リリースを掲載しています。</p></div><a class="button button-light" href="https://github.com/rain08080-0o0x" target="_blank" rel="noreferrer">GitHub プロフィール <span aria-hidden="true">↗</span></a></div>
     </section>
   </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>© 2026 Ikuya Yamamoto</p><a href="#top">ページ先頭へ ↑</a></div></footer>
 </body>
-
 </html>
