@@ -19,11 +19,6 @@ html.game-scroll:has(.game-session[data-mode="bugs"]:not([hidden])){overflow-x:c
 .game-status{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal;font:12px var(--mono);color:#ffb276}
 .game-help{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:16px;right:16px;pointer-events:none;text-align:center;font-size:12px;line-height:1.8;text-shadow:0 2px 5px #000;background:#06101de8;border:1px solid #34434f;border-radius:10px;padding:9px}
 .game-help span{display:block;color:#8d9aa6;font:10px var(--mono)}
-.game-controls{position:absolute;top:90px;left:12px;display:grid;gap:10px;padding:12px;background:#08121aeb;border:1px solid #34434f;border-radius:10px;font-size:12px;max-width:190px}
-.game-controls label{display:grid;gap:3px}.game-controls input{width:150px;accent-color:#35e0ff}
-.game-controls label:has([type=checkbox]){display:flex;align-items:center}.game-controls input[type=checkbox]{width:auto}
-.game-controls select{max-width:100%;padding:8px 4px;background:#101923;color:#eef2f5;border:1px solid #34434f;border-radius:5px;font:inherit}
-.game-stroke-credit{font-size:10px;line-height:1.8;color:#8d9aa6}.game-stroke-credit a{color:#35e0ff;text-decoration:underline}
 .game-text-wrap{display:contents}.game-letter{font:inherit;letter-spacing:inherit;color:inherit}
 .game-letter-gone{visibility:hidden!important}
 .game-scroll{scroll-behavior:auto!important;scrollbar-gutter:stable}
@@ -56,20 +51,22 @@ body.game-playing main .reveal,body.game-playing main .char,body.game-playing ma
 
 /* ---------- 三点リーダーメニューの開閉 ---------- */
 .game-menu-panel{transform-origin:top right}
-.game-menu-panel.is-opening{animation:menu-in .34s cubic-bezier(.2,1.5,.4,1) both}
+.game-menu-panel.is-opening{animation:menu-in .48s cubic-bezier(.16,1,.3,1) both}
 .game-menu-panel.is-closing{animation:menu-out .2s ease-in both}
-.game-menu>button.is-kick{animation:menu-kick .42s cubic-bezier(.2,1.8,.4,1)}
-@keyframes menu-in{0%{opacity:0;scale:.6;translate:12px -12px}100%{opacity:1;scale:1;translate:0 0}}
+.game-menu>button.is-returning{animation:menu-return .55s cubic-bezier(.2,1.3,.4,1) both}
+.game-menu .is-menu-entering{animation:menu-item-in .4s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.16s + var(--menu-item-index,0) * 35ms)}
+@keyframes menu-in{0%{opacity:.6;scale:var(--menu-scale-x,.15) var(--menu-scale-y,.1);translate:var(--menu-shift-x,0px) var(--menu-shift-y,-56px);border-radius:24px}100%{opacity:1;scale:1;translate:0 0}}
+@keyframes menu-return{0%{opacity:0;translate:-80px -70px;scale:.55;rotate:-25deg}70%{opacity:1;translate:3px 3px;scale:1.08;rotate:3deg}100%{opacity:1;translate:0 0;scale:1;rotate:0deg}}
+@keyframes menu-item-in{from{opacity:0;translate:36px 0}to{opacity:1;translate:0 0}}
 @keyframes menu-out{to{opacity:0;scale:.85;translate:8px -8px}}
-@keyframes menu-kick{0%{scale:1;rotate:0deg}30%{scale:.82;rotate:-12deg}65%{scale:1.15;rotate:8deg}100%{scale:1;rotate:0deg}}
 
 /* ---------- ポーズ画面 ---------- */
 /* z-index: セッション(220) < ポーズ(240) < 三点リーダー(250) → 三点リーダー以外がグレーアウトされる */
-.game-pause{position:fixed;inset:0;z-index:240;display:grid;place-content:center;justify-items:center;gap:min(5vh,40px);padding:16px;font-family:var(--display,"Space Grotesk",sans-serif);color:#fff}
+.game-pause{position:fixed;inset:0;height:100dvh;z-index:240;display:grid;grid-template-rows:auto auto minmax(0,1fr);justify-items:center;gap:clamp(12px,3vh,24px);padding:16px;overflow:hidden;font-family:var(--display,"Space Grotesk",sans-serif);color:#fff}
 .game-pause[hidden]{display:none}
 /* 即グレーアウト(トランジションなし) */
 .game-pause.is-gray{background:rgba(10,12,16,.5);-webkit-backdrop-filter:grayscale(1) brightness(.55);backdrop-filter:grayscale(1) brightness(.55)}
-.game-pause-title{display:flex;margin:0;font-size:min(19vw,40vh);font-weight:700;line-height:.9;letter-spacing:-.04em;pointer-events:none;text-shadow:0 0 60px rgba(255,255,255,.25),0 12px 0 rgba(0,0,0,.35)}
+.game-pause-title{display:flex;margin:0;font-size:min(19vw,20dvh);font-weight:700;line-height:.9;letter-spacing:-.04em;pointer-events:none;text-shadow:0 0 60px rgba(255,255,255,.25),0 12px 0 rgba(0,0,0,.35)}
 .game-pause-title span{display:inline-block;opacity:0}
 .game-pause-continue{width:min(500px,calc(100vw - 32px));min-height:68px;padding:0 24px;color:#0a0d12;background:#fff;border:0;border-radius:999px;cursor:pointer;font:700 1.35rem/1 var(--display,"Space Grotesk",sans-serif);letter-spacing:.24em;text-transform:uppercase;opacity:0;box-shadow:0 0 0 1px rgba(255,255,255,.3),0 20px 60px rgba(0,0,0,.5);transition:background .2s,color .2s,box-shadow .2s,scale .2s}
 .game-pause-continue:hover{color:#fff;background:#ff5b22;box-shadow:0 0 0 1px #ff5b22,0 0 40px rgba(255,91,34,.55)}
@@ -98,14 +95,34 @@ body.game-playing main .reveal,body.game-playing main .char,body.game-playing ma
 .game-pause.is-in .game-pause-stats tbody tr{animation:upg-enter .42s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--k,0) * 45ms)}
 .game-pause.is-out .game-pause-stats{animation:upg-leave .3s ease-in both}
 .game-pause:not(.is-ready),.game-pause.is-out{pointer-events:none}
-@media(max-width:960px){.game-pause-stats{position:static;transform:none;max-height:38vh;order:1}}
+.game-pause-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;width:min(960px,100%);min-height:0;align-items:stretch}
+.game-pause-columns .game-pause-stats{position:static;transform:none;width:auto;min-width:0;max-height:none;overflow:auto}
+.game-pause-columns .game-menu{position:static;grid-column:2;min-width:0;min-height:0;overflow:auto;z-index:auto}
+.game-pause-columns .game-menu>button{display:none}
+.game-pause-columns .game-menu-panel{width:100%;margin:0;box-shadow:none}
+.game-pause-columns .game-menu-panel p{overflow-wrap:anywhere}
+.game-pause-columns .game-menu li button{overflow-wrap:anywhere}
+@media(max-width:700px){
+  .game-pause{padding:12px;gap:12px}
+  .game-pause-columns{gap:8px}
+  .game-pause-columns .game-pause-stats,.game-pause-columns .game-menu-panel{padding:8px}
+  .game-pause-stats p,.game-pause-columns .game-menu-panel p{font-size:9px;letter-spacing:.05em}
+  .game-pause-stats h3{font-size:12px}
+  .game-pause-stats table{table-layout:fixed;font-size:10px;overflow-wrap:anywhere}
+  .game-pause-stats th,.game-pause-stats td{padding:6px 2px}
+  .game-pause-stats th:first-child{width:38%}
+  .game-pause-stats th:nth-child(2){width:22%}
+  .game-pause-columns .game-menu ul{margin-left:0;padding-left:6px}
+  .game-pause-columns .game-menu li button{font-size:11px;padding:8px 5px}
+  .game-pause-columns .game-menu small{font-size:9px}
+}
 @keyframes pause-letter{0%{opacity:0;translate:0 -60%;scale:1.8;filter:blur(14px)}55%{opacity:1;translate:0 6%;scale:.94;filter:blur(0)}78%{translate:0 -2%;scale:1.03}100%{opacity:1;translate:0 0;scale:1;filter:blur(0)}}
 @keyframes pause-btn-in{0%{opacity:0;translate:0 40px;scale:.8}70%{opacity:1;translate:0 -6px;scale:1.03}100%{opacity:1;translate:0 0;scale:1}}
 @keyframes pause-letter-out{0%{opacity:1;scale:1;filter:blur(0)}100%{opacity:0;scale:1.35;translate:0 -12%;filter:blur(10px)}}
 @keyframes pause-press{0%{scale:1}40%{scale:.92}100%{scale:1.04}}
 @keyframes pause-btn-out{0%{opacity:1}100%{opacity:0;translate:0 30px}}
 @media(prefers-reduced-motion:reduce){
-  .game-menu-panel,.game-menu>button,.game-pause *{animation:none!important}
+  .game-menu-panel,.game-menu>button,.game-menu .is-menu-entering,.game-pause *{animation:none!important}
   .game-pause.is-gray .game-pause-title span,.game-pause.is-gray .game-pause-continue,.game-pause.is-gray .game-pause-stats{opacity:1}
   .game-pause.is-out{transition:none}
 }
@@ -114,8 +131,8 @@ body.game-playing .scroll-progress{z-index:260;height:4px;background:rgba(13,18,
 body.game-playing .scroll-progress i{transition:transform .12s cubic-bezier(.16,1,.3,1)}
 body.game-playing,body.game-playing button{cursor:auto!important}
 body.game-playing .cursor-dot,body.game-playing .cursor-ring,body.game-playing .cursor-trail,body.game-playing .cursor-click-ring,body.game-playing .cursor-click-particle,body.game-playing .cursor-click-flash{display:none!important}
-[hidden].game-session,[hidden].game-menu-panel,[hidden].game-controls,[hidden].game-upgrades,[hidden].game-pause-stats,[hidden].game-stroke-credit,.game-upgrades button[hidden]{display:none}
-@media(max-width:600px){.game-menu{right:10px;top:14px}.game-bar{padding:9px;gap:6px;right:66px}.game-bar h2{flex-basis:100%;font-size:12px}.game-bar button{padding:6px 10px;font-size:12px}.game-status{font-size:10px}.game-controls{top:128px}.game-help{font-size:11px;left:10px;right:10px}.home .header-inner{gap:8px;padding-right:48px}.home .brand strong{font-size:11px}}
+[hidden].game-session,[hidden].game-menu-panel,[hidden].game-upgrades,[hidden].game-pause-stats,.game-upgrades button[hidden]{display:none}
+@media(max-width:600px){.game-menu{right:10px;top:14px}.game-bar{padding:9px;gap:6px;right:66px}.game-bar h2{flex-basis:100%;font-size:12px}.game-bar button{padding:6px 10px;font-size:12px}.game-status{font-size:10px}.game-help{font-size:11px;left:10px;right:10px}.home .header-inner{gap:8px;padding-right:48px}.home .brand strong{font-size:11px}}
 @media(max-width:600px){.game-session[data-mode="bugs"] .game-status{flex-basis:100%;min-height:2.6em}}
 @media(max-height:500px){
   .game-session[data-mode="bugs"] .game-bar{padding:4px 8px;gap:4px 8px}
@@ -125,3 +142,42 @@ body.game-playing .cursor-dot,body.game-playing .cursor-ring,body.game-playing .
   .game-session[data-mode="bugs"] .game-help span{display:none}
   .game-session[data-mode="bugs"] .game-upgrades{max-height:calc(100dvh - 24px);padding:12px;gap:8px}
 }
+
+.game-session{width:100vw;height:100dvh;overflow:hidden}
+html.game-scroll{overflow-x:clip;scrollbar-gutter:auto}
+.game-menu-panel{max-height:calc(100dvh - 88px);overflow:auto}
+.game-bar{font-size:clamp(12px,min(2.5vw,3dvh),15px)}
+.game-bar h2{font-size:clamp(11px,min(2.5vw,3dvh),15px)}
+.game-status{font-size:clamp(10px,min(2.2vw,2.5dvh),12px)}
+.game-help{font-size:clamp(10px,min(2.4vw,2.6dvh),12px)}
+.game-upgrades{font-size:clamp(12px,min(2.8vw,3.2dvh),16px);max-height:calc(100dvh - 32px);padding:clamp(12px,3dvh,22px)}
+.game-pause-columns .game-menu-panel{max-height:none}
+.game-pause-continue{min-height:clamp(44px,8dvh,68px);font-size:clamp(14px,min(4vw,4dvh),22px)}
+@media(max-height:500px){
+  .game-bar{padding:4px 8px;gap:4px 8px}
+  .game-bar h2{flex:1}
+  .game-help{padding:4px;line-height:1.3;bottom:max(4px,env(safe-area-inset-bottom))}
+  .game-help span{display:none}
+}
+
+.game-menu [data-menu-view][hidden]{display:none}
+.game-project-links a{display:block;padding:10px 8px;min-height:44px;color:#eef2f5;border-bottom:1px solid #34434f;font:500 13px/1.5 var(--jp);letter-spacing:normal;text-transform:none;overflow-wrap:anywhere}
+.game-project-links a:hover{color:#35e0ff;background:#18303c}
+.game-menu .game-project-links{margin:0 0 16px;padding:0;border:0;gap:0}
+.game-menu [data-action="show-games"]{width:100%;border-color:#35e0ff}
+.game-pause-columns .game-project-links a{font-size:clamp(11px,2vw,13px)}
+
+.game-menu>button{display:block;margin-left:auto}
+.game-menu-panel{display:grid;overflow-x:hidden}
+.game-menu-panel>[data-menu-view]{grid-area:1/1;min-width:0}
+.game-menu-panel.is-view-transition{overflow:hidden;grid-template-rows:minmax(0,1fr);align-items:start}
+.game-menu>button.is-returning{animation-delay:.48s}
+.game-menu .is-menu-entering{animation-delay:calc(var(--menu-items-delay,0s) + var(--menu-item-index,0) * 35ms)}
+.game-menu-panel.is-opening{position:relative}
+.game-menu-panel.is-opening::before{content:'⋯';position:absolute;inset:0;display:grid;place-items:center;color:#eef2f5;font-size:24px;pointer-events:none;animation:menu-dots .48s both}
+@keyframes menu-dots{0%,20%{opacity:1}60%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.game-menu-panel.is-opening::before{display:none}}
+
+.game-menu-panel.is-opening>[data-menu-view]{animation:menu-content .15s .48s both}
+@keyframes menu-content{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.game-menu-panel.is-opening>[data-menu-view]{animation:none}}
