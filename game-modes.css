@@ -1,0 +1,116 @@
+.game-menu{position:fixed;top:16px;right:16px;z-index:250;font-family:var(--jp)}
+.home .header-inner{padding-right:58px}
+.game-menu button,.game-session button{font:inherit;color:#eef2f5;cursor:pointer;touch-action:manipulation;border:1px solid #34434f;background:#101923;border-radius:8px;padding:10px 14px;min-height:44px}
+.game-menu button:hover,.game-session button:hover{border-color:#35e0ff;background:#18303c}
+.game-menu>button{font-size:24px;line-height:1;width:46px;padding:8px;box-shadow:0 0 22px #35e0ff18}
+.game-menu-panel{width:min(320px,calc(100vw - 32px));margin-top:10px;padding:18px;background:#0a101af5;border:1px solid #34434f;border-radius:14px;box-shadow:0 24px 80px #0009}
+.game-menu-panel p{font:11px var(--mono);color:#35e0ff;letter-spacing:.15em;margin:0 0 16px}
+.game-menu summary{cursor:pointer;padding:10px 0;font-weight:700}
+.game-menu ul{list-style:none;margin:10px 0 0 8px;padding:0 0 0 14px;border-left:1px solid #34434f;display:grid;gap:8px}
+.game-menu li button{width:100%;text-align:left;font-size:13px}
+.game-menu small{display:block;color:#8d9aa6;font:10px var(--mono);margin-top:4px}
+.game-session{position:fixed;inset:0;z-index:220;isolation:isolate;color:#eef2f5;font-family:var(--jp);background:transparent}
+.game-session canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair!important}
+.game-bar{position:absolute;top:12px;left:12px;right:76px;padding:12px 16px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:#08121af2;border:1px solid #34434f;border-radius:12px}
+.game-bar h2{font:700 15px var(--mono);margin:0;flex:1;white-space:nowrap;color:#35e0ff}
+.game-status{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal;font:12px var(--mono);color:#ffb276}
+.game-help{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:16px;right:16px;pointer-events:none;text-align:center;font-size:12px;line-height:1.8;text-shadow:0 2px 5px #000;background:#06101de8;border:1px solid #34434f;border-radius:10px;padding:9px}
+.game-help span{display:block;color:#8d9aa6;font:10px var(--mono)}
+.game-controls{position:absolute;top:90px;left:12px;display:grid;gap:10px;padding:12px;background:#08121aeb;border:1px solid #34434f;border-radius:10px;font-size:12px;max-width:190px}
+.game-controls label{display:grid;gap:3px}.game-controls input{width:150px;accent-color:#35e0ff}
+.game-controls label:has([type=checkbox]){display:flex;align-items:center}.game-controls input[type=checkbox]{width:auto}
+.game-controls select{max-width:100%;padding:8px 4px;background:#101923;color:#eef2f5;border:1px solid #34434f;border-radius:5px;font:inherit}
+.game-stroke-credit{font-size:10px;line-height:1.8;color:#8d9aa6}.game-stroke-credit a{color:#35e0ff;text-decoration:underline}
+.game-text-wrap{display:contents}.game-letter{font:inherit;letter-spacing:inherit;color:inherit}
+.game-letter-gone{visibility:hidden!important}
+.game-scroll{scroll-behavior:auto!important;scrollbar-gutter:stable}
+body.game-playing main *,body.game-playing main *::before,body.game-playing main *::after{animation-play-state:paused!important;transition:none!important}
+body.game-playing main .reveal,body.game-playing main .char,body.game-playing main .rt-inner,body.game-playing main .work-card,body.game-playing main [data-tilt],body.game-playing main [data-magnetic],body.game-playing main .section-bg-num{transform:none!important;opacity:1!important}
+.game-upgrades{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,calc(100vw - 32px));max-height:65vh;overflow:auto;padding:22px;border:1px solid #35e0ff;background:#08121af5;border-radius:14px;box-shadow:0 0 70px #35e0ff20;display:grid;gap:12px}
+.game-upgrades p{margin:0;color:#5dffa8;font:12px var(--mono);letter-spacing:.2em}.game-upgrades h3{margin:0 0 8px;font-size:16px}.game-upgrades button{text-align:left}.game-upgrades small{display:block;color:#8d9aa6;font-size:11px;margin-top:5px}
+.game-upgrades [data-action="reroll"]{text-align:center;border-style:dashed;color:#35e0ff}.game-upgrades button:disabled{opacity:.4;cursor:default}
+/* 強化UIの演出 (transformは中央寄せに使用中のため、scale/translate/rotateの個別プロパティで動かす) */
+.game-upgrades button{position:relative;overflow:hidden;transition:border-color .2s,background .2s,opacity .25s,scale .25s}
+.game-upgrades button[data-upgrade]:not(:disabled):hover{scale:1.02}
+.game-upgrades button[data-upgrade]:not(:disabled):active{scale:.97}
+.game-upgrades.is-open{animation:upg-open .5s cubic-bezier(.2,1.6,.4,1) both}
+.game-upgrades.is-bump{animation:upg-bump .45s cubic-bezier(.2,1.8,.4,1)}
+.game-upgrades.is-locked{pointer-events:none}
+.game-upgrades.is-locked button{cursor:default}
+.game-upgrades button.is-enter{animation:upg-enter .42s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--k,0) * 70ms)}
+.game-upgrades button.is-picked{z-index:1;border-color:#5dffa8;background:#123326;box-shadow:0 0 0 1px #5dffa8,0 0 32px #5dffa880;animation:upg-pick .6s cubic-bezier(.2,1.8,.4,1) both}
+.game-upgrades button.is-picked::after{position:absolute;inset:0;content:"";background:linear-gradient(100deg,transparent 30%,#ffffff70 50%,transparent 70%);animation:upg-shine .55s ease-out both}
+.game-upgrades button.is-leaving{animation:upg-leave .3s ease-in both}
+.game-upgrades [data-action="reroll"].is-pressed{animation:upg-press .35s cubic-bezier(.2,1.8,.4,1)}
+@keyframes upg-open{0%{opacity:0;scale:.7}60%{opacity:1;scale:1.06}100%{opacity:1;scale:1}}
+@keyframes upg-bump{0%{scale:1}30%{scale:1.035}60%{scale:.985}100%{scale:1}}
+@keyframes upg-enter{0%{opacity:0;translate:0 18px;scale:.9}70%{opacity:1;translate:0 -4px;scale:1.02}100%{opacity:1;translate:0 0;scale:1}}
+@keyframes upg-pick{0%{scale:1}25%{scale:.93}55%{scale:1.08;translate:0 -6px}80%{scale:.98;translate:0 1px}100%{scale:1;translate:0 0}}
+@keyframes upg-shine{from{translate:-100% 0}to{translate:100% 0}}
+@keyframes upg-leave{to{opacity:0;scale:.92;translate:0 8px}}
+@keyframes upg-press{0%{scale:1}35%{scale:.92}70%{scale:1.05}100%{scale:1}}
+@media(prefers-reduced-motion:reduce){.game-upgrades,.game-upgrades button,.game-upgrades button::after{animation:none!important}}
+
+/* ---------- 三点リーダーメニューの開閉 ---------- */
+.game-menu-panel{transform-origin:top right}
+.game-menu-panel.is-opening{animation:menu-in .34s cubic-bezier(.2,1.5,.4,1) both}
+.game-menu-panel.is-closing{animation:menu-out .2s ease-in both}
+.game-menu>button.is-kick{animation:menu-kick .42s cubic-bezier(.2,1.8,.4,1)}
+@keyframes menu-in{0%{opacity:0;scale:.6;translate:12px -12px}100%{opacity:1;scale:1;translate:0 0}}
+@keyframes menu-out{to{opacity:0;scale:.85;translate:8px -8px}}
+@keyframes menu-kick{0%{scale:1;rotate:0deg}30%{scale:.82;rotate:-12deg}65%{scale:1.15;rotate:8deg}100%{scale:1;rotate:0deg}}
+
+/* ---------- ポーズ画面 ---------- */
+/* z-index: セッション(220) < ポーズ(240) < 三点リーダー(250) → 三点リーダー以外がグレーアウトされる */
+.game-pause{position:fixed;inset:0;z-index:240;display:grid;place-content:center;justify-items:center;gap:min(5vh,40px);padding:16px;font-family:var(--display,"Space Grotesk",sans-serif);color:#fff}
+.game-pause[hidden]{display:none}
+/* 即グレーアウト(トランジションなし) */
+.game-pause.is-gray{background:rgba(10,12,16,.5);-webkit-backdrop-filter:grayscale(1) brightness(.55);backdrop-filter:grayscale(1) brightness(.55)}
+.game-pause-title{display:flex;margin:0;font-size:min(19vw,40vh);font-weight:700;line-height:.9;letter-spacing:-.04em;pointer-events:none;text-shadow:0 0 60px rgba(255,255,255,.25),0 12px 0 rgba(0,0,0,.35)}
+.game-pause-title span{display:inline-block;opacity:0}
+.game-pause-continue{width:min(500px,calc(100vw - 32px));min-height:68px;padding:0 24px;color:#0a0d12;background:#fff;border:0;border-radius:999px;cursor:pointer;font:700 1.35rem/1 var(--display,"Space Grotesk",sans-serif);letter-spacing:.24em;text-transform:uppercase;opacity:0;box-shadow:0 0 0 1px rgba(255,255,255,.3),0 20px 60px rgba(0,0,0,.5);transition:background .2s,color .2s,box-shadow .2s,scale .2s}
+.game-pause-continue:hover{color:#fff;background:#ff5b22;box-shadow:0 0 0 1px #ff5b22,0 0 40px rgba(255,91,34,.55)}
+.game-pause-continue:focus-visible{outline:3px solid #35e0ff;outline-offset:4px}
+/* 登場: 文字が上から叩きつけられるように順番に着地 → Continue がせり上がる */
+.game-pause.is-in .game-pause-title span{animation:pause-letter .62s cubic-bezier(.2,1.5,.35,1) both;animation-delay:calc(var(--i) * 55ms)}
+.game-pause.is-in .game-pause-continue{animation:pause-btn-in .5s cubic-bezier(.2,1.5,.4,1) .38s both}
+/* 退場: Continue が押し込まれ → 文字が弾けて消え → グレーが解ける */
+.game-pause.is-out{transition:background .4s ease,-webkit-backdrop-filter .4s ease,backdrop-filter .4s ease;background:rgba(10,12,16,0);-webkit-backdrop-filter:grayscale(0) brightness(1);backdrop-filter:grayscale(0) brightness(1)}
+.game-pause.is-out .game-pause-title span{animation:pause-letter-out .34s cubic-bezier(.5,0,.75,0) both;animation-delay:calc(var(--i) * 25ms)}
+.game-pause.is-out .game-pause-continue{animation:pause-press .2s cubic-bezier(.2,1.8,.4,1),pause-btn-out .26s ease-in .12s both}
+/* Bug Buster ポーズ中の左側強化ステータス欄 (強化選択ウィンドウと同じ登場・退場アニメーション) */
+.game-pause-stats{position:absolute;left:24px;top:50%;transform:translateY(-50%);width:min(350px,calc(100vw - 32px));max-height:76vh;overflow:auto;padding:20px;border:1px solid #35e0ff;background:#08121af5;border-radius:14px;box-shadow:0 0 70px #35e0ff20;font-family:var(--jp);opacity:0}
+.game-pause-stats p{margin:0;color:#5dffa8;font:12px var(--mono);letter-spacing:.2em}
+.game-pause-stats h3{margin:2px 0 12px;font-size:15px}
+.game-pause-stats table{width:100%;border-collapse:collapse;font-size:12px}
+.game-pause-stats th{padding:6px 8px;text-align:left;color:#8d9aa6;font:700 10px var(--mono);border-bottom:1px solid #34434f}
+.game-pause-stats th:nth-child(2),.game-pause-stats td:nth-child(2){text-align:center}
+.game-pause-stats th:nth-child(3),.game-pause-stats td:nth-child(3){text-align:right;font-family:var(--mono)}
+.game-pause-stats td{padding:7px 8px;border-bottom:1px solid #1a2936;color:#9aa8b4}
+.game-pause-stats tr:last-child td{border-bottom:0}
+.game-pause-stats tr.is-upgraded td{color:#eef2f5}
+.game-pause-stats tr.is-upgraded td:nth-child(2){color:#5dffa8;font-weight:700}
+.game-pause-stats tr.is-upgraded td:nth-child(3){color:#35e0ff;font-weight:700}
+.game-pause.is-in .game-pause-stats{animation:upg-open .5s cubic-bezier(.2,1.6,.4,1) both}
+.game-pause.is-in .game-pause-stats tbody tr{animation:upg-enter .42s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--k,0) * 45ms)}
+.game-pause.is-out .game-pause-stats{animation:upg-leave .3s ease-in both}
+.game-pause:not(.is-ready),.game-pause.is-out{pointer-events:none}
+@media(max-width:960px){.game-pause-stats{position:static;transform:none;max-height:38vh;order:1}}
+@keyframes pause-letter{0%{opacity:0;translate:0 -60%;scale:1.8;filter:blur(14px)}55%{opacity:1;translate:0 6%;scale:.94;filter:blur(0)}78%{translate:0 -2%;scale:1.03}100%{opacity:1;translate:0 0;scale:1;filter:blur(0)}}
+@keyframes pause-btn-in{0%{opacity:0;translate:0 40px;scale:.8}70%{opacity:1;translate:0 -6px;scale:1.03}100%{opacity:1;translate:0 0;scale:1}}
+@keyframes pause-letter-out{0%{opacity:1;scale:1;filter:blur(0)}100%{opacity:0;scale:1.35;translate:0 -12%;filter:blur(10px)}}
+@keyframes pause-press{0%{scale:1}40%{scale:.92}100%{scale:1.04}}
+@keyframes pause-btn-out{0%{opacity:1}100%{opacity:0;translate:0 30px}}
+@media(prefers-reduced-motion:reduce){
+  .game-menu-panel,.game-menu>button,.game-pause *{animation:none!important}
+  .game-pause.is-gray .game-pause-title span,.game-pause.is-gray .game-pause-continue,.game-pause.is-gray .game-pause-stats{opacity:1}
+  .game-pause.is-out{transition:none}
+}
+body.game-playing{overflow:hidden!important}
+body.game-playing .scroll-progress{z-index:260;height:4px;background:rgba(13,18,26,.65)}
+body.game-playing .scroll-progress i{transition:transform .12s cubic-bezier(.16,1,.3,1)}
+body.game-playing,body.game-playing button{cursor:auto!important}
+body.game-playing .cursor-dot,body.game-playing .cursor-ring,body.game-playing .cursor-trail,body.game-playing .cursor-click-ring,body.game-playing .cursor-click-particle,body.game-playing .cursor-click-flash{display:none!important}
+[hidden].game-session,[hidden].game-menu-panel,[hidden].game-controls,[hidden].game-upgrades,[hidden].game-pause-stats,[hidden].game-stroke-credit,.game-upgrades button[hidden]{display:none}
+@media(max-width:600px){.game-menu{right:10px;top:14px}.game-bar{padding:9px;gap:6px;right:66px}.game-bar h2{flex-basis:100%;font-size:12px}.game-bar button{padding:6px 10px;font-size:12px}.game-status{font-size:10px}.game-controls{top:128px}.game-help{font-size:11px;left:10px;right:10px}.home .header-inner{gap:8px;padding-right:48px}.home .brand strong{font-size:11px}}
+@media(max-width:600px){.game-session[data-mode="bugs"] .game-status{flex-basis:100%;min-height:2.6em}}

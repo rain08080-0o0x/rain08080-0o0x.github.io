@@ -1,0 +1,15 @@
+KanjiVG stroke subset for this portfolio
+
+Copyright (C) 2009/2010/2011 Ulrich Apel and KanjiVG contributors.
+Source: https://kanjivg.tagaini.net/
+Repository: https://github.com/KanjiVG/kanjivg
+Revision: 610091ce618cf757ed1357a8954cd65283e015d6
+License: Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/
+Legal code: https://creativecommons.org/licenses/by-sa/3.0/legalcode
+
+Changes: selected characters used on index.html; extracted SVG stroke paths
+to JSON; added bounding boxes rounded to three decimal places.
+This derived stroke dataset is distributed under CC BY-SA 3.0.
+
+Characters not provided by the source remain whole glyphs in the game.

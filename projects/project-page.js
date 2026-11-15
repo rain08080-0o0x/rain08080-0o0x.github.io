@@ -1,6 +1,6 @@
 const projectData = {
   naraku: {
-    kind: "Personal / DirectX11", title: "奈落塔", lead: "「まだ潜るか、もう帰るか」を中心判断にした2.5D探索サバイバルローグライト。ゲーム本体と専用Editorを分離し、生成・検証・発行まで含めて制作しています。",
+    kind: "Personal / DirectX11", title: "奈落塔", award: "🏆 技術力賞（ＨＡＬ３校合同学内コンテスト）", lead: "「まだ潜るか、もう帰るか」を中心判断にした2.5D探索サバイバルローグライト。ゲーム本体と専用Editorを分離し、生成・検証・発行まで含めて制作しています。",
     summary: "小さな地形ピースを条件に沿って組み合わせ、探索するたびに異なる塔を生成するゲームです。HP、スタミナ、精神力、所持重量を探索と帰還の判断へ結び付けています。",
     tools: ["Visual Studio 2022","Fork","GitHub","C++","DirectX11","DirectXMath","ImGui","JSON","PowerShell","Markdown"], role: "個人制作。外部ライブラリとフリーアセットを除き、企画、ゲームシステム、描画、Editor、データ検証、ビルド構成を担当。", period: "2026/05–開発中", github: "https://github.com/rain08080-0o0x/SurvivalRoguelike",
     gallery: [
@@ -48,7 +48,7 @@ const projectData = {
     sections:[{title:"EditorメニューからBundleを生成",intro:"背景とスプライトを別々にした構成と、一つへまとめた構成を用意し、Bundleの分け方を比較できるようにしました。",points:[["入力","Texture2Dを指定","背景とスプライトシートをBundleBuildへ登録します。"],["生成","BuildPipeline","StandaloneWindows64向けにBundleファイルを生成します。"],["比較","個別と一括","更新単位や読み込み単位を考えるため、粒度の違う構成を作りました。"]],diagram:["bundle001: 背景","bundle002: スプライト","bundle_ex: 一括"]},{title:"実行時に読み込み、Spriteへ変換",intro:"StreamingAssetsのパスからBundleを開き、Texture2Dを取得します。スプライトシートは必要な矩形へ分けてSprite.Createへ渡します。",points:[["読込","AssetBundle.LoadFromFile","ゲーム実行中にファイルを開きます。"],["取得","LoadAsset<Texture2D>","Bundle内の画像をTexture2Dとして取得します。"],["生成","Sprite.Create","1枚のシートから複数の表示用Spriteを作ります。"]],diagram:["Bundleファイル","Texture2D","複数Sprite"]},{title:"検証範囲を明確にする",intro:"この作品はAssetBundleの基本フローを確認するサンプルです。非同期ロードやダウンロード配信、メモリ解放の最適化までは実装対象に含めていません。",points:[["確認済み","BuildとLoad","Editor生成とローカル読込をゲームへ組み込みました。"],["ゲーム","2Dシューティング","読み込んだ背景とキャラクター画像を実際の画面で使用します。"],["今後","非同期・配信","実運用を想定する場合に必要な追加検証として切り分けています。"]],diagram:["学習対象を限定","小さく実装","次の課題を残す"]}]
   },
   chinchiro: {
-    kind:"Personal / Physics",title:"チンチロローグライク",lead:"投げたダイスが衝突し、回転して止まる過程を、そのまま出目とゲームルールへつなげた試作。",summary:"OBBによる衝突とRigidBodyの運動を自作し、乱数だけではないダイスの手触りを目指しました。",tools:["Visual Studio 2022","C++","DirectX11","DirectXMath","ImGui","OBB","RigidBody"],role:"個人制作。外部ライブラリと素材を除き、衝突、物理挙動、ゲームルール、調整を担当。",period:"2025/10–2025/12",github:null,
+    kind:"Personal / Physics",title:"チンチロローグライク",award:"🏆 構成力賞（ＨＡＬ３校合同学内コンテスト）",lead:"投げたダイスが衝突し、回転して止まる過程を、そのまま出目とゲームルールへつなげた試作。",summary:"OBBによる衝突とRigidBodyの運動を自作し、乱数だけではないダイスの手触りを目指しました。",tools:["Visual Studio 2022","C++","DirectX11","DirectXMath","ImGui","OBB","RigidBody"],role:"個人制作。外部ライブラリと素材を除き、衝突、物理挙動、ゲームルール、調整を担当。",period:"2025/10–2025/12",github:null,
     gallery:[{image:"../image/dice.png",alt:"ダイスのゲーム画面",caption:"複数のダイスを投げて出目を判定。"},{image:"../image/powerpoint/tintiro_box.png",alt:"OBBの解説",caption:"回転した箱形状に合わせるOBB。"},{image:"../image/powerpoint/tintiro_rigidboy1.png",alt:"RigidBody処理の解説",caption:"物理挙動をRigidBodyへ集約。"},{image:"../image/powerpoint/tintiro_rigidboy2.png",alt:"RigidBodyの更新処理",caption:"重力・摩擦・回転・停止を段階化。"},{image:"../image/powerpoint/tintiro_vec3.png",alt:"ベクトル補助処理",caption:"DirectXMathを扱いやすくする補助処理。"}],
     sections:[{title:"見た目と判定を合わせるOBB",intro:"軸に平行な箱判定では、ダイスが回転したときに見た目と当たり判定がずれます。モデルの向きを含むOBBを使い、面と辺の関係から衝突を扱います。",points:[["課題","回転で判定がずれる","AABBでは画面上の角度と判定形状が一致しません。"],["選定","OBB","中心、各軸、半径を持ち、回転した箱同士を比較できます。"],["効果","出目へ反映","実際の姿勢で止まった上面を出目として扱えます。"]],diagram:["姿勢をOBBへ反映","分離軸で衝突判定","停止後の上面を取得"]},{title:"RigidBodyへ運動の責務をまとめる",intro:"ゲーム側へ重力や摩擦を直接書かず、速度、角速度、質量、減衰、停止判定をRigidBodyへまとめました。",points:[["入力","力とトルク","投擲や衝突から運動量を受け取ります。"],["更新","重力・摩擦・回転","各要素を分け、パラメーターを比較しやすくしました。"],["停止","閾値で安定化","小さな速度が残り続けないよう、停止条件を設けます。"]],diagram:["力を蓄積","速度・角速度を更新","姿勢を反映"]},{title:"調整可能な物理として組み込む",intro:"正確さだけでなく、ゲームとして待ち時間が長すぎないことも必要です。ImGuiで値を変え、転がり方と停止までの時間を確認しました。",points:[["観察","値と見た目を並べる","速度や回転と実際の挙動を同時に確認します。"],["補助型","ベクトル変換を整理","XMVECTORとXMFLOAT3の受け渡しを補助し、式を読みやすくしました。"],["課題","負荷との両立","衝突形状と計算量のバランスは継続課題として残しました。"]],diagram:["値を変更","複数回投擲","停止時間と挙動を比較"]}]
   },
@@ -112,7 +112,7 @@ if (!data) {
 } else {
   document.title = `${data.title} — Ikuya Yamamoto Portfolio`;
   const hero = document.querySelector("#project-hero");
-  hero.innerHTML = `<p class="eyebrow">${data.kind}</p><h1>${data.title}</h1><p class="project-lead">${data.lead}</p><div class="project-actions">${data.github ? `<a class="button primary" href="${data.github}" target="_blank" rel="noreferrer">GitHubで見る ↗</a>` : ""}<a class="button secondary" href="#details">制作内容を見る</a></div>`;
+  hero.innerHTML = `<p class="eyebrow">${data.kind}</p><div class="project-title-row"><h1>${data.title}</h1>${data.award ? `<span class="project-award">${data.award}</span>` : ""}</div><p class="project-lead">${data.lead}</p><div class="project-actions">${data.github ? `<a class="button primary" href="${data.github}" target="_blank" rel="noreferrer">GitHubで見る ↗</a>` : ""}<a class="button secondary" href="#details">制作内容を見る</a></div>`;
 
   const gallery = document.querySelector("#gallery");
   const slideHtml = data.gallery.map((item, index) => {

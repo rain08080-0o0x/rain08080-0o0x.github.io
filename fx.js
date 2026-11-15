@@ -22,6 +22,27 @@
   const pointer = { x: innerWidth * 0.62, y: innerHeight * 0.45, sx: innerWidth * 0.62, sy: innerHeight * 0.45, moved: false };
   let scrollY = window.scrollY;
 
+  const labKeys = new Set();
+  const labChord = ["KeyA", "KeyS", "KeyK", "KeyL"];
+  let labChordFired = false;
+  addEventListener("keydown", e => {
+    const target = e.target;
+    if (target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+    if (!labChord.includes(e.code)) return;
+    labKeys.add(e.code);
+    if (!labChordFired && labChord.every(code => labKeys.has(code))) {
+      labChordFired = true;
+      e.preventDefault();
+      const script = document.querySelector('script[src$="fx.js"]');
+      if (script) location.assign(new URL("animation-lab.html", script.src).href);
+    }
+  });
+  addEventListener("keyup", e => {
+    labKeys.delete(e.code);
+    if (labChord.includes(e.code)) labChordFired = false;
+  });
+  addEventListener("blur", () => { labKeys.clear(); labChordFired = false; });
+
   /* -------------------------------------------------------
      1. WebGL background
      ------------------------------------------------------- */
@@ -227,6 +248,104 @@ void main(){
     cursorDot = document.createElement("div"); cursorDot.className = "cursor-dot";
     cursorRing = document.createElement("div"); cursorRing.className = "cursor-ring"; cursorRing.innerHTML = "<span>VIEW</span>";
     body.append(cursorDot, cursorRing);
+    const trailPool = Array.from({ length: 18 }, (_, index) => {
+      const trail = document.createElement("i");
+      trail.className = "cursor-trail";
+      trail.style.setProperty("--trail-color", index % 4 === 0 ? "var(--cyan)" : "var(--orange)");
+      trail.style.setProperty("--trail-rgb", index % 4 === 0 ? "53,224,255" : "255,91,34");
+      body.append(trail);
+      return trail;
+    });
+    let trailIndex = 0;
+    let lastTrail = { x: pointer.x, y: pointer.y, time: 0 };
+    addEventListener("pointermove", e => {
+      if (e.pointerType === "touch") return;
+      const now = performance.now();
+      const dx = e.clientX - lastTrail.x;
+      const dy = e.clientY - lastTrail.y;
+      if (now - lastTrail.time < 28 || dx * dx + dy * dy < 64) return;
+
+      const trail = trailPool[trailIndex++ % trailPool.length];
+      const size = 6 + Math.random() * 7;
+      const distance = Math.hypot(dx, dy) || 1;
+      const drift = 10 + Math.random() * 12;
+      const driftX = -(dx / distance) * drift;
+      const driftY = -(dy / distance) * drift - 4 - Math.random() * 7;
+      const angle = Math.random() * 90;
+      const startX = e.clientX - size / 2;
+      const startY = e.clientY - size / 2;
+
+      trail.getAnimations().forEach(animation => animation.cancel());
+      trail.style.width = `${size}px`;
+      trail.style.height = `${size}px`;
+      trail.animate([
+        { opacity: .72, transform: `translate3d(${startX}px,${startY}px,0) rotate(${angle}deg) scale(1)` },
+        { opacity: .26, offset: .55, transform: `translate3d(${startX + driftX * .55}px,${startY + driftY * .55}px,0) rotate(${angle + 38}deg) scale(.72)` },
+        { opacity: 0, transform: `translate3d(${startX + driftX}px,${startY + driftY}px,0) rotate(${angle + 82}deg) scale(.15)` }
+      ], { duration: 520 + Math.random() * 180, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+      lastTrail = { x: e.clientX, y: e.clientY, time: now };
+    }, { passive: true });
+    const clickRings = Array.from({ length: 9 }, () => {
+      const clickRing = document.createElement("i");
+      clickRing.className = "cursor-click-ring";
+      body.append(clickRing);
+      return clickRing;
+    });
+    const clickParticles = Array.from({ length: 132 }, (_, index) => {
+      const particle = document.createElement("i");
+      particle.className = "cursor-click-particle";
+      particle.style.setProperty("--burst-color", index % 3 === 0 ? "var(--cyan)" : "var(--orange)");
+      particle.style.setProperty("--burst-rgb", index % 3 === 0 ? "53,224,255" : "255,91,34");
+      body.append(particle);
+      return particle;
+    });
+    const clickFlashes = Array.from({ length: 3 }, () => {
+      const flash = document.createElement("i");
+      flash.className = "cursor-click-flash";
+      body.append(flash);
+      return flash;
+    });
+    let clickEffectIndex = 0;
+    const emitClickEffect = e => {
+      if (e.pointerType === "touch" || e.button !== 0) return;
+      const flash = clickFlashes[clickEffectIndex % clickFlashes.length];
+      flash.getAnimations().forEach(animation => animation.cancel());
+      flash.animate([
+        { opacity: 1, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(.18) rotate(0deg)` },
+        { opacity: .92, offset: .22, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(.9) rotate(28deg)` },
+        { opacity: 0, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(1.45) rotate(75deg)` }
+      ], { duration: 420, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+
+      for (let ringIndex = 0; ringIndex < 3; ringIndex++) {
+        const ringEffect = clickRings[(clickEffectIndex * 3 + ringIndex) % clickRings.length];
+        ringEffect.getAnimations().forEach(animation => animation.cancel());
+        ringEffect.animate([
+          { opacity: .95, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(.12)` },
+          { opacity: .55, offset: .48, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(${1.05 + ringIndex * .35})` },
+          { opacity: 0, transform: `translate3d(${e.clientX}px,${e.clientY}px,0) scale(${2.1 + ringIndex * .55})` }
+        ], { duration: 560 + ringIndex * 120, delay: ringIndex * 42, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+      }
+
+      for (let index = 0; index < 44; index++) {
+        const particle = clickParticles[(clickEffectIndex * 44 + index) % clickParticles.length];
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 35 + Math.pow(Math.random(), .65) * 115;
+        const size = 5 + Math.random() * 14;
+        const startX = e.clientX - size / 2 + (Math.random() - .5) * 20;
+        const startY = e.clientY - size / 2 + (Math.random() - .5) * 20;
+        const endX = startX + Math.cos(angle) * distance;
+        const endY = startY + Math.sin(angle) * distance;
+        particle.getAnimations().forEach(animation => animation.cancel());
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.animate([
+          { opacity: .96, transform: `translate3d(${startX}px,${startY}px,0) rotate(${Math.random() * 3}rad) scale(${.7 + Math.random() * .8})` },
+          { opacity: .72, offset: .32 + Math.random() * .24, transform: `translate3d(${startX + (endX - startX) * .42}px,${startY + (endY - startY) * .42}px,0) rotate(${angle + 1.8}rad) scale(1)` },
+          { opacity: 0, transform: `translate3d(${endX}px,${endY}px,0) rotate(${angle + 4.5 + Math.random() * 3}rad) scale(.08)` }
+        ], { duration: 520 + Math.random() * 520, delay: Math.random() * 90, easing: "cubic-bezier(.12,.72,.2,1)", fill: "forwards" });
+      }
+      clickEffectIndex++;
+    };
     const ring = { x: pointer.x, y: pointer.y };
     addEventListener("pointermove", () => root.classList.add("has-cursor"), { once: true });
     document.addEventListener("mouseleave", () => root.classList.remove("has-cursor"));
@@ -237,7 +356,7 @@ void main(){
       cursorRing.classList.toggle("is-view", !!card);
       cursorRing.classList.toggle("is-link", !card && !!link);
     });
-    addEventListener("pointerdown", () => cursorRing.classList.add("is-down"));
+    addEventListener("pointerdown", e => { cursorRing.classList.add("is-down"); emitClickEffect(e); });
     addEventListener("pointerup", () => cursorRing.classList.remove("is-down"));
     cursorDot._ring = ring;
   }
@@ -267,12 +386,13 @@ void main(){
 
   const GLYPHS = "!<>-_\\/[]{}=+*^?#$%&ABCDEFXYZ0123456789";
   const scramble = (el) => {
-    if (reduced) return;
+    if (reduced || body.classList.contains("game-playing")) return;
     const final = el.dataset.final || (el.dataset.final = el.textContent);
     cancelAnimationFrame(el._sraf);
     let frame = 0;
     const dur = Math.min(28, 10 + final.length);
     const tick = () => {
+      if (body.classList.contains("game-playing")) { el.textContent = final; return; }
       let out = "";
       for (let i = 0; i < final.length; i++) {
         const ch = final[i];
@@ -301,7 +421,7 @@ void main(){
   if (isProject) {
     const h1 = document.querySelector(".project-hero h1");
     if (h1) { h1.setAttribute("aria-label", h1.textContent); splitNode(h1); }
-    $$("#project-hero > :not(h1)").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", `${0.35 + i * 0.1}s`); });
+    $$("#project-hero > :not(h1):not(.project-title-row), .project-award").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", `${0.35 + i * 0.1}s`); });
     $$(".gallery, .meta-list, .toc, .case-study .case-number, .case-study h2, .case-intro, .case-study .process-diagram, .case-grid article, .case-media").forEach(el => el.classList.add("reveal"));
     $$(".case-grid article").forEach((el, i) => { el.style.setProperty("--d", `${(i % 3) * 0.08}s`); el.setAttribute("data-spotlight", ""); });
     $$(".project-cta .button, .project-actions .button, .back-link").forEach(el => el.setAttribute("data-magnetic", ""));
@@ -327,9 +447,10 @@ void main(){
   const countUp = (el) => {
     const target = Number(el.dataset.count);
     const suffix = el.dataset.suffix || "";
-    if (reduced) { el.textContent = target + suffix; return; }
+    if (reduced || body.classList.contains("game-playing")) { el.textContent = target + suffix; return; }
     const t0 = performance.now(), dur = 1800;
     const step = (now) => {
+      if (body.classList.contains("game-playing")) { el.textContent = target + suffix; return; }
       const k = clamp((now - t0) / dur, 0, 1);
       const e = 1 - Math.pow(2, -10 * k);
       el.textContent = String(Math.round(target * e)).padStart(2, "0") + suffix;
@@ -434,6 +555,28 @@ void main(){
     el.style.setProperty("--my", `${e.clientY - r.top}px`);
   }, { passive: true });
 
+  const outro = document.querySelector(".outro");
+  if (outro && finePointer && !reduced) {
+    const setOutroProximity = p => {
+      outro.style.setProperty("--outro-p", p.toFixed(3));
+      outro.style.setProperty("--outro-fill", `${(p * 100).toFixed(1)}%`);
+      outro.style.setProperty("--outro-rotate", `${(p * 45).toFixed(1)}deg`);
+      outro.style.setProperty("--outro-scale", (1 + p * .06).toFixed(3));
+      outro.style.setProperty("--outro-shift", `${(p * 8).toFixed(1)}px`);
+      outro.style.setProperty("--outro-blur", `${(p * 18).toFixed(1)}px`);
+      outro.style.setProperty("--outro-stroke", (.28 + p * .34).toFixed(3));
+      outro.style.setProperty("--outro-border", (.18 + p * .5).toFixed(3));
+    };
+    outro.addEventListener("pointermove", e => {
+      const r = outro.getBoundingClientRect();
+      const nx = clamp((e.clientX - r.left) / r.width, 0, 1);
+      const ny = clamp((e.clientY - r.top) / r.height, 0, 1);
+      const depth = Math.min(nx, 1 - nx, ny, 1 - ny);
+      setOutroProximity(clamp(depth / .28, 0, 1));
+    }, { passive: true });
+    outro.addEventListener("pointerleave", () => setOutroProximity(0));
+  }
+
   /* -------------------------------------------------------
      9. Works filter
      ------------------------------------------------------- */
@@ -472,22 +615,27 @@ void main(){
   })();
   const timelines = $$("[data-timeline]");
   const bgNums = $$(".section-bg-num");
+  const pageTop = document.querySelector(".page-top");
   let lastY = scrollY;
 
   const onScroll = () => {
     const vh = innerHeight;
     const max = Math.max(1, document.documentElement.scrollHeight - vh);
-    progress.style.setProperty("--p", clamp(scrollY / max, 0, 1));
+    if (!body.classList.contains("game-playing") || !document.querySelector('.game-session[data-mode="bugs"]')) {
+      progress.style.setProperty("--p", clamp(scrollY / max, 0, 1));
+    }
     if (header) {
       header.classList.toggle("scrolled", scrollY > 30);
       const down = scrollY > lastY;
       header.classList.toggle("hidden", down && scrollY > 500);
     }
     lastY = scrollY;
+    if (pageTop) pageTop.classList.toggle("is-visible", scrollY > 16);
     timelines.forEach(tl => {
       const r = tl.getBoundingClientRect();
       const p = clamp((vh * 0.78 - r.top) / r.height, 0, 1);
       tl.style.setProperty("--tp", p);
+      tl.style.setProperty("--runner-y", `${8 + p * Math.max(0, r.height - 16)}px`);
       $$("li", tl).forEach(li => li.classList.toggle("lit", li.getBoundingClientRect().top < vh * 0.82));
     });
     if (!reduced) bgNums.forEach(n => {

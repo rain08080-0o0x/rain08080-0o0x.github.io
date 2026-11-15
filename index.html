@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="style.css">
   <script>(function(d){d.classList.add("js");try{if(sessionStorage.getItem("iy-booted")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("no-loader")}catch(e){}})(document.documentElement)</script>
   <script src="fx.js" defer></script>
+  <link rel="stylesheet" href="game-modes.css">
+  <script src="game-strokes.js" defer></script>
+  <script src="game-modes.js" defer></script>
 </head>
 <body class="home">
   <!-- Boot loader -->
@@ -49,8 +52,8 @@
         <div class="hero-main">
           <p class="eyebrow" data-scramble-auto>GAME PROGRAMMER / TOOL DEVELOPER</p>
           <h1 class="hero-title" aria-label="遊びと制作環境を、同じ熱量でつくる。">
-            <span class="line" data-split>遊びと制作環境を、</span>
-            <span class="line" data-split><em>同じ熱量</em>でつくる。</span>
+            <span class="line" data-split>遊びと<wbr>制作環境を、</span>
+            <span class="line" data-split><em>同じ熱量</em><wbr>でつくる。</span>
           </h1>
           <p class="hero-copy reveal">C++ / DirectX11とUnityを中心に、ゲームシステム、物理挙動、Editor・ImGui・WPFによる制作支援ツールを開発しています。</p>
           <div class="hero-actions reveal">
@@ -130,20 +133,26 @@
         <div class="credential-grid">
           <article class="credential-block awards-block reveal" data-spotlight>
             <h3><span class="trophy" aria-hidden="true">🏆</span>受賞歴</h3>
-            <ol class="timeline" data-timeline>
-              <li><time datetime="2026-10-23">2026.10.23</time><div><strong>技術力賞</strong><span>ＨＡＬ３校合同学内コンテスト</span></div></li>
-              <li><time datetime="2026-02-26">2026.02.26</time><div><strong>構成力賞</strong><span>ＨＡＬ３校合同学内コンテスト</span></div></li>
-            </ol>
+            <div class="timeline-stage" data-timeline>
+              <i class="timeline-runner" aria-hidden="true"></i>
+              <ol class="timeline">
+                <li><time datetime="2026-10-23">2026.10.23</time><div><div class="award-heading"><strong>技術力賞</strong><a class="award-project" href="projects/naraku.html">奈落塔 ↗</a></div><span>ＨＡＬ３校合同学内コンテスト</span></div></li>
+                <li><time datetime="2026-02-26">2026.02.26</time><div><div class="award-heading"><strong>構成力賞</strong><a class="award-project" href="projects/chinchiro.html">チンチロローグライク ↗</a></div><span>ＨＡＬ３校合同学内コンテスト</span></div></li>
+              </ol>
+            </div>
           </article>
           <article class="credential-block reveal" data-spotlight>
             <h3><span class="trophy" aria-hidden="true">📜</span>資格</h3>
-            <ol class="timeline compact" data-timeline>
-              <li><time datetime="2026-10-01">2026.10.01</time><div><strong>システムデザインスキル</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
-              <li><time datetime="2026-10-01">2026.10.01</time><div><strong>システムエンジニア認定</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
-              <li><time datetime="2026-03-05">2026.03.05</time><div><strong>基本スキル</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
-              <li><time datetime="2025-08-06">2025.08.06</time><div><strong>ＣＧエンジニア検定ベーシック</strong><span>ＣＧエンジニア検定</span></div></li>
-              <li><time datetime="2025-01-20">2025.01.20</time><div><strong>情報活用試験 ２級</strong><span>情報処理活用能力検定（Ｊ検）</span></div></li>
-            </ol>
+            <div class="timeline-stage" data-timeline>
+              <i class="timeline-runner" aria-hidden="true"></i>
+              <ol class="timeline compact">
+                <li><time datetime="2026-10-01">2026.10.01</time><div><strong>システムデザインスキル</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
+                <li><time datetime="2026-10-01">2026.10.01</time><div><strong>システムエンジニア認定</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
+                <li><time datetime="2026-03-05">2026.03.05</time><div><strong>基本スキル</strong><span>情報処理活用能力検定（Ｊ検）／Ｊ検 情報システム試験</span></div></li>
+                <li><time datetime="2025-08-06">2025.08.06</time><div><strong>ＣＧエンジニア検定ベーシック</strong><span>ＣＧエンジニア検定</span></div></li>
+                <li><time datetime="2025-01-20">2025.01.20</time><div><strong>情報活用試験 ２級</strong><span>情報処理活用能力検定（Ｊ検）</span></div></li>
+              </ol>
+            </div>
           </article>
         </div>
       </div>
@@ -160,17 +169,17 @@
 
       <div class="work-filter reveal" role="toolbar" aria-label="プロジェクトの絞り込み">
         <button type="button" class="active" data-filter="all">ALL <sup>14</sup></button>
-        <button type="button" data-filter="dx">C++ / DirectX</button>
-        <button type="button" data-filter="unity">Unity</button>
-        <button type="button" data-filter="tool">Tools</button>
-        <button type="button" data-filter="team">Team</button>
+        <button type="button" data-filter="dx">C++ / DirectX <sup>7</sup></button>
+        <button type="button" data-filter="unity">Unity <sup>4</sup></button>
+        <button type="button" data-filter="tool">Tools <sup>6</sup></button>
+        <button type="button" data-filter="team">Team <sup>2</sup></button>
       </div>
 
       <div class="project-index">
-        <a class="work-card featured" href="projects/naraku.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/survival-Editor.png" alt="奈落塔の地形エディタ" loading="lazy"><span>01</span></div><div class="work-info"><p>Personal / DirectX11</p><h3>奈落塔</h3><p>小ステージを組み合わせて生成する、2.5D探索サバイバルローグライト。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
+        <a class="work-card featured" href="projects/naraku.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/survival-Editor.png" alt="奈落塔の地形エディタ" loading="lazy"><span>01</span></div><div class="work-info"><p>Personal / DirectX11</p><h3>奈落塔 <span class="work-award">🏆 技術力賞</span></h3><p>小ステージを組み合わせて生成する、2.5D探索サバイバルローグライト。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
         <a class="work-card" href="projects/physics-particle-lab.html" data-cat="dx" data-tilt><div class="work-media visual visual-physics"><i></i><i></i><i></i><i></i><i></i><span>02</span><strong>WIND / SPRING / FIREWORK</strong></div><div class="work-info"><p>Personal / Simulation</p><h3>Physics &amp; Particle Lab</h3><p>ばね、風、後流、花火を数値から観察する物理実験環境。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
         <a class="work-card" href="projects/assetbundle-sample.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/assetbundle/background.png" alt="AssetBundleサンプルの背景画像" loading="lazy"><span>03</span></div><div class="work-info"><p>Personal / Unity</p><h3>AssetBundle Loading Sample</h3><p>Bundle生成から実行時ロードまでを2Dシューティングで検証。</p><ul><li>Unity</li><li>C#</li><li>AssetBundle</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/chinchiro.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/dice.png" alt="チンチロローグライクのダイス" loading="lazy"><span>04</span></div><div class="work-info"><p>Personal / Physics</p><h3>チンチロローグライク</h3><p>ダイスの衝突と転がりをゲームルールへつなげた試作。</p><ul><li>C++</li><li>OBB</li><li>RigidBody</li></ul><b>詳しく見る →</b></div></a>
+        <a class="work-card" href="projects/chinchiro.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/dice.png" alt="チンチロローグライクのダイス" loading="lazy"><span>04</span></div><div class="work-info"><p>Personal / Physics</p><h3>チンチロローグライク <span class="work-award">🏆 構成力賞</span></h3><p>ダイスの衝突と転がりをゲームルールへつなげた試作。</p><ul><li>C++</li><li>OBB</li><li>RigidBody</li></ul><b>詳しく見る →</b></div></a>
         <a class="work-card" href="projects/creator-kousien.html" data-cat="unity tool team" data-tilt><div class="work-media"><img src="image/powerpoint/CreaterKousien.png" alt="CreatorKousienのゲーム画面" loading="lazy"><span>05</span></div><div class="work-info"><p>Team / Unity</p><h3>CreatorKousien</h3><p>ゲーム機能と、チーム制作を支えるEditor拡張を開発。</p><ul><li>Unity</li><li>C#</li><li>Editor</li></ul><b>詳しく見る →</b></div></a>
         <a class="work-card" href="projects/file-zipper.html" data-cat="tool" data-tilt><div class="work-media"><img src="image/powerpoint/FileZIpper.png" alt="FileZipperの画面" loading="lazy"><span>06</span></div><div class="work-info"><p>Personal / Desktop tool</p><h3>FileZipper</h3><p>提出ファイルの抽出・命名・Zip化を一本化したWPFツール。</p><ul><li>C#</li><li>WPF</li><li>.NET 8</li></ul><b>詳しく見る →</b></div></a>
         <a class="work-card" href="projects/pmx-converter.html" data-cat="tool" data-tilt><div class="work-media visual visual-pmx"><span>07</span><div class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="pmx-labels"><strong>PMX</strong><em>→</em><b>glTF</b></div></div><div class="work-info"><p>Personal / Graphics tool</p><h3>pmxConverter</h3><p>ボーン・モーション・ウェイトを編集してglTFへ出力。</p><ul><li>C++20</li><li>OpenGL</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
@@ -196,6 +205,6 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="shell"><p>© 2026 Ikuya Yamamoto — Built with hand-written WebGL &amp; vanilla JS</p><a href="#top">ページ先頭へ ↑</a></div></footer>
+  <footer class="site-footer"><div class="shell"><p>© 2026 Ikuya Yamamoto — Built with hand-written WebGL &amp; vanilla JS</p><a class="page-top" href="#top" aria-label="ページ先頭へ戻る"><span class="page-top-icon" aria-hidden="true"><i></i><b>↑</b></span><span class="page-top-label" aria-hidden="true"><span>ペ</span><span>ー</span><span>ジ</span><span>先</span><span>頭</span><span>へ</span></span></a></div></footer>
 </body>
 </html>

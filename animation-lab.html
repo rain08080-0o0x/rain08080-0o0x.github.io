@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="一時的なCSSアニメーション研究ページ">
+  <title>CSS Animation Lab — Temporary Debug</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&amp;family=Space+Grotesk:wght@300..700&amp;family=Zen+Kaku+Gothic+New:wght@500;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="animation-lab.css">
+</head>
+<body>
+  <header class="lab-header">
+    <a href="index.html">← PORTFOLIO</a>
+    <span>TEMPORARY / DEBUG ONLY</span>
+  </header>
+
+  <main>
+    <section class="lab-hero">
+      <p>CSS MOTION RESEARCH / 32 PATTERNS</p>
+      <h1>Animation<br><em>Lab.</em></h1>
+      <div class="lab-intro">
+        <p>公開されている公式資料から動きの考え方を調査し、外部ライブラリを使わず再構成した比較用ページです。</p>
+        <p><kbd>A</kbd><kbd>S</kbd><kbd>K</kbd><kbd>L</kbd> の同時押しでポートフォリオから移動できます。</p>
+      </div>
+    </section>
+
+    <section class="lab-grid" aria-label="CSSアニメーションの実験一覧">
+      <article class="lab-card">
+        <header><span>01 / ENTRANCE</span><h2>Puff Reveal</h2></header>
+        <div class="lab-stage stage-puff"><b>REVEAL</b></div>
+        <p>拡大・ぼかし・透明度を同時に収束させる登場表現。</p>
+        <a href="https://animista.net/play/entrances/puff-in" target="_blank" rel="noreferrer">SOURCE / Animista — Puff In ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>02 / ATTENTION</span><h2>Rubber Signal</h2></header>
+        <div class="lab-stage stage-rubber"><b>NOTICE!</b></div>
+        <p>複数の縦横スケールを短時間で切り替える注目喚起。</p>
+        <a href="https://animate.style/" target="_blank" rel="noreferrer">SOURCE / Animate.css — Attention seekers ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>03 / HOVER</span><h2>Sweep Button</h2></header>
+        <div class="lab-stage stage-hover"><button type="button"><span>HOVER ME</span><i>→</i></button></div>
+        <p>疑似要素を移動させ、面の塗りと矢印を連動させるホバー。</p>
+        <a href="https://github.com/IanLunn/Hover" target="_blank" rel="noreferrer">SOURCE / Hover.css ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>04 / PERSPECTIVE</span><h2>Magic Door</h2></header>
+        <div class="lab-stage stage-door"><div><b>OPEN</b></div></div>
+        <p>原点を片側へ固定し、扉のように三次元回転させる表現。</p>
+        <a href="https://github.com/miniMAC/magic" target="_blank" rel="noreferrer">SOURCE / Magic Animations ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>05 / LOADER</span><h2>Grid Pulse</h2></header>
+        <div class="lab-stage stage-loader"><div class="loader-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <p>同じキーフレームへ負の遅延を与えて波を作るローダー。</p>
+        <a href="https://github.com/ConnorAtherton/loaders.css/" target="_blank" rel="noreferrer">SOURCE / Loaders.css ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>06 / STEPS</span><h2>Frame Counter</h2></header>
+        <div class="lab-stage stage-steps"><div><span>FRAME</span><b>00</b></div></div>
+        <p><code>steps()</code>で補間を切り、デジタル表示を段階的に更新。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation" target="_blank" rel="noreferrer">SOURCE / MDN — animation ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>07 / EASING</span><h2>Timing Function Race</h2></header>
+        <div class="lab-stage stage-easing">
+          <div><span>LINEAR</span><i></i></div><div><span>EASE OUT</span><i></i></div><div><span>BACK</span><i></i></div>
+        </div>
+        <p>同じ距離と時間でも、速度曲線によって動きの印象が変わる比較。</p>
+        <a href="https://easings.net/" target="_blank" rel="noreferrer">SOURCE / easings.net ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>08 / 3D</span><h2>Card Flip</h2></header>
+        <div class="lab-stage stage-flip"><div><b>FRONT</b><b>BACK</b></div></div>
+        <p><code>preserve-3d</code>と背面非表示を使ったカード反転。</p>
+        <a href="https://tympanus.net/codrops/css_reference/hover/" target="_blank" rel="noreferrer">SOURCE / Codrops — :hover reference ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>09 / TYPOGRAPHY</span><h2>Glitch Type</h2></header>
+        <div class="lab-stage stage-glitch"><b data-text="GLITCH">GLITCH</b></div>
+        <p>同じ文字を疑似要素で重ね、短いずれとクリップを断続実行。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using" target="_blank" rel="noreferrer">SOURCE / MDN — Using CSS animations ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>10 / FEEDBACK</span><h2>Skeleton Scan</h2></header>
+        <div class="lab-stage stage-skeleton"><div><i></i><i></i><i></i><i></i></div></div>
+        <p>背景位置を移動して、読み込み中の走査光を表現。</p>
+        <a href="https://web.dev/articles/animations-guide" target="_blank" rel="noreferrer">SOURCE / web.dev — Animation performance ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>11 / SCROLL TIMELINE</span><h2>Scroll-driven Signal</h2></header>
+        <div class="lab-stage stage-scroll"><p>この枠内をスクロール ↓</p><div class="scroll-space"><i></i><b>SCROLL LINKED</b></div></div>
+        <p>経過時間ではなく、スクロール量をアニメーションの進捗として使用。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations" target="_blank" rel="noreferrer">SOURCE / MDN — Scroll-driven animations ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>12 / COMPOSITE</span><h2>Transform &amp; Opacity Orbit</h2></header>
+        <div class="lab-stage stage-orbit"><div class="orbit"><i></i><i></i><i></i><b>60 FPS</b></div></div>
+        <p>レイアウト変更を避け、主に <code>transform</code> と <code>opacity</code> で構成。</p>
+        <a href="https://web.dev/articles/animations-and-performance/" target="_blank" rel="noreferrer">SOURCE / web.dev — Animations and performance ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>13 / CLIP-PATH</span><h2>Shape Morph</h2></header>
+        <div class="lab-stage stage-morph"><i></i></div>
+        <p>多角形の各頂点を補間し、同じ要素を連続した図形へ変形。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/clip-path" target="_blank" rel="noreferrer">SOURCE / MDN — clip-path ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>14 / MASK</span><h2>Gradient Wipe</h2></header>
+        <div class="lab-stage stage-mask"><b>MASKED</b></div>
+        <p>移動するグラデーションマスクで文字を滑らかに表示・消去。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/mask-image" target="_blank" rel="noreferrer">SOURCE / MDN — mask-image ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>15 / SVG STROKE</span><h2>Line Drawing</h2></header>
+        <div class="lab-stage stage-draw"><svg viewBox="0 0 180 100" aria-label="CSSの文字を線で描画"><path d="M44 25C17 7 4 83 43 75M82 28C67 15 49 31 61 46S87 63 73 76 45 72 48 65M103 25v50M103 25h30M103 49h25"/><circle cx="151" cy="67" r="8"/></svg></div>
+        <p>破線の開始位置を動かし、SVGパスが描かれる過程を表現。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-dashoffset" target="_blank" rel="noreferrer">SOURCE / MDN — stroke-dashoffset ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>16 / MOTION PATH</span><h2>Offset-path Runner</h2></header>
+        <div class="lab-stage stage-path"><svg viewBox="0 0 600 180" aria-hidden="true"><path d="M30 120C130 20 220 20 300 105S470 180 570 48"/></svg><i>➤</i></div>
+        <p>座標を個別計算せず、CSSで定義した曲線に沿って要素を移動。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Motion_path" target="_blank" rel="noreferrer">SOURCE / MDN — CSS motion path ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>17 / VARIABLE FONT</span><h2>Weight Breathing</h2></header>
+        <div class="lab-stage stage-variable"><b>FLEX</b></div>
+        <p>1つの可変フォント内でウェイト軸を連続的に往復。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts" target="_blank" rel="noreferrer">SOURCE / MDN — Variable fonts ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>18 / 3D OBJECT</span><h2>Rotating Cube</h2></header>
+        <div class="lab-stage stage-cube"><div><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i></div></div>
+        <p>6面を三次元空間へ配置し、親要素を回転して立方体を構成。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style" target="_blank" rel="noreferrer">SOURCE / MDN — transform-style ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>19 / FILTER</span><h2>Metaball Merge</h2></header>
+        <div class="lab-stage stage-liquid"><div><i></i><i></i><i></i></div></div>
+        <p>ぼかしと高コントラストを重ね、円同士が液体のように結合。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/filter" target="_blank" rel="noreferrer">SOURCE / MDN — filter ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>20 / GRADIENT</span><h2>Aurora Field</h2></header>
+        <div class="lab-stage stage-aurora"><i></i><i></i><i></i><b>AURORA</b></div>
+        <p>複数の大きなグラデーションを別々の速度で移動・変形。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient" target="_blank" rel="noreferrer">SOURCE / MDN — CSS gradients ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>21 / BORDER</span><h2>Neon Runner</h2></header>
+        <div class="lab-stage stage-neon"><div><b>LIVE</b></div></div>
+        <p>円錐グラデーションを回し、マスクで枠部分だけを表示。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/conic-gradient" target="_blank" rel="noreferrer">SOURCE / MDN — conic-gradient() ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>22 / STAGGER</span><h2>Letter Wave</h2></header>
+        <div class="lab-stage stage-wave" aria-label="MOTION"><span>M</span><span>O</span><span>T</span><span>I</span><span>O</span><span>N</span></div>
+        <p>同じ動きへ少しずつ遅延を加え、文字列に波を伝播。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-delay" target="_blank" rel="noreferrer">SOURCE / MDN — animation-delay ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>23 / PARTICLES</span><h2>CSS Confetti</h2></header>
+        <div class="lab-stage stage-confetti"><b>WIN!</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p>同一キーフレームへ位置・回転・遅延の差を付けた紙吹雪。</p>
+        <a href="https://web.dev/articles/animations-and-performance/" target="_blank" rel="noreferrer">SOURCE / web.dev — Transform performance ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>24 / SPRITE</span><h2>Step Sequence</h2></header>
+        <div class="lab-stage stage-sprite"><div class="sprite-window"><div class="sprite-strip"><i>●</i><i>◔</i><i>◑</i><i>◕</i><i>●</i><i>✦</i></div></div></div>
+        <p>横長のフレーム列を<code>steps()</code>で送り、コマ送りを再現。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/steps" target="_blank" rel="noreferrer">SOURCE / MDN — steps() ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>25 / IMAGE SLICE</span><h2>Slice Hover</h2></header>
+        <div class="lab-stage stage-slice"><div><span></span><span></span><span></span><span></span><span></span><b>HOVER</b></div></div>
+        <p>同じ背景を帯状に分割し、ホバー時に互い違いの方向から合成。</p>
+        <a href="https://tympanus.net/codrops/2023/06/21/coding-the-sliced-image-hover-effect-from-quai-network/" target="_blank" rel="noreferrer">SOURCE / Codrops — Sliced image hover ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>26 / RIPPLE</span><h2>Ink Button</h2></header>
+        <div class="lab-stage stage-ripple"><button type="button">PRESS</button></div>
+        <p>疑似要素を中心から拡大し、クリック可能領域へ反応を返す。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/%3Aactive" target="_blank" rel="noreferrer">SOURCE / MDN — :active ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>27 / LAYERS</span><h2>Depth Card</h2></header>
+        <div class="lab-stage stage-depth"><div><span></span><span></span><span></span><b>DEPTH</b></div></div>
+        <p>各レイヤーをZ方向へ分離し、カード全体の傾きで奥行きを表示。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style" target="_blank" rel="noreferrer">SOURCE / MDN — preserve-3d ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>28 / LOOP</span><h2>Infinite Marquee</h2></header>
+        <div class="lab-stage stage-marquee"><div><span>CSS MOTION — </span><span>CSS MOTION — </span><span>CSS MOTION — </span><span>CSS MOTION — </span></div></div>
+        <p>同一内容を連結し、継ぎ目が見えない距離だけ一定速度で移動。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Animations/Using" target="_blank" rel="noreferrer">SOURCE / MDN — Using CSS animations ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>29 / INLINE SCROLL</span><h2>Horizontal Timeline</h2></header>
+        <div class="lab-stage stage-hscroll"><p>横へスクロール →</p><div><i></i><span>00</span><span>25</span><span>50</span><span>75</span><span>100</span></div></div>
+        <p>横方向のスクロール量を回転・色・移動の進捗へ接続。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline" target="_blank" rel="noreferrer">SOURCE / MDN — animation-timeline ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>30 / VIEW TIMELINE</span><h2>Visibility Reveal</h2></header>
+        <div class="lab-stage stage-view"><p>この枠内をスクロール ↓</p><div><i>ENTRY</i><i>VIEW</i><i>EXIT</i></div></div>
+        <p>要素がスクロール領域へ入ってから出るまでを進捗として表示。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view" target="_blank" rel="noreferrer">SOURCE / MDN — view() ↗</a>
+      </article>
+
+      <article class="lab-card">
+        <header><span>31 / CSS STATE</span><h2>Checkbox Machine</h2></header>
+        <div class="lab-stage stage-state"><input type="checkbox" id="lab-power"><label for="lab-power"><i></i><b>POWER</b><span>OFF</span><span>ON</span></label></div>
+        <p><code>:checked</code>を状態として利用し、JavaScriptなしでUIを遷移。</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Pseudo-classes" target="_blank" rel="noreferrer">SOURCE / MDN — :checked state ↗</a>
+      </article>
+
+      <article class="lab-card lab-wide">
+        <header><span>32 / HUD</span><h2>Radar Sweep</h2></header>
+        <div class="lab-stage stage-radar"><div><i></i><span></span><span></span><span></span><b></b><b></b><b></b></div><p>SCANNING / 032</p></div>
+        <p>回転する走査面、同心円、点滅する反応点を合成したHUD表現。</p>
+        <a href="https://web.dev/articles/animations-guide" target="_blank" rel="noreferrer">SOURCE / web.dev — High-performance animation ↗</a>
+      </article>
+    </section>
+
+    <section class="lab-notes">
+      <p>NOTES</p>
+      <h2>調査結果の使い分け</h2>
+      <ul>
+        <li><b>状態変化</b><span>入口・出口・ホバーは、何が起きたかを伝えるために使う。</span></li>
+        <li><b>反復表現</b><span>ローダーや信号など、待機・継続中であることを示す場面へ限定する。</span></li>
+        <li><b>軽量化</b><span>大きな要素では transform と opacity を優先し、常時動作する影やぼかしを増やしすぎない。</span></li>
+        <li><b>アクセシビリティ</b><span>OSの「視差効果を減らす」が有効な場合、このページの反復アニメーションを停止する。</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer><a href="index.html">← ポートフォリオへ戻る</a><span>DELETE WHEN RESEARCH IS COMPLETE</span></footer>
+</body>
+</html>
