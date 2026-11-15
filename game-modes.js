@@ -231,7 +231,7 @@
   }));
   function restoreScene() {
     wrappers.forEach(({ wrapper, original }) => wrapper.replaceWith(original)); wrappers = [];
-    bodies = []; letters = []; terrain = []; pointer = drag = null; keys.clear();
+    bodies = []; letters = []; terrain = []; heat = null; pointer = drag = null; keys.clear();
   }
   function stop() {
     silence();
@@ -242,11 +242,11 @@
     window.scrollTo({ top: savedScroll, behavior: "instant" }); syncWaveProgress(); showMenu(false); toggle.focus({ preventScroll: true });
   }
   function dimensions() {
-    w = document.documentElement.clientWidth; h = innerHeight;
+    w = mode === "bugs" ? session.clientWidth : document.documentElement.clientWidth; h = mode === "bugs" ? session.clientHeight : innerHeight;
     const dpr = Math.min(devicePixelRatio || 1, 2);
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     top = $(".game-bar", session).getBoundingClientRect().bottom + 16;
-    floor = h - $(".game-help", session).getBoundingClientRect().height - 26;
+    floor = mode === "bugs" ? $(".game-help", session).getBoundingClientRect().top - 12 : h - $(".game-help", session).getBoundingClientRect().height - 26;
   }
   async function start(next) {
     if (!ctx || !modes[next]) return;
@@ -277,7 +277,7 @@
     if (token !== generation) return;
     dimensions(); elapsed = accumulator = fpsTime = fpsFrames = 0;
     particles = []; bullets = []; enemies = []; camera = 0; run = ring = ship = null;
-    if (mode === "gravity" || mode === "bugs") captureLetters(false, true);
+    if (mode === "gravity") captureLetters(false, true);
     if (mode === "gravity") {
       letters.forEach(letter => {
         letter.element.classList.add("game-letter-gone");
@@ -300,6 +300,7 @@
       ship = { x: 8, y: top + 32, vx: 0, vy: 45, radius: 5, contacts: 0, cooldown: 0, goal: worldHeight - 70 };
     }
     if (mode === "bugs") { ship = { x: w / 2, y: floor - 14 }; run = { wave: 1, kills: 0, health: 100, power: 1, interval: .24, spread: 1, cooldown: 0, choosing: false, broken: 0, chain: 0, chainDamage: 1, pierce: 0, splitChance: 0, hasteMax: 0, haste: 0, idleHitTime: 0, picks: {} }; beginWave(); }
+    if (mode === "bugs") { updateStatus(); dimensions(); ship.y = floor - 14; captureLetters(false, true); prepareHeat(); }
     if (mode === "ring") {
       const labels = [...document.querySelectorAll(".skill-card h3")].slice(0, 3).map(n => n.textContent);
       ring = { x: w / 2, y: (top + floor) / 2, radius: Math.max(42, Math.min(w * .34, (floor - top) * .36, 175)), angle: -Math.PI / 2, velocity: 0, index: 0, targets: [-.4, 2.1, -2.5], labels, feedback: 0 };
@@ -323,7 +324,8 @@
       const node = walker.currentNode, parent = node.parentElement;
       if (!node.textContent.trim() || parent.closest("script,style,svg,.marquee,.hero-hud,.section-bg-num,.scroll-cue")) continue;
       const r = parent.getBoundingClientRect(), style = getComputedStyle(parent);
-      if (!r.width || !r.height || style.visibility === "hidden" || (!world && (r.bottom < top || r.top > floor))) continue;
+      const heatText = mode === "bugs" && parent.closest(".hero-title em") && /[熱量]/u.test(node.textContent);
+      if (!r.width || !r.height || style.visibility === "hidden" || (!heatText && !world && (r.bottom < top || r.top > floor))) continue;
       nodes.push(node);
     }
     const measured = [];
@@ -345,7 +347,8 @@
     });
     measured.forEach(item => {
       const r = clippedRect(item.rect(), item.element), style = getComputedStyle(item.element), size = parseFloat(style.fontSize);
-      if (!r.width || !r.height || r.right < 0 || r.left > w || (!world && (r.top < top || r.bottom > floor))) return;
+      const heatText = mode === "bugs" && item.element.closest(".hero-title em") && ["熱", "量"].includes(item.text);
+      if (!r.width || !r.height || (!heatText && (r.right < 0 || r.left > w || (!world && (r.top < top || r.bottom > floor))))) return;
       const color = style.color === "rgba(0, 0, 0, 0)" || style.color === "transparent" ? "#ff9a3d" : style.color;
       letters.push({ text: item.text, element: item.element, x: r.left + r.width / 2, y: r.top + r.height / 2 + (world ? window.scrollY : 0), w: r.width, h: Math.min(r.height, size * 1.1), font: `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`, color, broken: false });
     });
@@ -549,6 +552,13 @@
     const previousHaste = run.haste;
     run.haste = Math.min(run.hasteMax, run.haste + run.hasteMax / 20); run.idleHitTime = 0;
     run.cooldown *= (1 + previousHaste) / (1 + run.haste);
+    chainHit(enemy);
+    if (bullet.canSplit && Math.random() < run.splitChance) {
+      const angle = Math.atan2(bullet.vy, bullet.vx);
+      for (const offset of [-.35, .35]) children.push(makeBullet(x, y, angle + offset, bullet.power, false, new Set(bullet.hit)));
+    }
+  }
+  function chainHit(enemy) {
     let from = enemy;
     const visited = new Set([enemy]);
     for (let i = 0; i < run.chain; i++) {
@@ -562,10 +572,22 @@
       for (let t = 0; t <= 1; t += .1) particles.push({ x: from.x + (next.x - from.x) * t, y: from.y + (next.y - from.y) * t, vx: 0, vy: 0, life: .2, color: "#b58cff" });
       visited.add(next); damageEnemy(next, run.chainDamage); from = next;
     }
-    if (bullet.canSplit && Math.random() < run.splitChance) {
-      const angle = Math.atan2(bullet.vy, bullet.vx);
-      for (const offset of [-.35, .35]) children.push(makeBullet(x, y, angle + offset, bullet.power, false, new Set(bullet.hit)));
-    }
+  }
+  let heat = null;
+  function prepareHeat() {
+    const glyphs = letters.filter(l => l.element.closest(".hero-title em") && ["熱", "量"].includes(l.text));
+    if (glyphs.length !== 2) return;
+    const left = Math.min(...glyphs.map(l => l.x - l.w / 2)), right = Math.max(...glyphs.map(l => l.x + l.w / 2));
+    const upper = Math.min(...glyphs.map(l => l.y - l.h / 2)), lower = Math.max(...glyphs.map(l => l.y + l.h / 2));
+    heat = { glyphs, x: (left + right) / 2, y: (upper + lower) / 2, w: right - left, h: lower - upper, time: 0 };
+  }
+  function hitHeat(bullet) {
+    heat.time = .25; playSound("letter");
+    heat.glyphs.forEach(l => { bullet.hit.add(l); l.element.classList.add("game-letter-gone"); });
+    const targets = enemies.filter(e => !e.dead && Math.hypot(
+      Math.max(0, Math.abs(e.x - heat.x) - heat.w / 2 - 10),
+      Math.max(0, Math.abs(e.y - heat.y) - heat.h / 2 - 10)) <= e.r);
+    targets.forEach(e => { if (!e.dead) { damageEnemy(e, bullet.power); chainHit(e); } });
   }
   function breakLetter(letter, bullet) {
     playSound("letter");
@@ -583,6 +605,10 @@
     return lo;
   }
   function updateDebris(dt) {
+    if (heat?.time > 0) {
+      heat.time = Math.max(0, heat.time - dt);
+      if (!heat.time) heat.glyphs.forEach(l => l.element.classList.remove("game-letter-gone"));
+    }
     bodies.forEach(body => {
       body.vy += 650 * dt; body.x += body.vx * dt; body.y += body.vy * dt; body.angle += body.omega * dt;
     });
@@ -607,8 +633,8 @@
         scale = 2;
       }
     }
-    const r = Math.min(16 * scale, Math.max(32, (w - 40) * .22));
-    const minX = r + 9, maxX = Math.max(minX, w - r - 9), spawnY = top + r + 4;
+    const r = Math.min(16 * scale, Math.max(1, Math.min((w - 20) / 3, (floor - top - 40) / 2, w * .16)));
+    const minX = r * 1.5 + 2, maxX = w - minX, spawnY = top + r + 20;
     // 出現位置: 既存の敵と重なりにくいX座標を探す。空きがなくてもラインより後ろ(上)には出さず、
     // 出現ラインへそのまま出して既存の敵を前(下・左右)へ押し出す（ある程度のめり込みは許容）
     const near = [];
@@ -630,8 +656,8 @@
         if (d >= min) continue;
         if (d < 1e-4) { dx = (Math.random() - .5) * .2; dy = 1; d = Math.hypot(dx, dy); }
         const push = (min - d) * .65;
-        e.x = clamp(e.x + (dx / d) * push, e.r + 2, w - e.r - 2);
-        e.y = Math.max(top + e.r + 4, e.y + (dy / d) * push);
+        e.x = clamp(e.x + (dx / d) * push, e.r * 1.5 + 2, w - e.r * 1.5 - 2);
+        e.y = Math.max(top + e.r + 20, e.y + (dy / d) * push);
       }
     }
     enemies.push({ id: enemyId++, x: best.x, y: spawnY, r, hp, maxHp: hp, speed: 15, phase: rand(0, tau), label: Math.random() < .5 ? "NULL" : "LEAK" });
@@ -662,9 +688,9 @@
           if (d >= min) continue;
           if (d < 1e-4) { dx = (Math.random() - .5) * .2; dy = 1; d = Math.hypot(dx, dy); }
           const push = (min - d) * .35, nx = dx / d, ny = dy / d;
-          a.x = clamp(a.x - nx * push, a.r + 2, w - a.r - 2);
-          b.x = clamp(b.x + nx * push, b.r + 2, w - b.r - 2);
-          const minYa = top + a.r + 4, minYb = top + b.r + 4;
+          a.x = clamp(a.x - nx * push, a.r * 1.5 + 2, w - a.r * 1.5 - 2);
+          b.x = clamp(b.x + nx * push, b.r * 1.5 + 2, w - b.r * 1.5 - 2);
+          const minYa = top + a.r + 20, minYb = top + b.r + 20;
           let ya = a.y - ny * push, yb = b.y + ny * push;
           if (ya < minYa) { yb += minYa - ya; ya = minYa; }
           if (yb < minYb) { ya += minYb - yb; yb = minYb; }
@@ -689,7 +715,7 @@
     while (run.toSpawn > 0 && run.spawnIn <= 1e-9) {
       spawnEnemy();
     }
-    enemies.forEach(e => { e.y += e.speed * dt; e.x = clamp(e.x + Math.sin(elapsed * 2 + e.phase) * 18 * dt, e.r + 2, w - e.r - 2); });
+    enemies.forEach(e => { e.y = Math.max(top + e.r + 20, e.y + e.speed * dt); e.x = clamp(e.x + Math.sin(elapsed * 2 + e.phase) * 18 * dt, e.r * 1.5 + 2, w - e.r * 1.5 - 2); });
     separateEnemies();
     enemies.forEach(e => { if (!e.dead && e.y + e.r > floor - 9) { e.dead = true; run.health = Math.max(0, run.health - 10); playSound("hurt"); burst(e.x, e.y, "#ff5b22"); } });
     const children = [];
@@ -701,8 +727,9 @@
       letters.forEach(l => { if (l.broken || bullet.hit.has(l)) return; const t = segmentRect(bullet.x, bullet.y, x, y, { x: l.x - l.w / 2, y: l.y - l.h / 2, w: l.w, h: l.h }); if (t !== null) hits.push({ t, target: l, letter: true }); });
       hits.sort((a, b) => a.t - b.t);
       for (const hit of hits) {
-        if (hit.target.dead || hit.target.broken) continue;
+        if (hit.target.dead || hit.target.broken || bullet.hit.has(hit.target)) continue;
         bullet.hit.add(hit.target);
+        if (hit.letter && heat?.glyphs.includes(hit.target)) { hitHeat(bullet); continue; }
         if (hit.letter) { breakLetter(hit.target, bullet); continue; }
         enemyHit(hit.target, bullet, bullet.x + (x - bullet.x) * hit.t, bullet.y + (y - bullet.y) * hit.t, children);
         if (bullet.remaining === 0) { bullet.life = 0; break; }
@@ -740,7 +767,7 @@
     if (mode === "ring") text = `${ring.index} / 3 · ${ring.labels[Math.min(ring.index, 2)]}`;
     if (done) text = mode === "bugs" ? `GAME OVER · WAVE ${run.wave}` : mode === "ring" ? "SYSTEM CALIBRATED" : "FLIGHT COMPLETE";
     if (status.textContent !== text) status.textContent = text;
-    if (mode === "bugs") syncWaveProgress();
+    if (mode === "bugs") { top = $(".game-bar", session).getBoundingClientRect().bottom + 16; syncWaveProgress(); }
   }
   function line(x1, y1, x2, y2, color, width = 1) { ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
   function circle(x, y, radius, color, fill = false) { ctx.beginPath(); ctx.arc(x, y, radius, 0, tau); ctx[fill ? "fillStyle" : "strokeStyle"] = color; fill ? ctx.fill() : ctx.stroke(); }
@@ -764,6 +791,12 @@
     circle(ship.x, ship.y, 11, "#35e0ff88");
   }
   function drawBugs() {
+    if (heat?.time > 0) {
+      const amount = heat.time / .25;
+      ctx.save(); ctx.translate(heat.x, heat.y); ctx.scale(1 + 20 * amount / heat.w, 1 + 20 * amount / heat.h);
+      heat.glyphs.forEach(l => { ctx.font = l.font; ctx.fillStyle = l.color; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(l.text, l.x - heat.x, l.y - heat.y); });
+      ctx.restore();
+    }
     line(0, floor - 6, w, floor - 6, "#ff5b22", 2); label("DEFEND THE PAGE", w / 2, floor - 35, "#ff9a3d", 11);
     ctx.fillStyle = "#5dffa8"; ctx.fillRect(w / 2 - 60, floor - 28, 120 * run.health / 100, 3); circle(ship.x, ship.y, 11, "#35e0ff", true);
     if (run.aim) { line(ship.x, ship.y, run.aim.x, run.aim.y, "#35e0ff33"); circle(run.aim.x, run.aim.y, 6, "#35e0ff88"); }
