@@ -101,16 +101,7 @@
     if (soundEnabled) { prepareAudio(); playSound("upgrade"); } else silence();
   });
   function activate(button, action) {
-    let touch = null;
-    button.addEventListener("pointerdown", e => { if (e.pointerType === "touch" && e.isPrimary) touch = { id: e.pointerId, x: e.clientX, y: e.clientY }; });
-    button.addEventListener("pointercancel", () => { touch = null; });
-    button.addEventListener("pointerup", e => {
-      if (!touch || e.pointerId !== touch.id) return;
-      const r = button.getBoundingClientRect();
-      const tapped = Math.hypot(e.clientX - touch.x, e.clientY - touch.y) < 12 && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-      touch = null; if (tapped) action();
-    });
-    button.addEventListener("click", e => { if (e.pointerType !== "touch") action(); });
+    button.addEventListener("click", action);
   }
   // 三点リーダーメニュー (開閉アニメーション付き)。開閉状態は menuOpen で管理する
   let menuOpen = false, menuCloseTimer = 0;
