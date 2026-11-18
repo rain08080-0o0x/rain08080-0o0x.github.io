@@ -27,7 +27,7 @@
   session.setAttribute("role", "dialog"); session.setAttribute("aria-modal", "true"); session.setAttribute("aria-labelledby", "game-title");
   session.innerHTML = `<canvas aria-label="ゲーム操作エリア" tabindex="0"></canvas>
     <div class="game-bar"><h2 id="game-title"></h2><output class="game-status" aria-live="polite"></output><button data-action="restart">↻ 再スタート</button><button data-action="exit">終了 ×</button></div>
-    <div class="game-upgrades" hidden><p>WAVE CLEAR</p><h3>次のウェーブへ向けて強化</h3><button data-upgrade="power">威力 +1<small>硬いバグを少ない弾で破壊</small></button><button data-upgrade="rate">連射速度 +25%<small>自動連射の間隔を短縮</small></button><button data-upgrade="spread">拡散 +2発<small>扇状に弾を発射</small></button><button data-upgrade="chain">伝播対象 +1・範囲 +20px<small>初期120pxから拡大。最寄りの敵へ順番に伝播</small></button><button data-upgrade="chainDamage">伝播ダメージ +1<small>伝播で与えるダメージを増加</small></button><button data-upgrade="pierce">貫通回数 +1<small>敵に当たっても先へ進む</small></button><button data-upgrade="split">分裂確率 +5ポイント<small>敵への命中時に分裂。初期2発・再分裂なし</small></button><button data-upgrade="splitCount">分裂数 +2発<small>分裂時の弾を増加。全体の角度は最大120度</small></button><button data-upgrade="haste">命中加速の上限 +30ポイント<small>1ヒットで上限の1/20上昇。未命中1秒ごとに1ポイント減衰</small></button><button data-action="reroll">候補を引き直す（残り3回）</button></div>
+    <div class="game-upgrades" hidden><p>WAVE CLEAR</p><h3>次のウェーブへ向けて強化</h3><button data-upgrade="power">威力 +1<small>硬いバグを少ない弾で破壊</small></button><button data-upgrade="rate">連射速度 +50%<small>自動連射の間隔を短縮</small></button><button data-upgrade="spread">拡散 +2発<small>扇状に弾を発射</small></button><button data-upgrade="chain">伝播対象 +1・範囲 +20px<small>初期120pxから拡大。最寄りの敵へ順番に伝播</small></button><button data-upgrade="chainDamage">伝播ダメージ +1<small>伝播で与えるダメージを増加</small></button><button data-upgrade="pierce">貫通回数 +1<small>敵に当たっても先へ進む</small></button><button data-upgrade="split">分裂確率 +5ポイント<small>敵への命中時に分裂。初期2発・再分裂なし</small></button><button data-upgrade="splitCount">分裂数 +2発<small>分裂時の弾を増加。全体の角度は最大120度</small></button><button data-upgrade="haste">命中加速の上限 +60ポイント<small>1ヒットで上限の1/20上昇。未命中1秒ごとに1ポイント減衰</small></button><button data-action="reroll">候補を引き直す（残り3回）</button></div>
     <div class="game-help"></div>`;
   // ポーズ画面: 三点リーダー以外をグレーアウトし、前面に PAUSE と Continue を表示
   const pauseLayer = document.createElement("div");
@@ -253,17 +253,17 @@
   });
   upgradePanel.querySelectorAll("[data-upgrade]").forEach(button => activate(button, () => {
     if (!run?.choosing || run.uiLocked || button.hidden) return;
-    const choice = button.dataset.upgrade;
+    const choice = button.dataset.upgrade, multiplier = Number(button.dataset.multiplier);
     run.picks[choice] = (run.picks[choice] || 0) + 1;
-    if (choice === "power") run.power++;
-    if (choice === "rate") run.interval /= 1.25;
-    if (choice === "spread") run.spread += 2;
-    if (choice === "chain") run.chain++;
-    if (choice === "chainDamage") run.chainDamage++;
-    if (choice === "pierce") run.pierce++;
-    if (choice === "split") run.splitChance = Math.min(1, run.splitChance + .05);
-    if (choice === "splitCount") run.splitCount += 2;
-    if (choice === "haste") run.hasteMax += .30;
+    if (choice === "power") run.power += multiplier;
+    if (choice === "rate") run.interval /= 1 + .5 * multiplier;
+    if (choice === "spread") run.spread += 2 * multiplier;
+    if (choice === "chain") run.chain += multiplier;
+    if (choice === "chainDamage") run.chainDamage += multiplier;
+    if (choice === "pierce") run.pierce += multiplier;
+    if (choice === "split") run.splitChance = Math.min(1, run.splitChance + .05 * multiplier);
+    if (choice === "splitCount") run.splitCount += 2 * multiplier;
+    if (choice === "haste") run.hasteMax += .60 * multiplier;
     playSound("upgrade"); run.rewardsRemaining--;
     // 演出: 選んだカードが跳ねて光り、他の候補は退場。パネル全体も小さく弾む
     upgradePanel.querySelectorAll("[data-upgrade]:not([hidden])").forEach(b => b.classList.toggle("is-leaving", b !== button));
@@ -274,6 +274,7 @@
     });
   }));
   function restoreScene() {
+    upgradePanel.classList.remove("is-revealing");
     wrappers.forEach(({ wrapper, original }) => wrapper.replaceWith(original)); wrappers = [];
     bodies = []; letters = []; heat = null; pointer = null;
   }
@@ -426,6 +427,26 @@
       spawnEnemy(); run.timedSpawned++;
     }
   }
+  function rollUpgradeRarity() {
+    const roll = Math.random();
+    return roll < .70 ? { name: "ノーマル", key: "normal", multiplier: 1 }
+      : roll < .95 ? { name: "アンコモン", key: "uncommon", multiplier: 2 }
+        : { name: "レア", key: "rare", multiplier: 4 };
+  }
+  function setUpgradeOffer(button) {
+    const rarity = rollUpgradeRarity(), m = rarity.multiplier;
+    const titles = {
+      power: `威力 +${m}`, rate: `連射速度 +${50 * m}%`, spread: `拡散 +${2 * m}発`,
+      chain: `伝播対象 +${m}・範囲 +${20 * m}px`, chainDamage: `伝播ダメージ +${m}`,
+      pierce: `貫通回数 +${m}`, split: `分裂確率 +${5 * m}ポイント`,
+      splitCount: `分裂数 +${2 * m}発`, haste: `命中加速の上限 +${60 * m}ポイント`
+    };
+    button.dataset.rarity = rarity.key; button.dataset.multiplier = m;
+    const description = button.querySelector("small");
+    const badge = document.createElement("span"); badge.className = "game-rarity";
+    badge.textContent = `${rarity.name} ×${m}`;
+    button.replaceChildren(badge, document.createTextNode(titles[button.dataset.upgrade]), description);
+  }
   function showUpgrades() {
     if (!run.choosing) {
       run.rerolls = 3; run.rewardsRemaining = run.wave % 5 === 0 ? 3 : 1; playSound("clear");
@@ -441,15 +462,22 @@
     const pool = buttons.filter(b => (b.dataset.upgrade !== "chainDamage" || run.chain > 0) && (b.dataset.upgrade !== "split" || run.splitChance < 1) && (b.dataset.upgrade !== "splitCount" || run.splitChance > 0));
     for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
     const offered = new Set(pool.slice(0, 3));
-    let k = 0;
+    let k = 0, revealDuration = 0;
     buttons.forEach(button => {
       button.hidden = !offered.has(button);
       button.classList.remove("is-picked", "is-leaving", "is-enter");
-      if (!button.hidden) { button.style.setProperty("--k", k++); void button.offsetWidth; button.classList.add("is-enter"); }
+      if (!button.hidden) {
+        setUpgradeOffer(button); button.style.setProperty("--k", k);
+        const duration = button.dataset.rarity === "rare" ? 850 : button.dataset.rarity === "uncommon" ? 650 : 420;
+        revealDuration = Math.max(revealDuration, duration + k * 70); k++;
+        void button.offsetWidth; button.classList.add("is-enter");
+      }
     });
     const reroll = $('[data-action="reroll"]', upgradePanel);
     reroll.textContent = `候補を引き直す（残り${run.rerolls}回）`; reroll.disabled = run.rerolls === 0;
-    buttons.find(button => !button.hidden).focus();
+    const focusOffer = () => { upgradePanel.classList.remove("is-revealing"); buttons.find(button => !button.hidden).focus({ preventScroll: true }); };
+    if (!reduced) { upgradePanel.classList.add("is-revealing"); lockUpgradeUI(revealDuration, focusOffer); }
+    else focusOffer();
   }
   function makeBullet(x, y, angle, power, canSplit = true, hit = new Set()) {
     return { x, y, vx: Math.cos(angle) * 760, vy: Math.sin(angle) * 760, life: 2, power, remaining: run.pierce, canSplit, hit };

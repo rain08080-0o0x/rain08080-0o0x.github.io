@@ -72,7 +72,7 @@ body.game-playing main .reveal,body.game-playing main .char,body.game-playing ma
 .game-pause-continue:hover{color:#fff;background:#ff5b22;box-shadow:0 0 0 1px #ff5b22,0 0 40px rgba(255,91,34,.55)}
 .game-pause-continue:focus-visible{outline:3px solid #35e0ff;outline-offset:4px}
 /* 登場: 文字が上から叩きつけられるように順番に着地 → Continue がせり上がる */
-.game-pause.is-in .game-pause-title span{animation:pause-letter .62s cubic-bezier(.2,1.5,.35,1) both;animation-delay:calc(var(--i) * 55ms)}
+.game-pause.is-in .game-pause-title span{animation:pause-letter .62s cubic-bezier(.2,1.5,.35,1) both,pause-float 2.8s ease-in-out infinite;animation-delay:calc(var(--i) * 55ms),calc(.9s + var(--i) * 160ms)}
 .game-pause.is-in .game-pause-continue{animation:pause-btn-in .5s cubic-bezier(.2,1.5,.4,1) .38s both}
 /* 退場: Continue が押し込まれ → 文字が弾けて消え → グレーが解ける */
 .game-pause.is-out{transition:background .4s ease,-webkit-backdrop-filter .4s ease,backdrop-filter .4s ease;background:rgba(10,12,16,0);-webkit-backdrop-filter:grayscale(0) brightness(1);backdrop-filter:grayscale(0) brightness(1)}
@@ -117,6 +117,7 @@ body.game-playing main .reveal,body.game-playing main .char,body.game-playing ma
   .game-pause-columns .game-menu small{font-size:9px}
 }
 @keyframes pause-letter{0%{opacity:0;translate:0 -60%;scale:1.8;filter:blur(14px)}55%{opacity:1;translate:0 6%;scale:.94;filter:blur(0)}78%{translate:0 -2%;scale:1.03}100%{opacity:1;translate:0 0;scale:1;filter:blur(0)}}
+@keyframes pause-float{0%,50%,100%{transform:translateY(0);color:#fff}25%{transform:translateY(-6px);color:#ccefff}75%{transform:translateY(6px);color:#f2edff}}
 @keyframes pause-btn-in{0%{opacity:0;translate:0 40px;scale:.8}70%{opacity:1;translate:0 -6px;scale:1.03}100%{opacity:1;translate:0 0;scale:1}}
 @keyframes pause-letter-out{0%{opacity:1;scale:1;filter:blur(0)}100%{opacity:0;scale:1.35;translate:0 -12%;filter:blur(10px)}}
 @keyframes pause-press{0%{scale:1}40%{scale:.92}100%{scale:1.04}}
@@ -181,3 +182,17 @@ html.game-scroll{overflow-x:clip;scrollbar-gutter:auto}
 .game-menu-panel.is-opening>[data-menu-view]{animation:menu-content .15s .48s both}
 @keyframes menu-content{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.game-menu-panel.is-opening>[data-menu-view]{animation:none}}
+
+.game-rarity{display:block;margin-bottom:5px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#aab6c0}
+.game-upgrades button[data-rarity="normal"]{border-color:#35e0ff}
+.game-upgrades button[data-rarity="normal"] .game-rarity{color:#35e0ff}
+.game-upgrades button[data-rarity="uncommon"]{border-color:#b58cff;background:#20182e}
+.game-upgrades button[data-rarity="uncommon"] .game-rarity{color:#b58cff}
+.game-upgrades button[data-rarity="rare"]{border-color:#ffe14d;background:#292310}
+.game-upgrades button[data-rarity="rare"] .game-rarity{color:#ffe14d}
+.game-upgrades.is-revealing{overflow:visible}
+.game-upgrades button[data-rarity="uncommon"].is-enter:not(.is-picked):not(.is-leaving){z-index:2;animation:upg-uncommon-in .65s ease-out both,upg-rarity-idle 1.8s ease-in-out infinite;animation-delay:calc(var(--k,0) * 70ms),calc(.65s + var(--k,0) * 70ms)}
+.game-upgrades button[data-rarity="rare"].is-enter:not(.is-picked):not(.is-leaving){z-index:3;animation:upg-rare-in .85s ease-out both,upg-rarity-idle .9s ease-in-out infinite;animation-delay:calc(var(--k,0) * 70ms),calc(.85s + var(--k,0) * 70ms)}
+@keyframes upg-uncommon-in{0%{opacity:0;scale:.9;box-shadow:0 0 0 #b58cff00}40%{opacity:1;scale:1.15;box-shadow:0 0 28px #b58cff99,inset 0 0 12px #b58cff44}100%{opacity:1;scale:1;box-shadow:0 0 12px #b58cff55}}
+@keyframes upg-rare-in{0%{opacity:0;scale:.9;box-shadow:0 0 0 #ffe14d00}35%{opacity:1;scale:2;box-shadow:0 0 90px #ffe14dee,0 0 35px #fff9,inset 0 0 32px #ffe14d99}65%{opacity:1;scale:1.08;box-shadow:0 0 45px #ffe14daa,inset 0 0 15px #ffe14d66}100%{opacity:1;scale:1;box-shadow:0 0 22px #ffe14d88}}
+@keyframes upg-rarity-idle{0%,100%{scale:1}50%{scale:1.03}}
