@@ -1,0 +1,98 @@
+{
+  "l1_castle_bridge": {
+    "url": "assets/bridge-straight.glb",
+    "footprint": [
+      4,
+      4
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_flag_long": {
+    "url": "campaign/flag-banner-long.glb",
+    "footprint": [
+      1,
+      1
+    ],
+    "anchor": [
+      0.02,
+      0,
+      0
+    ]
+  },
+  "l1_castle_rocks": {
+    "url": "assets/rocks-large.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_tower_base": {
+    "url": "assets/tower-square-base.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_tower_open": {
+    "url": "assets/tower-square-mid-open.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      5.000000000143778e-8,
+      0,
+      0
+    ]
+  },
+  "l1_castle_pillar": {
+    "url": "campaign/wall-pillar.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_stud": {
+    "url": "campaign/wall-stud.glb",
+    "footprint": [
+      1,
+      1
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_mini_banner": {
+    "url": "campaign/banner.glb",
+    "footprint": [
+      1,
+      1
+    ],
+    "anchor": [
+      0,
+      0.2285392,
+      -0.475
+    ]
+  }
+}

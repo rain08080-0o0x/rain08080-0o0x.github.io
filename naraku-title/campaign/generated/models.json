@@ -1,0 +1,98 @@
+{
+  "l1_castle_bridge_pillar": {
+    "url": "campaign/generated/bridge-straight-pillar.glb",
+    "footprint": [
+      4,
+      4
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_flag_long": {
+    "url": "campaign/flag-banner-long.glb",
+    "footprint": [
+      1,
+      1
+    ],
+    "anchor": [
+      0.02,
+      0,
+      0
+    ]
+  },
+  "l1_castle_metal_gate": {
+    "url": "assets/metal-gate.glb",
+    "footprint": [
+      1,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_tower_base": {
+    "url": "assets/tower-square-base.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_castle_tower_open": {
+    "url": "assets/tower-square-mid-open.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      5.000000000143778e-8,
+      0,
+      0
+    ]
+  },
+  "l1_castle_pillar": {
+    "url": "campaign/wall-pillar.glb",
+    "footprint": [
+      2,
+      2
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  },
+  "l1_dungeon_corner": {
+    "url": "campaign/generated/room-corner.glb",
+    "footprint": [
+      3,
+      3
+    ],
+    "anchor": [
+      5.00000000069889e-7,
+      -1.707772e-14,
+      -0.0000014999999997655777
+    ]
+  },
+  "l1_mini_column": {
+    "url": "campaign/generated/column.glb",
+    "footprint": [
+      1,
+      1
+    ],
+    "anchor": [
+      0,
+      0,
+      0
+    ]
+  }
+}
