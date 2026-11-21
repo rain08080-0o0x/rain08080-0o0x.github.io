@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b1119">
   <link rel="icon" href="data:,">
   <title>奈落塔｜城外と地上の町</title>
-  <script type="module" crossorigin src="./assets/index-DYrFPxmM.js"></script>
+  <script type="module" crossorigin src="./assets/index-GCec0wtZ.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/CanvasPool-Ejlyih0a.js">
   <link rel="modulepreload" crossorigin href="./assets/Filter-bBEao5QU.js">
   <link rel="modulepreload" crossorigin href="./assets/canvasUtils-D-Pugx0D.js">
@@ -22,10 +22,10 @@
   <link rel="modulepreload" crossorigin href="./assets/toneMappingBits-DeuRT71H.js">
   <link rel="modulepreload" crossorigin href="./assets/EventSystem-DhJvHR6r.js">
   <link rel="modulepreload" crossorigin href="./assets/CullResults-D2NJAjG8.js">
-  <link rel="modulepreload" crossorigin href="./assets/OrbitCamera-PViE4MVk.js">
+  <link rel="modulepreload" crossorigin href="./assets/OrbitCamera-DvezhNLR.js">
   <link rel="modulepreload" crossorigin href="./assets/View3DGlobalData-CT8VOoux.js">
   <link rel="modulepreload" crossorigin href="./assets/GraphicsContext-CfnxY1FS.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-CGU5h-Wh.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-gnbELM7d.css">
 </head>
 <body>
   <main id="scene" aria-label="奈落塔 城外と地上の町 3Dビュー"></main>
@@ -59,6 +59,11 @@
     <a class="mode-link" href="./">縦穴</a>
     <a class="mode-link" href="?demo=1">城外デモ</a>
   </footer>
+  <div id="walk-actions" hidden>
+    <button type="button" id="walk-route" title="次のリングを向く" aria-label="次のリングを向く"></button>
+    <div><button type="button" id="walk-jump">ジャンプ</button>
+      <button type="button" id="walk-hook">フック</button></div>
+  </div>
   <div id="walk-pad" aria-hidden="true" hidden><i></i></div>
   <footer id="abyss-controls" class="controls" hidden>
     <details class="abyss-panel" open>
@@ -73,7 +78,7 @@
           <button type="button" data-abyss-view="lake" aria-pressed="false">第五層・なきがらの海</button>
         </div>
         <span class="abyss-help">左ドラッグで回転 <i></i> 右ドラッグで平行移動 <i></i> スクロール・ピンチで拡大</span>
-        <button type="button" id="abyss-walk" aria-pressed="false">第四層を歩く</button>
+        <button type="button" id="abyss-walk" aria-pressed="false">ここを歩く</button>
         <button type="button" id="abyss-flight" aria-pressed="false">自由飛行</button>
         <button type="button" id="abyss-reset">視点を戻す</button>
         <a class="mode-link" href="?campaign=1">本編区画</a>
