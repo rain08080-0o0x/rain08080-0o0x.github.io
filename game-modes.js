@@ -265,6 +265,7 @@
     if (choice === "splitCount") run.splitCount += 2 * multiplier;
     if (choice === "haste") run.hasteMax += .60 * multiplier;
     playSound("upgrade"); run.rewardsRemaining--;
+    window.PortfolioPixelFX?.upgradePick(button, button.dataset.rarity);
     // 演出: 選んだカードが跳ねて光り、他の候補は退場。パネル全体も小さく弾む
     upgradePanel.querySelectorAll("[data-upgrade]:not([hidden])").forEach(b => b.classList.toggle("is-leaving", b !== button));
     replayClass(button, "is-picked"); replayClass(upgradePanel, "is-bump");
@@ -299,7 +300,7 @@
     const token = ++generation;
     if (!mode) {
       savedScroll = window.scrollY;
-      inertNodes = [...document.body.children].filter(n => n instanceof HTMLElement && n !== menu && n !== session && n !== pauseLayer && !n.classList.contains("scroll-progress") && !["SCRIPT", "LINK"].includes(n.tagName)).map(n => [n, n.inert]);
+      inertNodes = [...document.body.children].filter(n => n instanceof HTMLElement && n !== menu && n !== session && n !== pauseLayer && !n.classList.contains("scroll-progress") && !n.classList.contains("pfx-overlay") && !["SCRIPT", "LINK"].includes(n.tagName)).map(n => [n, n.inert]);
       inertNodes.forEach(([node]) => { node.inert = true; });
     }
     cancelAnimationFrame(frame); restoreScene(); resetPause();
@@ -450,6 +451,7 @@
   function showUpgrades() {
     if (!run.choosing) {
       run.rerolls = 3; run.rewardsRemaining = run.wave % 5 === 0 ? 3 : 1; playSound("clear");
+      window.PortfolioPixelFX?.waveClear();
       // ウェーブクリアごとに破壊された文字を元の位置へ復元する
       letters.forEach(letter => { if (letter.broken) { letter.broken = false; letter.element.classList.remove("game-letter-gone"); } });
       bodies = []; run.broken = 0;
@@ -496,8 +498,13 @@
   function damageEnemy(enemy, damage) {
     if (enemy.dead) return;
     enemy.hp -= damage; burst(enemy.x, enemy.y, "#ff9a3d", 8);
-    if (enemy.hp <= 0) { enemy.dead = true; run.kills++; playSound("kill"); }
-    else playSound("hit");
+    if (enemy.hp <= 0) {
+      enemy.dead = true; run.kills++; playSound("kill");
+      window.PortfolioPixelFX?.enemyKill(enemy.x, enemy.y, enemy.r > 20);
+    } else {
+      playSound("hit");
+      window.PortfolioPixelFX?.enemyHit(enemy.x, enemy.y, damage >= 4);
+    }
   }
   function enemyHit(enemy, bullet, x, y, children) {
     damageEnemy(enemy, bullet.power);
@@ -550,6 +557,7 @@
     letter.broken = true; letter.element.classList.add("game-letter-gone"); run.broken++;
     bodies.push(Object.assign(makeBody(letter.x, letter.y, letter.w, letter.h), { text: letter.text, font: letter.font, color: letter.color, vx: bullet.vx * .3 + rand(-80, 80), vy: bullet.vy * .3 - 80, omega: rand(-12, 12) }));
     burst(letter.x, letter.y, "#35e0ff", 6);
+    window.PortfolioPixelFX?.letterBreak(letter.x, letter.y);
   }
   function segmentRect(x1, y1, x2, y2, r) {
     let lo = 0, hi = 1;
@@ -670,7 +678,7 @@
     spawnTimedEnemies(dt);
     enemies.forEach(e => { e.y = Math.max(top + e.r + 20, e.y + e.speed * dt); e.x = clamp(e.x + Math.sin(elapsed * 2 + e.phase) * 18 * dt, e.r * 1.5 + 2, w - e.r * 1.5 - 2); });
     separateEnemies();
-    enemies.forEach(e => { if (!e.dead && e.y + e.r > floor - 9) { e.dead = true; run.health = Math.max(0, run.health - 10); playSound("hurt"); burst(e.x, e.y, "#ff5b22"); } });
+    enemies.forEach(e => { if (!e.dead && e.y + e.r > floor - 9) { e.dead = true; run.health = Math.max(0, run.health - 10); playSound("hurt"); burst(e.x, e.y, "#ff5b22"); window.PortfolioPixelFX?.playerHurt(e.x, e.y); } });
     const children = [];
     bullets.forEach(bullet => {
       const x = bullet.x + bullet.vx * dt, y = bullet.y + bullet.vy * dt; bullet.life -= dt;

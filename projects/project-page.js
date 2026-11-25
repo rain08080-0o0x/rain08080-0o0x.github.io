@@ -110,9 +110,26 @@ const data = projectData[key];
 if (!data) {
   document.querySelector("main").innerHTML = '<section class="project-hero shell"><h1>Project not found</h1><p><a href="../index.html">トップへ戻る</a></p></section>';
 } else {
-  document.title = `${data.title} — Ikuya Yamamoto Portfolio`;
+  document.title = `${data.title} — Fumiya Yamamoto Portfolio`;
+  const pfxByProject = {
+    naraku: ["brazier", "ember"],
+    physics: ["plasma-ball", "cyan"],
+    assetbundle: ["xp-orb", "emerald"],
+    chinchiro: ["coin-spin", "gold"],
+    creator: ["rune-circle", "cyan"],
+    filezipper: ["crystal-shard", "ember"],
+    pmx: ["hologram", "violet"],
+    joya: ["spirit-flame", "gold"],
+    perforce: ["teleporter", "cyan"],
+    shigoto: ["campfire", "ember"],
+    buns: ["power-star", "gold"],
+    namebattler: ["wisp", "emerald"],
+    tower: ["energy-core", "cyan"],
+    lostpage: ["arcane-orb", "violet"],
+  };
+  const [pfxKey, pfxPal] = pfxByProject[key] || ["gem-spin", "ember"];
   const hero = document.querySelector("#project-hero");
-  hero.innerHTML = `<p class="eyebrow">${data.kind}</p><div class="project-title-row"><h1>${data.title}</h1>${data.award ? `<span class="project-award">${data.award}</span>` : ""}</div><p class="project-lead">${data.lead}</p><div class="project-actions">${data.github ? `<a class="button primary" href="${data.github}" target="_blank" rel="noreferrer">GitHubで見る ↗</a>` : ""}<a class="button secondary" href="#details">制作内容を見る</a></div>`;
+  hero.innerHTML = `<div class="project-hero-emblem"><span class="pfx-mini" data-pfx="${pfxKey}" data-pfx-palette="${pfxPal}" aria-hidden="true"></span><p class="eyebrow">${data.kind}</p></div><div class="project-title-row"><h1>${data.title}</h1>${data.award ? `<span class="project-award">${data.award}</span>` : ""}</div><p class="project-lead">${data.lead}</p><div class="project-actions">${data.github ? `<a class="button primary" href="${data.github}" target="_blank" rel="noreferrer">GitHubで見る ↗</a>` : ""}<a class="button secondary" href="#details">制作内容を見る</a></div>`;
 
   const gallery = document.querySelector("#gallery");
   const slideHtml = data.gallery.map((item, index) => {

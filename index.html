@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="山本郁也のゲームプログラミング・開発ツール制作ポートフォリオ">
   <meta name="theme-color" content="#06080c">
-  <title>Ikuya Yamamoto — Game Programming Portfolio</title>
+  <title>Fumiya Yamamoto — Game Programming Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap">
   <link rel="stylesheet" href="style.css">
   <script>(function(d){d.classList.add("js");try{if(sessionStorage.getItem("iy-booted")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("no-loader")}catch(e){}})(document.documentElement)</script>
   <script src="fx.js" defer></script>
+  <script src="pixelfx-bundle.js" defer></script>
+  <script src="portfolio-pixelfx.js" defer></script>
   <link rel="stylesheet" href="game-modes.css">
   <script src="game-modes.js" defer></script>
 </head>
@@ -19,7 +21,10 @@
   <!-- Boot loader -->
   <div class="loader" aria-hidden="true">
     <div class="loader-inner">
-      <div class="loader-logo">IY</div>
+      <div class="loader-mark">
+        <div class="loader-logo">FY</div>
+        <div class="loader-blocks"><i></i><i></i><i></i><i></i></div>
+      </div>
       <pre class="loader-log"></pre>
       <div class="loader-bar"><i></i></div>
       <div class="loader-count"><span>000</span>%</div>
@@ -30,48 +35,77 @@
 
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="#top" data-magnetic><span>IY</span><strong>Ikuya Yamamoto</strong></a>
+      <a class="brand" href="#top" data-magnetic><span>FY</span><strong>Fumiya Yamamoto</strong></a>
       <nav aria-label="メインナビゲーション">
-        <a href="#skills" data-scramble>Skills</a><a href="#awards" data-scramble>Awards</a><a href="#works" data-scramble>Works</a>
+        <a href="#works" data-scramble>Works</a><a href="#skills" data-scramble>Skills</a><a href="#awards" data-scramble>Awards</a>
         <a class="nav-github" href="https://github.com/rain08080-0o0x" target="_blank" rel="noreferrer" data-magnetic>GitHub ↗</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <!-- HERO -->
     <section class="home-hero">
-      <div class="hero-hud" aria-hidden="true">
-        <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
-        <div class="hud-readout left"><b>RENDER</b> WebGL / GLSL<br><b>FPS</b> <span data-fps>--</span><br><b>CURSOR</b> <span data-cursor-pos>0000, 0000</span></div>
-        <div class="hud-readout right"><b>BUILD</b> 2026.11<br><b>CORE</b> C++ / DX11<br><b>STATUS</b> <span class="blink">● ONLINE</span></div>
-      </div>
-
       <div class="shell hero-layout">
         <div class="hero-main">
-          <p class="eyebrow" data-scramble-auto>GAME PROGRAMMER / TOOL DEVELOPER</p>
+          <div class="hero-badge-row">
+            <p class="eyebrow" data-scramble-auto>GAME PROGRAMMER / TOOL DEVELOPER</p>
+            <span class="hero-pfx-pill" title="Realtime code-driven PixelFX"><span class="pfx-mini" data-pfx="spirit-flame" data-pfx-palette="ember" aria-hidden="true"></span>REALTIME VFX READY</span>
+          </div>
           <h1 class="hero-title" aria-label="遊びと制作環境を、同じ熱量でつくる。">
             <span class="line" data-split>遊びと<wbr>制作環境を、</span>
             <span class="line" data-split><em>同じ熱量</em><wbr>でつくる。</span>
           </h1>
           <p class="hero-copy reveal">C++ / DirectX11とUnityを中心に、ゲームシステム、物理挙動、Editor・ImGui・WPFによる制作支援ツールを開発しています。</p>
           <div class="hero-actions reveal">
-            <a class="button primary" href="#works" data-magnetic><span>作品を見る</span><i>→</i></a>
+            <a class="button primary" href="#works" data-magnetic><span>制作実績を見る</span><i>→</i></a>
             <a class="button secondary" href="#skills" data-magnetic><span>扱える技術</span><i>↓</i></a>
           </div>
         </div>
 
-        <aside class="hero-panel reveal" aria-label="得意分野" data-tilt>
-          <div class="panel-top"><p class="panel-label">FOCUS.CFG</p><span class="panel-dots"><i></i><i></i><i></i></span></div>
-          <ol>
-            <li><span>01</span><strong>Game systems</strong><small>探索・戦闘・物理・保存</small><em style="--v:92%"></em></li>
-            <li><span>02</span><strong>Development tools</strong><small>Editor・ImGui・WPF</small><em style="--v:88%"></em></li>
-            <li><span>03</span><strong>Problem solving</strong><small>計測・責務分離・データ駆動</small><em style="--v:84%"></em></li>
-          </ol>
-        </aside>
+        <a class="hero-project" href="projects/naraku.html">
+          <div class="hero-project-media"><img src="image/survival-Editor.png" alt="地形ピースや接続条件を編集する奈落塔の専用エディタ"></div>
+          <div class="hero-project-caption">
+            <div><strong>奈落塔</strong><span>地形自動生成と専用エディタ</span></div>
+            <i aria-hidden="true">↗</i>
+          </div>
+        </a>
       </div>
 
-      <a class="scroll-cue" href="#skills" aria-label="下へスクロール"><span>SCROLL</span><i></i></a>
+    </section>
+
+    <!-- WORKS -->
+    <section id="works" class="section shell works-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-scramble-view>PROJECT INDEX</p>
+        <h2 class="reveal-text">プロジェクト</h2>
+        <p class="reveal">ゲームの仕組み、物理シミュレーション、制作ツール。担当した実装と設計の判断を作品ごとにまとめました。</p>
+      </div>
+
+      <div class="work-filter reveal" role="group" aria-label="プロジェクトの絞り込み">
+        <button type="button" class="active" aria-pressed="true" aria-controls="project-list" data-filter="all">ALL <sup aria-hidden="true"></sup></button>
+        <button type="button" aria-pressed="false" aria-controls="project-list" data-filter="dx">C++ / DirectX <sup aria-hidden="true"></sup></button>
+        <button type="button" aria-pressed="false" aria-controls="project-list" data-filter="unity">Unity <sup aria-hidden="true"></sup></button>
+        <button type="button" aria-pressed="false" aria-controls="project-list" data-filter="tool">Tools <sup aria-hidden="true"></sup></button>
+        <button type="button" aria-pressed="false" aria-controls="project-list" data-filter="team">Team <sup aria-hidden="true"></sup></button>
+      </div>
+
+      <p class="work-results" role="status">14件のプロジェクト</p>
+      <div class="project-index" id="project-list">
+        <a class="work-card featured" href="projects/naraku.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/survival-Editor.png" alt="奈落塔の地形エディタ" loading="lazy"></div><div class="work-info"><p>Personal / DirectX11</p><h3>奈落塔 <span class="work-award">技術力賞</span></h3><p>接続条件から地形を自動生成する探索ローグライト。地形ピースを編集・検証・発行する専用エディタも制作。</p><p class="work-role"><strong>個人制作の担当</strong> ゲームシステム、描画、エディタとデータ検証</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/creator-kousien.html" data-cat="unity tool team" data-tilt><div class="work-media"><img src="image/powerpoint/CreaterKousien.png" alt="CreatorKousienのゲーム画面" loading="lazy"></div><div class="work-info"><p>Team / Unity</p><h3>CreatorKousien</h3><p>フィールド探索とカードバトルのチーム制作。ScriptableObjectを一覧・検索・編集できるUnity Editor拡張を実装。</p><p class="work-role"><strong>チーム制作の担当</strong> プレイヤー・敵・UI、制作ツール</p><ul><li>Unity</li><li>C#</li><li>Editor</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/chinchiro.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/dice.png" alt="チンチロローグライクのダイス" loading="lazy"></div><div class="work-info"><p>Personal / Physics</p><h3>チンチロローグライク <span class="work-award">構成力賞</span></h3><p>ダイスの衝突と回転を自作し、静止した面を出目としてゲームルールに接続。</p><p class="work-role"><strong>個人制作の担当</strong> OBB衝突、剛体の挙動、ゲームルール</p><ul><li>C++</li><li>OBB</li><li>RigidBody</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/physics-particle-lab.html" data-cat="dx" data-tilt><div class="work-media visual visual-physics" data-pfx="plasma-ball" data-pfx-palette="cyan"><i></i><i></i><i></i><i></i><i></i><strong>WIND / SPRING / FIREWORK</strong></div><div class="work-info"><p>Personal / Simulation</p><h3>Physics &amp; Particle Lab</h3><p>ばね、風、後流、花火を数値から観察する物理実験環境。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/assetbundle-sample.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/assetbundle/background.png" alt="AssetBundleサンプルの背景画像" loading="lazy"></div><div class="work-info"><p>Personal / Unity</p><h3>AssetBundle Loading Sample</h3><p>Bundle生成から実行時ロードまでを2Dシューティングで検証。</p><ul><li>Unity</li><li>C#</li><li>AssetBundle</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/file-zipper.html" data-cat="tool" data-tilt><div class="work-media"><img src="image/powerpoint/FileZIpper.png" alt="FileZipperの画面" loading="lazy"></div><div class="work-info"><p>Personal / Desktop tool</p><h3>FileZipper</h3><p>提出ファイルの抽出・命名・Zip化を一本化したWPFツール。</p><ul><li>C#</li><li>WPF</li><li>.NET 8</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/pmx-converter.html" data-cat="tool" data-tilt><div class="work-media visual visual-pmx" data-pfx="hologram" data-pfx-palette="violet"><div class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="pmx-labels"><strong>PMX</strong><em>→</em><b>glTF</b></div></div><div class="work-info"><p>Personal / Graphics tool</p><h3>pmxConverter</h3><p>ボーン・モーション・ウェイトを編集してglTFへ出力。</p><ul><li>C++20</li><li>OpenGL</li><li>ImGui</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/joya-bell-bozu.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/joya/game.png" alt="JoyaBellBozuのゲーム画面" loading="lazy"></div><div class="work-info"><p>Personal / Unity Physics</p><h3>JoyaBellBozu</h3><p>二重振り子をRK4で計算する鐘つきゲーム。</p><ul><li>Unity</li><li>C#</li><li>RK4</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/perforce.html" data-cat="tool" data-tilt><div class="work-media visual visual-perforce" data-pfx="teleporter" data-pfx-palette="cyan"><strong>DEPOT</strong><i class="sync"><em></em><em></em><em></em></i><b>WORKSPACE</b></div><div class="work-info"><p>Learning / Version control</p><h3>Perforce / P4V</h3><p>Workspace操作とバージョン管理の基本を学習。</p><ul><li>Perforce</li><li>P4V</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/shigoto-neko.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/effect.png" alt="仕事猫のエフェクト調整画面" loading="lazy"></div><div class="work-info"><p>Personal / DirectX11</p><h3>仕事猫：無限残業編</h3><p>設定UIと実行中に調整できるエフェクト制作環境を実装。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/buns-and-party.html" data-cat="dx team" data-tilt><div class="work-media"><img src="image/powerpoint/buns%26party.png" alt="Buns&amp;Partyのゲーム画面" loading="lazy"></div><div class="work-info"><p>Team / DirectX11</p><h3>Buns&amp;Party</h3><p>料理・納品アクションと、調整・保存基盤をチームで制作。</p><ul><li>C++</li><li>ImGui</li><li>JSON</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/name-battler.html" data-cat="dx" data-tilt><div class="work-media visual visual-terminal" data-pfx="wisp" data-pfx-palette="emerald"><code><em>&gt; NAME_</em><br>ATK 42 / SPD 18<br>&gt; BATTLE<i class="caret"></i></code></div><div class="work-info"><p>Personal / Console</p><h3>ネームバトラー</h3><p>文字列から能力値を生成するターン制コンソールゲーム。</p><ul><li>C</li><li>Console</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/tower-defense.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/castleEditor.png" alt="タワーディフェンスの配置エディタ" loading="lazy"></div><div class="work-info"><p>Personal / Editor</p><h3>タワーディフェンス</h3><p>3Dグリッド配置とマップ保存を扱うステージエディタ。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>実装を見る →</b></div></a>
+        <a class="work-card" href="projects/lost-page.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/lost-page/battle.png" alt="Lost Pageの戦闘画面" loading="lazy"></div><div class="work-info"><p>Personal / Game design</p><h3>Lost Page</h3><p>4色のエーテルとカードコストを結び付けたデッキ構築ローグライト。</p><ul><li>Unity</li><li>C#</li><li>Game Design</li></ul><b>実装を見る →</b></div></a>
+      </div>
     </section>
 
     <!-- MARQUEE -->
@@ -104,20 +138,60 @@
       </div>
       <div class="skill-groups">
         <article class="skill-card reveal" data-spotlight>
-          <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M16 14 6 24l10 10M32 14l10 10-10 10M27 10l-6 28"/></svg></div>
+          <div class="skill-head">
+            <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M16 14 6 24l10 10M32 14l10 10-10 10M27 10l-6 28"/></svg></div>
+            <span class="pfx-mini" data-pfx="crystal-shard" data-pfx-palette="ember" aria-hidden="true"></span>
+          </div>
           <span class="group-index">01</span><h3>Languages</h3>
           <ul class="tag-list"><li>C</li><li>C++</li><li>C#</li><li>JavaScript</li><li>HTML / CSS</li><li>Python</li><li>Markdown</li></ul>
         </article>
         <article class="skill-card reveal" data-spotlight>
-          <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 41 15v18L24 43 7 33V15z"/><path d="M24 5v19m0 0 17-9M24 24 7 15m17 9v19"/></svg></div>
+          <div class="skill-head">
+            <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5 41 15v18L24 43 7 33V15z"/><path d="M24 5v19m0 0 17-9M24 24 7 15m17 9v19"/></svg></div>
+            <span class="pfx-mini" data-pfx="energy-core" data-pfx-palette="cyan" aria-hidden="true"></span>
+          </div>
           <span class="group-index">02</span><h3>Game / Graphics</h3>
           <ul class="tag-list"><li>DirectX11</li><li>DirectXMath</li><li>Unity</li><li>Unreal Engine</li><li>OpenGL</li><li>ImGui</li><li>Maya</li></ul>
         </article>
         <article class="skill-card reveal" data-spotlight>
-          <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="13" cy="12" r="5"/><circle cx="13" cy="36" r="5"/><circle cx="35" cy="20" r="5"/><path d="M13 17v14M35 25c0 7-8 7-17 9"/></svg></div>
+          <div class="skill-head">
+            <div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="13" cy="12" r="5"/><circle cx="13" cy="36" r="5"/><circle cx="35" cy="20" r="5"/><path d="M13 17v14M35 25c0 7-8 7-17 9"/></svg></div>
+            <span class="pfx-mini" data-pfx="gem-spin" data-pfx-palette="violet" aria-hidden="true"></span>
+          </div>
           <span class="group-index">03</span><h3>Development</h3>
           <ul class="tag-list"><li>Visual Studio 2022</li><li>Visual Studio Code</li><li>GitHub</li><li>Fork</li><li>Perforce / P4V</li><li>CMake</li><li>.NET / WPF</li></ul>
         </article>
+      </div>
+    </section>
+
+    <!-- CLICK VFX CUSTOMIZER -->
+    <section id="click-vfx" class="section shell pfx-lab-section" aria-labelledby="pfx-lab-heading">
+      <div class="pfx-lab reveal" data-pfx-lab data-spotlight>
+        <div class="pfx-viewport" data-pfx-viewport role="button" tabindex="0" aria-label="プレビュー画面：クリックした位置に選択中のエフェクトが発生します">
+          <span class="pfx-viewport-badge" data-pfx-status>ACTIVE : 魔力バースト · Original</span>
+          <div class="pfx-viewport-hud">
+            <span><b>LIVE PREVIEW</b> 画面内クリックで試し打ち</span>
+            <span>Dual-Buffer PixelFX</span>
+          </div>
+        </div>
+        <div class="pfx-controls-pane">
+          <div class="pfx-controls-head">
+            <p class="eyebrow">INTERACTIVE CLICK VFX</p>
+            <h3 id="pfx-lab-heading">クリックエフェクトをカスタム</h3>
+            <p>選んだエフェクトとカラーが、このサイト全体のクリック演出にそのまま反映されます（個別作品ページでも有効）。左のプレビューやページ上の好きな場所をクリックして試せます。</p>
+          </div>
+          <div class="pfx-meta-line">
+            <span data-pfx-cat>ARCANE</span>
+            <strong data-pfx-title>魔力バースト (Mana Burst)</strong>
+            <small data-pfx-desc>魔力が一点に収束して弾け、発光するルーン文字と火花が周囲へ飛び散ります。</small>
+          </div>
+          <div class="pfx-presets" data-pfx-presets role="group" aria-label="クリックエフェクトの種類"></div>
+          <div class="pfx-toolbar">
+            <div class="pfx-palettes" data-pfx-palettes role="group" aria-label="クリックエフェクトのカラー">
+              <span class="pfx-palettes-label">COLOR</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -131,7 +205,7 @@
         </div>
         <div class="credential-grid">
           <article class="credential-block awards-block reveal" data-spotlight>
-            <h3><span class="trophy" aria-hidden="true">🏆</span>受賞歴</h3>
+            <h3><span class="trophy" data-pfx="power-star" aria-hidden="true"><span>🏆</span></span>受賞歴</h3>
             <div class="timeline-stage" data-timeline>
               <i class="timeline-runner" aria-hidden="true"></i>
               <ol class="timeline">
@@ -141,7 +215,7 @@
             </div>
           </article>
           <article class="credential-block reveal" data-spotlight>
-            <h3><span class="trophy" aria-hidden="true">📜</span>資格</h3>
+            <h3><span class="trophy" data-pfx="coin-spin" aria-hidden="true"><span>📜</span></span>資格</h3>
             <div class="timeline-stage" data-timeline>
               <i class="timeline-runner" aria-hidden="true"></i>
               <ol class="timeline compact">
@@ -157,41 +231,6 @@
       </div>
     </section>
 
-    <!-- WORKS -->
-    <section id="works" class="section shell works-section">
-      <div class="section-heading">
-        <span class="section-bg-num" aria-hidden="true">03</span>
-        <p class="eyebrow" data-scramble-view>PROJECT INDEX</p>
-        <h2 class="reveal-text">プロジェクト</h2>
-        <p class="reveal">カードを選ぶと、機能・処理・技術選定・問題解決をまとめた個別ページへ移動します。</p>
-      </div>
-
-      <div class="work-filter reveal" role="toolbar" aria-label="プロジェクトの絞り込み">
-        <button type="button" class="active" data-filter="all">ALL <sup>14</sup></button>
-        <button type="button" data-filter="dx">C++ / DirectX <sup>7</sup></button>
-        <button type="button" data-filter="unity">Unity <sup>4</sup></button>
-        <button type="button" data-filter="tool">Tools <sup>6</sup></button>
-        <button type="button" data-filter="team">Team <sup>2</sup></button>
-      </div>
-
-      <div class="project-index">
-        <a class="work-card featured" href="projects/naraku.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/survival-Editor.png" alt="奈落塔の地形エディタ" loading="lazy"><span>01</span></div><div class="work-info"><p>Personal / DirectX11</p><h3>奈落塔 <span class="work-award">🏆 技術力賞</span></h3><p>小ステージを組み合わせて生成する、2.5D探索サバイバルローグライト。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/physics-particle-lab.html" data-cat="dx" data-tilt><div class="work-media visual visual-physics"><i></i><i></i><i></i><i></i><i></i><span>02</span><strong>WIND / SPRING / FIREWORK</strong></div><div class="work-info"><p>Personal / Simulation</p><h3>Physics &amp; Particle Lab</h3><p>ばね、風、後流、花火を数値から観察する物理実験環境。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/assetbundle-sample.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/assetbundle/background.png" alt="AssetBundleサンプルの背景画像" loading="lazy"><span>03</span></div><div class="work-info"><p>Personal / Unity</p><h3>AssetBundle Loading Sample</h3><p>Bundle生成から実行時ロードまでを2Dシューティングで検証。</p><ul><li>Unity</li><li>C#</li><li>AssetBundle</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/chinchiro.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/dice.png" alt="チンチロローグライクのダイス" loading="lazy"><span>04</span></div><div class="work-info"><p>Personal / Physics</p><h3>チンチロローグライク <span class="work-award">🏆 構成力賞</span></h3><p>ダイスの衝突と転がりをゲームルールへつなげた試作。</p><ul><li>C++</li><li>OBB</li><li>RigidBody</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/creator-kousien.html" data-cat="unity tool team" data-tilt><div class="work-media"><img src="image/powerpoint/CreaterKousien.png" alt="CreatorKousienのゲーム画面" loading="lazy"><span>05</span></div><div class="work-info"><p>Team / Unity</p><h3>CreatorKousien</h3><p>ゲーム機能と、チーム制作を支えるEditor拡張を開発。</p><ul><li>Unity</li><li>C#</li><li>Editor</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/file-zipper.html" data-cat="tool" data-tilt><div class="work-media"><img src="image/powerpoint/FileZIpper.png" alt="FileZipperの画面" loading="lazy"><span>06</span></div><div class="work-info"><p>Personal / Desktop tool</p><h3>FileZipper</h3><p>提出ファイルの抽出・命名・Zip化を一本化したWPFツール。</p><ul><li>C#</li><li>WPF</li><li>.NET 8</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/pmx-converter.html" data-cat="tool" data-tilt><div class="work-media visual visual-pmx"><span>07</span><div class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="pmx-labels"><strong>PMX</strong><em>→</em><b>glTF</b></div></div><div class="work-info"><p>Personal / Graphics tool</p><h3>pmxConverter</h3><p>ボーン・モーション・ウェイトを編集してglTFへ出力。</p><ul><li>C++20</li><li>OpenGL</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/joya-bell-bozu.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/joya/game.png" alt="JoyaBellBozuのゲーム画面" loading="lazy"><span>08</span></div><div class="work-info"><p>Personal / Unity Physics</p><h3>JoyaBellBozu</h3><p>二重振り子をRK4で計算する鐘つきゲーム。</p><ul><li>Unity</li><li>C#</li><li>RK4</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/perforce.html" data-cat="tool" data-tilt><div class="work-media visual visual-perforce"><span>09</span><strong>DEPOT</strong><i class="sync"><em></em><em></em><em></em></i><b>WORKSPACE</b></div><div class="work-info"><p>Learning / Version control</p><h3>Perforce / P4V</h3><p>Workspace操作とバージョン管理の基本を学習。</p><ul><li>Perforce</li><li>P4V</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/shigoto-neko.html" data-cat="dx" data-tilt><div class="work-media"><img src="image/effect.png" alt="仕事猫のエフェクト調整画面" loading="lazy"><span>10</span></div><div class="work-info"><p>Personal / DirectX11</p><h3>仕事猫：無限残業編</h3><p>設定UIと実行中に調整できるエフェクト制作環境を実装。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/buns-and-party.html" data-cat="dx team" data-tilt><div class="work-media"><img src="image/powerpoint/buns%26party.png" alt="Buns&amp;Partyのゲーム画面" loading="lazy"><span>11</span></div><div class="work-info"><p>Team / DirectX11</p><h3>Buns&amp;Party</h3><p>料理・納品アクションと、調整・保存基盤をチームで制作。</p><ul><li>C++</li><li>ImGui</li><li>JSON</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/name-battler.html" data-cat="dx" data-tilt><div class="work-media visual visual-terminal"><span>12</span><code><em>&gt; NAME_</em><br>ATK 42 / SPD 18<br>&gt; BATTLE<i class="caret"></i></code></div><div class="work-info"><p>Personal / Console</p><h3>ネームバトラー</h3><p>文字列から能力値を生成するターン制コンソールゲーム。</p><ul><li>C</li><li>Console</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/tower-defense.html" data-cat="dx tool" data-tilt><div class="work-media"><img src="image/castleEditor.png" alt="タワーディフェンスの配置エディタ" loading="lazy"><span>13</span></div><div class="work-info"><p>Personal / Editor</p><h3>タワーディフェンス</h3><p>3Dグリッド配置とマップ保存を扱うステージエディタ。</p><ul><li>C++</li><li>DirectX11</li><li>ImGui</li></ul><b>詳しく見る →</b></div></a>
-        <a class="work-card" href="projects/lost-page.html" data-cat="unity" data-tilt><div class="work-media"><img src="image/projects/lost-page/battle.png" alt="Lost Pageの戦闘画面" loading="lazy"><span>14</span></div><div class="work-info"><p>Personal / Game design</p><h3>Lost Page</h3><p>4色のエーテルとカードコストを結び付けたデッキ構築ローグライト。</p><ul><li>Unity</li><li>C#</li><li>Game Design</li></ul><b>詳しく見る →</b></div></a>
-      </div>
-    </section>
-
     <!-- CONTACT CTA -->
     <section class="outro">
       <div class="shell">
@@ -204,6 +243,6 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="shell"><p>© 2026 Ikuya Yamamoto — Built with hand-written WebGL &amp; vanilla JS</p><a class="page-top" href="#top" aria-label="ページ先頭へ戻る"><span class="page-top-icon" aria-hidden="true"><i></i><b>↑</b></span><span class="page-top-label" aria-hidden="true"><span>ペ</span><span>ー</span><span>ジ</span><span>先</span><span>頭</span><span>へ</span></span></a></div></footer>
+  <footer class="site-footer"><div class="shell"><p>© 2026 Fumiya Yamamoto — Built with hand-written WebGL &amp; vanilla JS</p><a class="page-top" href="#top" aria-label="ページ先頭へ戻る"><span class="page-top-icon" aria-hidden="true"><i></i><b>↑</b></span><span class="page-top-label" aria-hidden="true"><span>ペ</span><span>ー</span><span>ジ</span><span>先</span><span>頭</span><span>へ</span></span></a></div></footer>
 </body>
 </html>

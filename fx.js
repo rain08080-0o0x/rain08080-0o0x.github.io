@@ -1,5 +1,5 @@
 /* =========================================================
-   fx.js — Ikuya Yamamoto Portfolio
+   fx.js — Fumiya Yamamoto Portfolio
    Hand-written WebGL background (domain-warped FBM nebula,
    perspective editor grid, mouse lens, click shockwave)
    + kinetic typography, HUD, cursor, tilt, reveal, filters.
@@ -199,8 +199,8 @@ void main(){
       click = [e.clientX * sf, (innerHeight - e.clientY) * sf, (performance.now() - start) / 1000];
     });
 
-    const grid = isHome ? 1 : 0;
-    const intensity = isHome ? 1 : 0.75;
+    const grid = isHome ? 0.85 : 0;
+    const intensity = isHome ? 0.82 : 0.68;
 
     const draw = (now) => {
       const time = reduced ? 12.0 : (now - start) / 1000;
@@ -307,7 +307,7 @@ void main(){
     });
     let clickEffectIndex = 0;
     const emitClickEffect = e => {
-      if (e.pointerType === "touch" || e.button !== 0) return;
+      if (e.pointerType === "touch" || e.button !== 0 || window.__pfxClickActive) return;
       const flash = clickFlashes[clickEffectIndex % clickFlashes.length];
       flash.getAnimations().forEach(animation => animation.cancel());
       flash.animate([
@@ -421,7 +421,7 @@ void main(){
   if (isProject) {
     const h1 = document.querySelector(".project-hero h1");
     if (h1) { h1.setAttribute("aria-label", h1.textContent); splitNode(h1); }
-    $$("#project-hero > :not(h1):not(.project-title-row), .project-award").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", `${0.35 + i * 0.1}s`); });
+    $$("#project-hero > :not(h1):not(.project-title-row):not(.project-hero-emblem), .project-hero-emblem, .project-award").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", `${0.35 + i * 0.1}s`); });
     $$(".gallery, .meta-list, .toc, .case-study .case-number, .case-study h2, .case-intro, .case-study .process-diagram, .case-grid article, .case-media").forEach(el => el.classList.add("reveal"));
     $$(".case-grid article").forEach((el, i) => { el.style.setProperty("--d", `${(i % 3) * 0.08}s`); el.setAttribute("data-spotlight", ""); });
     $$(".project-cta .button, .project-actions .button, .back-link").forEach(el => el.setAttribute("data-magnetic", ""));
@@ -583,23 +583,35 @@ void main(){
   const filterBar = document.querySelector(".work-filter");
   if (filterBar) {
     const cards = $$(".work-card");
+    const buttons = $$("button[data-filter]", filterBar);
+    const results = document.querySelector(".work-results");
+    const matches = (card, filter) => filter === "all" || card.dataset.cat.split(" ").includes(filter);
+    buttons.forEach(button => {
+      button.querySelector("sup").textContent = cards.filter(card => matches(card, button.dataset.filter)).length;
+    });
     filterBar.addEventListener("click", e => {
       const btn = e.target.closest("button[data-filter]");
       if (!btn) return;
-      $$("button", filterBar).forEach(b => { b.classList.toggle("active", b === btn); b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+      buttons.forEach(b => { b.classList.toggle("active", b === btn); b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
       const f = btn.dataset.filter;
-      let k = 0;
+      const visibleCards = cards.filter(card => matches(card, f));
+      const visibleSet = new Set(visibleCards);
+      btn.classList.remove("is-rippling");
       cards.forEach(card => {
-        const show = f === "all" || card.dataset.cat.split(" ").includes(f);
+        const show = visibleSet.has(card);
         card.classList.toggle("filtered-out", !show);
         card.classList.remove("pop");
-        if (show) {
-          card.classList.add("in");
-          void card.offsetWidth;
-          card.style.setProperty("--k", k++);
-          card.classList.add("pop");
-        }
+        if (show) card.classList.add("in");
       });
+      if (!reduced) {
+        void filterBar.offsetWidth;
+        btn.classList.add("is-rippling");
+        visibleCards.forEach((card, index) => {
+          card.style.setProperty("--k", index);
+          card.classList.add("pop");
+        });
+      }
+      results.textContent = `${visibleCards.length}件のプロジェクト`;
     });
   }
 
